@@ -118,7 +118,7 @@ const getBackground = () => {
             <h3 className="text-2xl font-semibold mb-2">Outlaw Lark</h3>
             <p className="mb-4">
               Unplug. Get rugged. Experience the wild side of the Okanagan with our
-              adventure-focused weekends.
+              adventure-focused weekends. test why is this not showing up 
             </p>
             <Link to="/outlaw" className="text-red-600 font-bold hover:underline">
               Learn More →
