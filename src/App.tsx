@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Services from "./pages/services";
-import Property from "./pages/property";
+import Property from "./pages/property_TEMP2";
 import Gallery from "./pages/gallery";
 import FAQ from "./pages/faq";
 import Contact from "./pages/contact";
