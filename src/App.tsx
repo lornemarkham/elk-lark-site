@@ -8,7 +8,7 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Property from "./pages/Property";
 import Gallery from "./pages/Gallery";
-import FAQ from "./pages/FAQ";
+import FAQ from "./pages/Faq";
 import Contact from "./pages/Contact";
 import Book from "./pages/Book";
 
@@ -25,7 +25,7 @@ export default function App() {
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />             {/* The ELK Stor test with with Services */}
+          <Route path="/about" element={<About />} />             {/* The ELK Stor test with wit test again Services */}
           <Route path="/services" element={<Services />} />       {/* Your Experience */}
           <Route path="/property" element={<Property />} />       {/* Basecamp */}
           <Route path="/gallery" element={<Gallery />} />         {/* The Lark Life */}
