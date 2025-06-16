@@ -1,36 +1,45 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./components/Header";
+
 import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Property from "./pages/Property";
+import Gallery from "./pages/Gallery";
+import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
+import Book from "./pages/Book";
+
+// Optional sub-pages if you're using them
 import OutlawLark from "./pages/OutlawLark";
 import RestoreLark from "./pages/RestoreLark";
 import StrategyLark from "./pages/StrategyLark";
 import Accommodation from "./pages/Accommodation";
 
-
 export default function App() {
   return (
-    <div>
-      <header className="bg-white shadow px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-3">
-          <img src="/logo-no-slogan.png" alt="ELK Lark logo" className="h-10 w-auto" />
-          {/* Optional text backup */}
-          <span className="sr-only">ELK Lark</span>
-        </Link>
+    <>
+      <Header />
+      <main className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />             {/* The ELK Story */}
+          <Route path="/services" element={<Services />} />       {/* Your Experience */}
+          <Route path="/property" element={<Property />} />       {/* Basecamp */}
+          <Route path="/gallery" element={<Gallery />} />         {/* The Lark Life */}
+          <Route path="/faq" element={<FAQ />} />                 {/* What to Expect */}
+          <Route path="/contact" element={<Contact />} />         {/* Get in Touch */}
+          <Route path="/book" element={<Book />} />               {/* Start Your Lark */}
 
-        <nav className="hidden md:flex space-x-6 text-brand font-semibold">
-          <Link to="/outlaw">Outlaw</Link>
-          <Link to="/restore">Restore</Link>
-          <Link to="/strategy">Strategy</Link>
-        </nav>
-      </header>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/outlaw" element={<OutlawLark />} />
-        <Route path="/restore" element={<RestoreLark />} />
-        <Route path="/strategy" element={<StrategyLark />} />
-        <Route path="/accommodation" element={<Accommodation />} />
-      </Routes>
-    </div>
+          {/* Optional sub-routes */}
+          <Route path="/outlaw" element={<OutlawLark />} />
+          <Route path="/restore" element={<RestoreLark />} />
+          <Route path="/strategy" element={<StrategyLark />} />
+          <Route path="/accommodation" element={<Accommodation />} />
+        </Routes>
+      </main>
+    </>
   );
 }
