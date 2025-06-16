@@ -25,7 +25,7 @@ export default function App() {
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />             {/* The ELK Story */}
+          <Route path="/about" element={<About />} />             {/* The ELK Stor test with with Services */}
           <Route path="/services" element={<Services />} />       {/* Your Experience */}
           <Route path="/property" element={<Property />} />       {/* Basecamp */}
           <Route path="/gallery" element={<Gallery />} />         {/* The Lark Life */}
