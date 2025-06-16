@@ -9,7 +9,7 @@ const sections = [
     features: ["Full-size fridge & freezer", "Gas stove and oven", "Espresso machine & kettle"],
   },
   {
-    title: "Living Room with Pullout Couch",
+    title: "Living Room with Pullout Couch test,
     images: ["/stays/living.jpg"],
     features: ["Smart TV with streaming", "Pullout queen-sized couch", "Cozy gas fireplace"],
   },
