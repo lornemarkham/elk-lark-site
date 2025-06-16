@@ -22,7 +22,7 @@ export default function Services() {
         </h2>
         <p className="max-w-2xl mx-auto text-lg text-gray-600">
           Whether you're chasing dust clouds, recharging under the sun, or plotting your next big
-          move — we've got your vibe covered.
+          move — we've got your vibe covered. test
         </p>
       </section>
 
