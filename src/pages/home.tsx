@@ -28,59 +28,71 @@ export default function Home() {
         <HeroBackground hoverTarget={hoverTarget} />
         <div className="absolute inset-0 bg-black/60 z-10" />
 
-        {/* Logo top-center */}
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
-          <img
-            src={
-              hoverTarget === "outlaw"
-                ? "/logo-outlaw.png"
-                : hoverTarget === "restore"
-                ? "/logo-restore.png"
-                : hoverTarget === "strategy"
-                ? "/logo-strategy.png"
-                : "/logo-white.png"
-            }
-            alt="ELK Lark Logo"
-            className="h-48 md:h-56"
-          />
-        </div>
+       {/* Logo top-center */}
+<div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
+  <img
+    src={
+      typeof window !== "undefined" && window.innerWidth >= 640
+        ? hoverTarget === "outlaw"
+          ? "/logo-outlaw.png"
+          : hoverTarget === "restore"
+          ? "/logo-restore.png"
+          : hoverTarget === "strategy"
+          ? "/logo-strategy.png"
+          : "/logo-white.png"
+        : "/logo-white.png"
+    }
+    alt="ELK Lark Logo"
+    className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
+  />
+</div>
 
-        {/* Main CTA */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4">
-          <h1 className="text-5xl font-bold mb-4 font-serif">Escape Ordinary. Live the Lark.</h1>
-          <p className="text-xl max-w-2xl mb-8 font-sans">
-            Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the
-            heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.
-          </p>
-          <div
-            className="flex flex-col sm:flex-row gap-4 font-sans"
-            onMouseLeave={handleMouseLeave}
-          >
-            <Link
-              to="/outlaw"
-              onMouseEnter={() => handleMouseEnter("outlaw")}
-              className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold"
-            >
-              Outlaw Lark
-            </Link>
+{/* Main CTA */}
+<div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
 
-            <Link
-              to="/restore"
-              onMouseEnter={() => handleMouseEnter("restore")}
-              className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold"
-            >
-              Restore Lark
-            </Link>
+  {/* Tagline */}
+  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
+    Escape Ordinary. Live the Lark.
+  </h1>
 
-            <Link
-              to="/strategy"
-              onMouseEnter={() => handleMouseEnter("strategy")}
-              className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold"
-            >
-              Strategy Lark
-            </Link>
-          </div>
-        </div>
+  {/* Description */}
+  <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
+    Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the
+    heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.
+  </p>
+
+  {/* CTA Buttons */}
+  <div
+    className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
+    onMouseLeave={handleMouseLeave}
+  >
+    <Link
+      to="/outlaw"
+      onMouseEnter={() => handleMouseEnter("outlaw")}
+      className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
+    >
+      Outlaw Lark
+    </Link>
+
+    <Link
+      to="/restore"
+      onMouseEnter={() => handleMouseEnter("restore")}
+      className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
+    >
+      Restore Lark
+    </Link>
+
+    <Link
+      to="/strategy"
+      onMouseEnter={() => handleMouseEnter("strategy")}
+      className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
+    >
+      Strategy Lark
+    </Link>
+  </div>
+</div>
+
+
       </div>
 
       {/* Why We Built ELK Lark */}

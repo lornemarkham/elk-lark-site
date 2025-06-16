@@ -12,11 +12,22 @@ export default function BasecampCarousel() {
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel);
       },
+      slides: {
+        perView: 1,
+        spacing: 8,
+      },
+      breakpoints: {
+        "(min-width: 640px)": {
+          slides: { perView: 1, spacing: 12 },
+        },
+        "(min-width: 1024px)": {
+          slides: { perView: 1, spacing: 16 },
+        },
+      },
     },
     []
   );
 
-  // Auto-play effect
   useEffect(() => {
     timer.current = setInterval(() => {
       if (instanceRef.current) {
@@ -29,7 +40,7 @@ export default function BasecampCarousel() {
   }, [instanceRef]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto overflow-hidden">
       <div
         ref={sliderRef}
         className="keen-slider rounded-lg overflow-hidden shadow-lg"
@@ -38,21 +49,21 @@ export default function BasecampCarousel() {
           <img
             src="https://picsum.photos/id/1018/1600/720"
             alt="Private Pool"
-            className="w-full h-72 object-cover"
+            className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />
         </div>
         <div className="keen-slider__slide">
           <img
             src="https://picsum.photos/id/1015/1600/720"
             alt="Garage Hangout"
-            className="w-full h-72 object-cover"
+            className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />
         </div>
         <div className="keen-slider__slide">
           <img
             src="https://picsum.photos/id/1011/1600/720"
             alt="Garden"
-            className="w-full h-72 object-cover"
+            className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />
         </div>
       </div>
@@ -63,7 +74,7 @@ export default function BasecampCarousel() {
           <button
             key={idx}
             onClick={() => instanceRef.current?.moveToIdx(idx)}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
               currentSlide === idx ? "bg-black" : "bg-gray-400"
             }`}
           />
