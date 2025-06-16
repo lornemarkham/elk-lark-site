@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 
 import Home from "./pages/Home";
-import About from "./pages/About";
+// import About from "./pages/About";
 // import Services from "./pages/Services";
 import Property from "./pages/Property";
 import Gallery from "./pages/Gallery";
