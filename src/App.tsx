@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Services from "./pages/Services";
+import About from "./pages/about";
+import Services from "./pages/services";
 import Property from "./pages/property";
-import Gallery from "./pages/Gallery";
-import FAQ from "./pages/Faq";
-import Contact from "./pages/Contact";
-import Book from "./pages/Book";
+import Gallery from "./pages/gallery";
+import FAQ from "./pages/faq";
+import Contact from "./pages/contact";
+import Book from "./pages/book";
 
 // Optional sub-pages if you're using them
 import OutlawLark from "./pages/OutlawLark";
