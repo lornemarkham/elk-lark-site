@@ -43,9 +43,3 @@ export default function App() {
   );
 }
 
-
-
-
-
-git mv src/pages/Property.tsx src/pages/Property_temp.tsx
-git mv src/pages/Property_temp.tsx src/pages/Property.tsx
