@@ -47,21 +47,21 @@ export default function BasecampCarousel() {
       >
         <div className="keen-slider__slide">
           <img
-            src="https://picsum.photos/id/1018/1600/720"
+            src="public/stays/pool.jpg"
             alt="Private Pool"
             className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />
         </div>
         <div className="keen-slider__slide">
           <img
-            src="https://picsum.photos/id/1015/1600/720"
+            src="public/stays/gazebo.jpg"
             alt="Garage Hangout"
             className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />
         </div>
         <div className="keen-slider__slide">
           <img
-            src="https://picsum.photos/id/1011/1600/720"
+            src="public/stays/storm.jpg"
             alt="Garden"
             className="w-full h-64 sm:h-72 md:h-96 object-cover"
           />

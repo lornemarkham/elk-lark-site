@@ -123,23 +123,33 @@ export default function Home() {
       </section>
 
       {/* Your Private Basecamp */}
-      <section className="bg-stone-100 py-20 px-6 text-center text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">Your Private Basecamp</h2>
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-          {/* Carousel */}
-          <BasecampCarousel />
+<section className="bg-stone-100 py-20 px-6 text-center text-gray-800">
+  <h2 className="text-3xl md:text-4xl font-bold mb-10">Your Private Basecamp</h2>
+  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+    {/* Carousel */}
+    <BasecampCarousel />
 
-          {/* Details */}
-          <ul className="space-y-3 text-left text-gray-600">
-            <li>🏖️ Huge private pool with a waterslide</li>
-            <li>🔧 Fully equipped garage hangout (TV, karaoke, fridge, darts)</li>
-            <li>🛻 Access to forest service roads in a rugged truck</li>
-            <li>🏍️ Dirt bike, paddleboards, and seasonal gear</li>
-            <li>🌱 Seasonal garden-to-table tastings (when the harvest is right)</li>
-            <li>🛏️ Home base for your crew — not open to the public</li>
-          </ul>
-        </div>
-      </section>
+    {/* Details */}
+    <ul className="space-y-3 text-left text-gray-600">
+      <li>🏖️ Huge private pool with a waterslide</li>
+      <li>🔧 Fully equipped garage hangout (TV, karaoke, fridge, darts)</li>
+      <li>🛻 Access to forest service roads in a rugged truck</li>
+      <li>🏍️ Dirt bike, paddleboards, and seasonal gear</li>
+      <li>🌱 Seasonal garden-to-table tastings (when the harvest is right)</li>
+      <li>🛏️ Home base for your crew — not open to the public</li>
+    </ul>
+  </div>
+
+  {/* CTA Button */}
+  <div className="mt-12">
+    <Link
+      to="/property"
+      className="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition"
+    >
+      Explore the Basecamp
+    </Link>
+  </div>
+</section>
       <Footer />
     </>
     

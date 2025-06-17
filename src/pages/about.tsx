@@ -30,45 +30,88 @@ export default function About() {
             experience that doesn’t come in a brochure.
           </p>
 
-          <p className="text-lg mb-6">
+          <p className="text-lg mb-10">
             Every offering is hand-curated, drawing from our land, our gear, our stories — and the
             kind of people we love to host. It’s not about luxury or budget. It’s about soul.
           </p>
-
-          <h2 className="text-2xl font-bold mt-10 mb-4">Choose Your Lark</h2>
-          <ul className="space-y-4 text-lg">
-            <li>
-              <Link
-                to="/outlaw"
-                className="text-red-600 hover:underline font-semibold"
-              >
-                → Outlaw Lark
-              </Link>{" "}
-              — Rugged weekends with dirt, fire, beer, and bikes.
-            </li>
-            <li>
-              <Link
-                to="/restore"
-                className="text-purple-600 hover:underline font-semibold"
-              >
-                → Restore Lark
-              </Link>{" "}
-              — Beach, wine, sunshine, and nothing on the schedule.
-            </li>
-            <li>
-              <Link
-                to="/strategy"
-                className="text-blue-600 hover:underline font-semibold"
-              >
-                → Strategy Lark
-              </Link>{" "}
-              — Retreats for tech, growth, clarity, and creative fire.
-            </li>
-          </ul>
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Video Card Section */}
+      <section className="grid md:grid-cols-3 gap-6 px-6 pb-20">
+        {/* Outlaw Lark */}
+        <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src="/videos/outlaw.mp4"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
+            <h3 className="text-white text-2xl font-bold mb-2">Outlaw Lark</h3>
+            <p className="text-white text-sm mb-4">
+              Unplug. Get rugged. Hit the wild side of the Okanagan.
+            </p>
+            <Link
+              to="/outlaw"
+              className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+            >
+              Ride the Wild →
+            </Link>
+          </div>
+        </div>
+
+        {/* Restore Lark */}
+        <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src="/videos/restore.mp4"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
+            <h3 className="text-white text-2xl font-bold mb-2">Restore Lark</h3>
+            <p className="text-white text-sm mb-4">
+              Beachside bliss, wine pours, and absolute ease.
+            </p>
+            <Link
+              to="/restore"
+              className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+            >
+              Reset & Restore →
+            </Link>
+          </div>
+        </div>
+
+        {/* Strategy Lark */}
+        <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src="/videos/strategy.mp4"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
+            <h3 className="text-white text-2xl font-bold mb-2">Strategy Lark</h3>
+            <p className="text-white text-sm mb-4">
+              Whiteboards, wine, clarity, and creative breakthrough.
+            </p>
+            <Link
+              to="/strategy"
+              className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+            >
+              Build the Vision →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </>
   );
