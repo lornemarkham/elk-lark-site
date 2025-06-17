@@ -4,7 +4,6 @@ import HeroBackground from "../components/HeroBackground";
 import BasecampCarousel from "../components/BasecampCarousel";
 import Footer from "../components/Footer";
 
-
 export default function Home() {
   const [hoverTarget, setHoverTarget] = useState("");
 
@@ -28,71 +27,68 @@ export default function Home() {
         <HeroBackground hoverTarget={hoverTarget} />
         <div className="absolute inset-0 bg-black/60 z-10" />
 
-       {/* Logo top-center */}
-<div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
-  <img
-    src={
-      typeof window !== "undefined" && window.innerWidth >= 640
-        ? hoverTarget === "outlaw"
-          ? "/logo-outlaw.png"
-          : hoverTarget === "restore"
-          ? "/logo-restore.png"
-          : hoverTarget === "strategy"
-          ? "/logo-strategy.png"
-          : "/logo-white.png"
-        : "/logo-white.png"
-    }
-    alt="ELK Lark Logo"
-    className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
-  />
-</div>
+        {/* Logo top-center */}
+        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
+          <img
+            src={
+              typeof window !== "undefined" && window.innerWidth >= 640
+                ? hoverTarget === "outlaw"
+                  ? "/logo-outlaw.png"
+                  : hoverTarget === "restore"
+                  ? "/logo-restore.png"
+                  : hoverTarget === "strategy"
+                  ? "/logo-strategy.png"
+                  : "/logo-white.png"
+                : "/logo-white.png"
+            }
+            alt="ELK Lark Logo"
+            className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
+          />
+        </div>
 
-{/* Main CTA */}
-<div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
+        {/* Main CTA */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
+          {/* Tagline */}
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
+            Escape Ordinary. Live the Lark.
+          </h1>
 
-  {/* Tagline */}
-  <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
-    Escape Ordinary. Live the Lark.
-  </h1>
+          {/* Description */}
+          <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
+            Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the
+            heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.
+          </p>
 
-  {/* Description */}
-  <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
-    Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the
-    heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.
-  </p>
+          {/* CTA Buttons */}
+          <div
+            className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
+            onMouseLeave={handleMouseLeave}
+          >
+            <Link
+              to="/experiences/outlaw"
+              onMouseEnter={() => handleMouseEnter("outlaw")}
+              className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
+            >
+              Outlaw Lark
+            </Link>
 
-  {/* CTA Buttons */}
-  <div
-    className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
-    onMouseLeave={handleMouseLeave}
-  >
-    <Link
-      to="/outlaw"
-      onMouseEnter={() => handleMouseEnter("outlaw")}
-      className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
-    >
-      Outlaw Lark
-    </Link>
+            <Link
+              to="/experiences/restore"
+              onMouseEnter={() => handleMouseEnter("restore")}
+              className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
+            >
+              Restore Lark
+            </Link>
 
-    <Link
-      to="/restore"
-      onMouseEnter={() => handleMouseEnter("restore")}
-      className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
-    >
-      Restore Lark
-    </Link>
-
-    <Link
-      to="/strategy"
-      onMouseEnter={() => handleMouseEnter("strategy")}
-      className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
-    >
-      Strategy Lark
-    </Link>
-  </div>
-</div>
-
-
+            <Link
+              to="/experiences/strategy"
+              onMouseEnter={() => handleMouseEnter("strategy")}
+              className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
+            >
+              Strategy Lark
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Why We Built ELK Lark */}
@@ -123,37 +119,34 @@ export default function Home() {
       </section>
 
       {/* Your Private Basecamp */}
-<section className="bg-stone-100 py-20 px-6 text-center text-gray-800">
-  <h2 className="text-3xl md:text-4xl font-bold mb-10">Your Private Basecamp</h2>
-  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-    {/* Carousel */}
-    <BasecampCarousel />
+      <section className="bg-stone-100 py-20 px-6 text-center text-gray-800">
+        <h2 className="text-3xl md:text-4xl font-bold mb-10">Your Private Basecamp</h2>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          {/* Carousel */}
+          <BasecampCarousel />
 
-    {/* Details */}
-    <ul className="space-y-3 text-left text-gray-600">
-      <li>🏖️ Huge private pool with a waterslide</li>
-      <li>🔧 Fully equipped garage hangout (TV, karaoke, fridge, darts)</li>
-      <li>🛻 Access to forest service roads in a rugged truck</li>
-      <li>🏍️ Dirt bike, paddleboards, and seasonal gear</li>
-      <li>🌱 Seasonal garden-to-table tastings (when the harvest is right)</li>
-      <li>🛏️ Home base for your crew — not open to the public</li>
-    </ul>
-  </div>
+          {/* Details */}
+          <ul className="space-y-3 text-left text-gray-600">
+            <li>🏖️ Huge private pool with a waterslide</li>
+            <li>🔧 Fully equipped garage hangout (TV, karaoke, fridge, darts)</li>
+            <li>🛻 Access to forest service roads in a rugged truck</li>
+            <li>🏍️ Dirt bike, paddleboards, and seasonal gear</li>
+            <li>🌱 Seasonal garden-to-table tastings (when the harvest is right)</li>
+            <li>🛏️ Home base for your crew — not open to the public</li>
+          </ul>
+        </div>
 
-  {/* CTA Button */}
-  <div className="mt-12">
-    <Link
-      to="/property"
-      className="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition"
-    >
-      Explore the Basecamp
-    </Link>
-  </div>
-</section>
+        {/* CTA Button */}
+        <div className="mt-12">
+          <Link
+            to="/basecamp"
+            className="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition"
+          >
+            Explore the Basecamp
+          </Link>
+        </div>
+      </section>
       <Footer />
     </>
-    
   );
-
 }
-

@@ -1,119 +1,96 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
+
 
 export default function OutlawLark() {
   return (
     <>
       {/* Mini Hero */}
-      <div className="relative h-80 w-full overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?auto=format&fit=crop&w=1600&q=80"
-          alt="Outlaw Lark Hero"
-          className="object-cover w-full h-full"
+      <section className="relative h-[40vh] w-full">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/videos/outlaw.mp4"
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <img
-            src="/logo-outlaw.png"
-            alt="Outlaw Lark Logo"
-            className="h-28 md:h-40"
-          />
-        </div>
-      </div>
-
-      {/* Experience Highlights */}
-      <section className="bg-white text-gray-800 px-6 py-16">
-        <div className="max-w-5xl mx-auto space-y-10">
-          <h1 className="text-4xl font-bold text-center">Outlaw Lark</h1>
-          <p className="text-lg text-center max-w-3xl mx-auto">
-            ELK Lark’s rugged offering — built for bold weekends, wild roads, and backyard hangouts
-            that go way off-script.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="space-y-4">
-              <img
-                src="https://images.unsplash.com/photo-1502920917128-1aa500764b79?auto=format&fit=crop&w=1600&q=80"
-                alt="Private Pool"
-                className="rounded-lg shadow object-cover w-full h-64"
-              />
-              <h2 className="text-2xl font-semibold">Private Poolside Recovery</h2>
-              <p>
-                After a long ride or a hike up the ridge, nothing hits like our pool, waterslide, and
-                a cold one.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <img
-                src="https://images.unsplash.com/photo-1615290647364-0b21ebbb6b99?auto=format&fit=crop&w=1600&q=80"
-                alt="Garage Hangout"
-                className="rounded-lg shadow object-cover w-full h-64"
-              />
-              <h2 className="text-2xl font-semibold">The Outlaw Garage</h2>
-              <p>
-                Fully loaded. Grab a beer, hit the karaoke, throw darts, or wrench on your own gear.
-                It’s your clubhouse.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <img
-                src="https://images.unsplash.com/photo-1602179037574-4be0e1d85b81?auto=format&fit=crop&w=1600&q=80"
-                alt="Outlaw BBQ"
-                className="rounded-lg shadow object-cover w-full h-64"
-              />
-              <h2 className="text-2xl font-semibold">Outlaw BBQ</h2>
-              <p>
-                Smoked meat. Real fire. Big sky. Let us serve up a backyard BBQ that feels like a
-                rebel’s feast.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <img
-                src="https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&w=1600&q=80"
-                alt="Forest Road Adventure"
-                className="rounded-lg shadow object-cover w-full h-64"
-              />
-              <h2 className="text-2xl font-semibold">Forest Road Escapes</h2>
-              <p>
-                Truck rides deep into the hills. Alpine lakes. Off-grid sunsets. Come explore what
-                most never reach.
-              </p>
-            </div>
-          </div>
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 flex items-center justify-center h-full">
+          <h1 className="text-white text-5xl font-bold text-center px-4 font-serif">
+            Outlaw Lark
+          </h1>
         </div>
       </section>
 
-      {/* Brand Grit Statement */}
-      <section className="bg-black text-white px-6 py-20 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 uppercase tracking-wider">
-          Raise Hell. Then Cool Off.
+      {/* Intro */}
+      <section className="bg-white py-20 px-6 text-center text-gray-800">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          This Ain’t a Retreat. It’s a Revival.
         </h2>
-        <p className="max-w-2xl mx-auto text-lg">
-          Ride fast. Swim hard. Eat loud. We built this for the misfits, the makers, and the ones who
-          don’t need a tour guide to find freedom. Out here, you set the tone.
+        <p className="max-w-3xl mx-auto text-lg text-gray-700">
+          Outlaw Lark is a no-BS weekend for people who want dirt under their nails, a cold one in their hand, and no one telling them what to do. It’s part freedom, part chaos, part healing. And it’s damn fun.
         </p>
       </section>
 
-      {/* Pricing Info */}
-      <section className="bg-zinc-100 text-gray-800 px-6 py-12 text-center">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h2 className="text-2xl font-bold">Pricing & Booking</h2>
+      {/* Activities */}
+      <section className="bg-gray-50 py-20 px-6">
+        <div className="max-w-5xl mx-auto space-y-12">
+          <h3 className="text-2xl font-bold text-center mb-10">You Might Find Yourself...</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800 text-lg">
+            <li>🔥 Lighting up a bonfire with outlaw karaoke echoing in the trees</li>
+            <li>🏍️ Tearing up forest roads on your dirt bike (or ours, soon...)</li>
+            <li>🍖 Crushing smoked meat off the grill — powered by our Pignition crew</li>
+            <li>🛠️ Fixing something in the gear garage while the music hits just right</li>
+            <li>💦 Cannonballing into the pool after a day of dust and sun</li>
+            <li>🎯 Maybe — just maybe — shooting cans (if you ask nicely)</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* What to Bring */}
+      <section className="bg-white py-20 px-6 text-center text-gray-800">
+        <h3 className="text-2xl font-bold mb-6">What to Bring</h3>
+        <p className="mb-6 max-w-xl mx-auto text-lg text-gray-600">
+          Don’t show up unprepared. This isn’t a spa (well, unless you count Ember’s pop-up nail salon — appointments not guaranteed).
+        </p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto text-left text-gray-700">
+          <li>✅ Decent boots</li>
+          <li>✅ Towel for the pool or lake</li>
+          <li>✅ Your own bike or hiking gear</li>
+          <li>✅ Respect for the land and people</li>
+          <li>✅ Cooler, snacks, whatever fuels your lark</li>
+          <li>✅ A sense of humour (non-negotiable)</li>
+        </ul>
+      </section>
+
+      {/* Code of the Outlaw */}
+      <section className="bg-gray-100 py-20 px-6 text-gray-800 text-center">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <h3 className="text-2xl font-bold">Code of the Outlaw</h3>
+          <p>No jerks. No drama. No posers. Be real, have fun, and look out for your crew.</p>
           <p>
-            Every Outlaw Lark weekend is unique. Pricing varies based on group size, activity
-            choices, and season.
+            You’re not paying for a bed. You’re paying for an experience. There may or may not be a pillow involved.
           </p>
           <p>
-            To build your custom experience,{" "}
-            <a
-              href="/contact"
-              className="text-amber-700 font-semibold hover:underline"
-            >
-              get in touch →
-            </a>
+            This is invite-only, friends-first territory. You show up right, we show you a hell of a time.
           </p>
         </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-strategy text-white py-20 px-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Ride the Wild?</h2>
+        <p className="mb-6 max-w-xl mx-auto">
+          This isn’t a package. It’s a test drive of the future. Outlaw Lark is running lean while we build the dream.
+        </p>
+        <a
+          href="mailto:hello@elklark.com"
+          className="inline-block bg-black hover:bg-white hover:text-black text-white px-6 py-3 rounded-full font-semibold transition"
+        >
+          Email Us to Learn More
+        </a>
       </section>
 
       <Footer />
