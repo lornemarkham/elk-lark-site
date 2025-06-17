@@ -20,11 +20,10 @@ export default function Footer() {
           <h4 className="text-lg font-semibold">Explore</h4>
           <ul className="space-y-1 text-sm">
             <li><Link to="/about" className="hover:underline">The ELK Story</Link></li>
-            <li><Link to="/services" className="hover:underline">Your Experience</Link></li>
-            <li><Link to="/property" className="hover:underline">Basecamp</Link></li>
-            <li><Link to="/gallery" className="hover:underline">The Lark Life</Link></li>
+            <li><Link to="/experience" className="hover:underline">Your Experience</Link></li>
+            <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
             <li><Link to="/faq" className="hover:underline">What to Expect</Link></li>
-            <li><Link to="/contact" className="hover:underline">Get in Touch</Link></li>
+            <li><Link to="/start" className="hover:underline">Start Your Lark</Link></li>
           </ul>
         </div>
 

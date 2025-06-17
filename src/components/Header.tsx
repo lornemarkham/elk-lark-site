@@ -9,11 +9,9 @@ export default function Header() {
 
   const navItems = [
     { label: "The ELK Story", to: "/about" },
-    { label: "Your Experience", to: "/services" },
-    { label: "Basecamp", to: "/property" },
-    { label: "The Lark Life", to: "/gallery" },
+    { label: "Your Experience", to: "/experience" },
+    { label: "Basecamp", to: "/basecamp" },
     { label: "What to Expect", to: "/faq" },
-    { label: "Get in Touch", to: "/contact" },
   ];
 
   const linkStyles = (isActive: boolean) =>
@@ -39,7 +37,7 @@ export default function Header() {
 
       {/* CTA Button */}
       <Link
-        to="/book"
+        to="/start"
         className="hidden md:inline-block ml-6 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
       >
         Start Your Lark
@@ -69,10 +67,11 @@ export default function Header() {
               {label}
             </NavLink>
           ))}
+          {/* Mobile-only CTA */}
           <Link
-            to="/book"
+            to="/start"
             onClick={() => setIsMobileOpen(false)}
-            className="mt-2 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
+            className="block w-full mt-2 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-center transition"
           >
             Start Your Lark
           </Link>
