@@ -52,7 +52,7 @@ export default function Home() {
 
   {/* Tagline */}
   <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
-    Escape Ordinary. Live the Lark. Test deploy again
+    Escape Ordinary. Live the Lark.
   </h1>
 
   {/* Description */}
