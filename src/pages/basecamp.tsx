@@ -6,52 +6,52 @@ export default function LarkLife() {
       title: "✨ Moments",
       caption: "Sundown talks. Slow mornings. Starry skies.",
       images: [
-        "/gallery/placeholders/moments1.jpg",
-        "/gallery/placeholders/moments2.jpg",
-        "/gallery/placeholders/moments3.jpg",
+        "/stays/patio.jpg",
+        "/stays/pool.jpg",
+        "/stays/gazebo.jpg",
       ],
     },
     {
       title: "🌊 Water Days",
       caption: "Dive in. Float on. Paddle out.",
       images: [
-        "/gallery/placeholders/water1.jpg",
-        "/gallery/placeholders/water2.jpg",
-        "/gallery/placeholders/water3.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
       ],
     },
     {
       title: "🛠 Garage Vibes",
       caption: "Cold beers. Loud music. Good times.",
       images: [
-        "/gallery/placeholders/garage1.jpg",
-        "/gallery/placeholders/garage2.jpg",
+        "/stays/garage.jpg",
+        "/stays/pool.jpg",
       ],
     },
     {
       title: "🏕 Adventure Scenes",
       caption: "Dirt trails. Deep woods. Unexpected turns.",
       images: [
-        "/gallery/placeholders/adventure1.jpg",
-        "/gallery/placeholders/adventure2.jpg",
-        "/gallery/placeholders/adventure3.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
       ],
     },
     {
       title: "🥂 Chill & Social",
       caption: "Good food. Great people. Easy vibes.",
       images: [
-        "/gallery/placeholders/social1.jpg",
-        "/gallery/placeholders/social2.jpg",
-        "/gallery/placeholders/social3.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
       ],
     },
     {
       title: "🌱 From the Garden",
       caption: "Whatever grows, goes. (Sometimes onto your plate.)",
       images: [
-        "/gallery/placeholders/garden1.jpg",
-        "/gallery/placeholders/garden2.jpg",
+        "/stays/patio.jpg",
+        "/stays/patio.jpg",
       ],
     },
   ];
