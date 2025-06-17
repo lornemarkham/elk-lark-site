@@ -42,7 +42,7 @@ export default function About() {
         {/* Ember */}
         <div className="md:flex items-center gap-6 space-y-6 md:space-y-0">
           <img
-            src="/public/images/ember.jpg"
+            src="/images/ember.jpg"
             alt="Ember"
             className="w-full md:w-48 rounded-xl object-cover"
           />
@@ -59,7 +59,7 @@ export default function About() {
         {/* Lorne */}
         <div className="md:flex md:flex-row-reverse items-center gap-6 space-y-6 md:space-y-0">
           <img
-            src="/public/images/lorne.jpg"
+            src="/images/lorne.jpg"
             alt="Lorne"
             className="w-full md:w-48 rounded-xl object-cover"
           />
@@ -76,7 +76,7 @@ export default function About() {
         {/* Kathy */}
         <div className="md:flex items-center gap-6 space-y-6 md:space-y-0">
           <img
-            src="/public/images/kathy.jpg"
+            src="/images/kathy.jpg"
             alt="Kathy"
             className="w-full md:w-48 rounded-xl object-cover"
           />
