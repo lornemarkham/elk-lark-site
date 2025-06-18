@@ -1,25 +1,19 @@
 import React from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import Footer from "../components/footer";
 
 export default function LarkLife() {
   const gallerySections = [
     {
-      title: "✨ Moments",
-      caption: "Sundown talks. Slow mornings. Starry skies.",
-      images: [
-        { src: "/stays/patio.jpg", caption: "Golden hour on the patio — where every day winds down just right." },
-        { src: "/stays/pool.jpg", caption: "Float, splash, or soak in the view — the pool’s always calling." },
-        { src: "/stays/gazebo.jpg", caption: "Morning coffee, shaded chats, or an impromptu hangout." },
-      ],
-    },
-    {
       title: "🌊 Water Days",
       caption: "Dive in. Float on. Paddle out.",
       images: [
-        { src: "/stays/patio.jpg", caption: "Where lake life begins and schedules end." },
-        { src: "/stays/patio.jpg", caption: "Sun, paddleboards, and absolutely no plans." },
-        { src: "/stays/patio.jpg", caption: "Moments that make you forget what day it is." },
+        { src: "/images/pool/pool6.jpg", caption: "A view that stretches beyond the pool — Kalamalka and calm for miles." },
+        { src: "/images/pool/pool8.jpg", caption: "Splash zone activated — with Ember, age 2, already living the Lark life." },
+        { src: "/images/pool/pool2.jpg", caption: "Nothing on the agenda but sun, floaties, and freedom." },
+        { src: "/images/pool/pool7.jpg", caption: "Generations deep: Grandpa and Ember keeping it cool in the upper plunge pool." },
+        { src: "/images/pool/pool9.jpg", caption: "Real people. Real moments. Ember approved." },
       ],
     },
     {
@@ -38,26 +32,38 @@ export default function LarkLife() {
       title: "🏕 Adventure Scenes",
       caption: "Dirt trails. Deep woods. Unexpected turns.",
       images: [
-        { src: "/stays/patio.jpg", caption: "Adventure begins where the pavement ends." },
-        { src: "/stays/patio.jpg", caption: "Throttle therapy, forest edition." },
-        { src: "/stays/patio.jpg", caption: "Moments you can’t capture — but we try anyway." },
+        { src: "/images/adventures/adventure4.jpg", caption: "Some views silence even the loudest minds." },
+        { src: "/images/adventures/adventure5.jpg", caption: "Bikes parked. Stories flowing. That last stretch before sundown." },
+        { src: "/images/adventures/adventure2.jpg", caption: "No trail, no problem. Driftwood beaches and whatever comes next." },
+        { src: "/images/adventures/adventure7.jpg", caption: "Into the wild, by choice. Ice-cold water. Zero regrets." },
+        { src: "/images/adventures/adventure1.jpg", caption: "Not every treasure is buried. Some show up in the sky." },
       ],
     },
     {
-      title: "🥂 Chill & Social",
-      caption: "Good food. Great people. Easy vibes.",
+      title: "🔥 Backyard Bites",
+      caption: "Healthy. Hearty. Homemade. Always shared.",
       images: [
-        { src: "/stays/patio.jpg", caption: "Cheers to nothing urgent and everything chill." },
-        { src: "/stays/patio.jpg", caption: "Where strangers become crew by sundown." },
-        { src: "/stays/patio.jpg", caption: "Clink, sip, repeat." },
+        { src: "/images/food/food2.jpg", caption: "Grilled pork and kimchi over roasted cauliflower. Dinner with a kick." },
+        { src: "/images/food/food5.jpg", caption: "A sampler of steak, pork belly, and garlicky greens — no shortcuts taken." },
+        { src: "/images/food/food10.jpg", caption: "Calamari and shrimp cocktail with an Old Milwaukee? Yes please." },
+        { src: "/images/food/food11.jpg", caption: "Grill marks, fire, and flavor. Peppers, steak, and buttered onions." },
+        { src: "/images/food/food14.jpg", caption: "Shrimp ceviche meets cowboy beer. A backyard party in a glass." },
+        { src: "/images/food/food15.jpg", caption: "Lettuce taco loaded with pico and bacon. Crunch, spice, bite." },
+        { src: "/images/food/food17.jpg", caption: "Homemade jerky smoked on-site. You’ll smell it before you taste it." },
+        { src: "/images/food/food20.jpg", caption: "Dill, garlic, and cheese — just before it hits the fire." },
+        { src: "/images/food/food16.jpg", caption: "Thick-cut jerky: zero preservatives, maximum flavor." },
       ],
     },
     {
-      title: "🌱 From the Garden",
-      caption: "Whatever grows, goes. (Sometimes onto your plate.)",
+      title: "🛏 The Not-So-Secret Suite",
+      caption: "Blackout curtains. A bed that hits like a cloud. Steps from the pool with a morning coffee in hand. Not listed. Not rented. Just offered — to those who vibe with the Lark life.",
       images: [
-        { src: "/stays/patio.jpg", caption: "Fresh-picked and plated with zero food miles." },
-        { src: "/stays/patio.jpg", caption: "The garden does the talking — and the seasoning." },
+        { src: "/images/stays/kitchen.jpg", caption: "Marshall fridge. Sleek cabinets. Full kitchen. Full send." },
+        { src: "/images/stays/kitchen2.jpg", caption: "Double doors to the pool. TV, fireplace, and good vibes." },
+        { src: "/images/stays/living.jpg", caption: "Cozy couch by day. Hide-a-bed by night. Leather lounge seals the deal." },
+        { src: "/images/stays/office.jpg", caption: "Yes, you can work. No, you won’t want to." },
+        { src: "/images/stays/bathroom.jpg", caption: "Rain shower, heated floors, and a warm amber glow." },
+        { src: "/images/stays/bedroom.jpg", caption: "Not ultra-modern, but a mattress you’ll dream about. Walk-out morning sun included." },
       ],
     },
   ];
@@ -65,7 +71,10 @@ export default function LarkLife() {
   return (
     <div className="bg-white py-16 px-6 text-gray-800">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-12">The Lark Life</h1>
+        <h1 className="text-4xl font-bold text-center mb-2">The Lark Life</h1>
+        <p className="text-center text-gray-600 italic mb-12 max-w-2xl mx-auto">
+          Offbeat, off-grid, and off-the-record. The Lark Life isn’t a rental — it’s an invitation to unwind your way. The pool’s warm, the fridge is full, and there’s always a seat at the fire or a floatie with your name on it. Here’s what you might stumble into...
+        </p>
 
         {gallerySections.map((section, idx) => (
           <div key={idx} className="mb-16">
@@ -82,7 +91,7 @@ export default function LarkLife() {
                         alt={section.title + " image " + (index + 1)}
                         className="object-cover w-full h-64"
                       />
-                      <div className="absolute bottom-0 w-full bg-black/70 text-white text-sm p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 w-full bg-black/70 text-white text-sm p-3 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                         {image.caption}
                       </div>
                     </div>
@@ -93,6 +102,7 @@ export default function LarkLife() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   );
 }
