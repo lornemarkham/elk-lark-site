@@ -23,22 +23,25 @@ export default function StartYourLark() {
       <section className="bg-white py-16 px-6 text-center text-gray-800">
         <div className="max-w-2xl mx-auto space-y-6">
           <p className="text-xl">
-            No dropdowns. No templates. Just tell us what kind of chaos, calm, or curiosity you're chasing.
+            Looking to escape for a day? A weekend? Something in between?
           </p>
           <p className="text-lg text-gray-600">
-            Whether you’re planning a chill lake weekend, a wine-fueled escape, or a dirt bike mission into the bush — we want to hear from you.
+            Whether it’s a BBQ, a lakeside recharge, or just a pool day with a solid vibe — tell us what you’re after.
           </p>
-          <p className="text-lg font-light text-gray-500 italic">
-            The more you share, the better we can build your perfect Lark.
+          <p className="text-lg text-gray-600">
+            Some folks come for the afternoon. Others stay a little longer. We don’t ask too many questions.
+          </p>
+          <p className="text-md font-light text-gray-500 italic">
+            If we like your vibe, we’ll build you a Lark.
           </p>
         </div>
       </section>
 
       {/* Email CTA */}
       <section className="bg-gray-100 py-20 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800 font-serif">Let’s Talk</h2>
+        <h2 className="text-3xl font-bold mb-6 text-gray-800 font-serif">Reach Out</h2>
         <p className="text-lg text-gray-700 mb-8 max-w-xl mx-auto">
-          Shoot us an email with a bit about you, your group, and what you’re into. We’ll take it from there.
+          Shoot us a note about your group, what you're into, and when you're thinking. We’ll take it from there.
         </p>
         <a
           href="mailto:hello@elklark.com"
@@ -51,12 +54,12 @@ export default function StartYourLark() {
         </p>
       </section>
 
-      {/* Optional Quote Strip */}
+      {/* Quote Strip */}
       <section className="bg-white py-12 px-6 text-center">
         <div className="max-w-4xl mx-auto grid gap-6 md:grid-cols-3 text-gray-600 italic text-md">
-          <p>“Bachelor party with dirt bikes? Easy.”</p>
-          <p>“Wine tour that ends in a pool party? Done.”</p>
-          <p>“Need to chill and stare at the lake? Respect.”</p>
+          <p>“We came for the view. Stayed for the fire pit.”</p>
+          <p>“Brought beers and a Bluetooth speaker. That was enough.”</p>
+          <p>“I didn’t plan to sleep over. But I didn’t plan to leave either.”</p>
         </div>
       </section>
 
