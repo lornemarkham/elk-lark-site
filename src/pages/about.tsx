@@ -114,7 +114,7 @@ export default function About() {
               Unplug. Get rugged. Hit the wild side of the Okanagan.
             </p>
             <Link
-              to="/outlaw"
+              to="/experiences/outlaw"
               className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Ride the Wild →
@@ -136,7 +136,7 @@ export default function About() {
             <h3 className="text-white text-2xl font-bold mb-2">Restore Lark</h3>
             <p className="text-white text-sm mb-4">Relax, sip, float — this is your recharge zone.</p>
             <Link
-              to="/restore"
+              to="/experiences/restore"
               className="inline-block bg-accent text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Restore Yourself →
@@ -160,7 +160,7 @@ export default function About() {
               Work smarter in the wild. Plan, think, launch.
             </p>
             <Link
-              to="/strategy"
+              to="/experiences/strategy"
               className="inline-block bg-strategy text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Think Bigger →

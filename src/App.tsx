@@ -6,15 +6,10 @@ import PageTransition from "./components/PageTransition";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Experience from "./pages/experience";
-// OLD
-// import OutlawLark from "./pages/Outlaw";
-// import RestoreLark from "./pages/Restore";
-// import StrategyLark from "./pages/Strategy";
 
-// ✅ NEW (go into the experiences folder)
-import OutlawLark from "./pages/experiences/Outlaw";
-import RestoreLark from "./pages/experiences/Restore";
-import StrategyLark from "./pages/experiences/Strategy";
+import OutlawLark from "./pages/experiences/outlaw";
+import RestoreLark from "./pages/experiences/restore";
+import StrategyLark from "./pages/experiences/strategy";
 
 import Basecamp from "./pages/basecamp";
 import FAQ from "./pages/faq";
@@ -33,8 +28,8 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/experience" element={<Experience />} />
             <Route path="/experiences/outlaw" element={<OutlawLark />} />
-            <Route path="/experience/restore" element={<RestoreLark />} />
-            <Route path="/experience/strategy" element={<StrategyLark />} />
+            <Route path="/experiences/restore" element={<RestoreLark />} />
+            <Route path="/experiences/strategy" element={<StrategyLark />} />
             <Route path="/basecamp" element={<Basecamp />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/start" element={<Start />} />
