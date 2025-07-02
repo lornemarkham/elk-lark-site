@@ -47,7 +47,7 @@ export default function StartYourLark() {
           href="mailto:elklarknow@gmail.com"
           className="inline-block bg-teal-700 text-white px-10 py-4 rounded-xl text-lg shadow-lg hover:bg-teal-800 hover:shadow-xl transition"
         >
-          Email Us: elklarknow@gmail.com test
+          Email Us: elklarknow@gmail.com
         </a>
         <p className="text-sm text-gray-500 mt-6 italic">
           Not into email? Tape a note to a beer can and toss it into Kalamalka. We’ll find it.
