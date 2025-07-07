@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import HeroBackground from "../components/HeroBackground";
 import BasecampCarousel from "../components/BasecampCarousel";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 
 export default function Home() {
   const [hoverTarget, setHoverTarget] = useState("");
