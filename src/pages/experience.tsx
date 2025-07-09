@@ -42,7 +42,7 @@ export default function Services() {
             <h3 className="text-white text-2xl font-bold mb-2">Outlaw Lark</h3>
             <p className="text-white text-sm mb-4">Unplug. Get rugged. Hit the wild side of the Okanagan.</p>
             <Link
-              to="/experience/outlaw"
+              to="/experiences/outlaw"
               className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Ride the Wild →
@@ -64,7 +64,7 @@ export default function Services() {
             <h3 className="text-white text-2xl font-bold mb-2">Restore Lark</h3>
             <p className="text-white text-sm mb-4">Relax, sip, float — this is your recharge zone.</p>
             <Link
-              to="/experience/restore"
+              to="/experiences/restore"
               className="inline-block bg-accent text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Restore Yourself →
@@ -86,7 +86,7 @@ export default function Services() {
             <h3 className="text-white text-2xl font-bold mb-2">Strategy Lark</h3>
             <p className="text-white text-sm mb-4">Work smarter in the wild. Plan, think, launch.</p>
             <Link
-              to="/experience/strategy"
+              to="/experiences/strategy"
               className="inline-block bg-strategy text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
             >
               Think Bigger →
