@@ -6,14 +6,14 @@ import PageTransition from "./components/PageTransition";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Experience from "./pages/experience";
-
 import OutlawLark from "./pages/experiences/outlaw";
 import RestoreLark from "./pages/experiences/restore";
 import StrategyLark from "./pages/experiences/strategy";
-
 import Basecamp from "./pages/basecamp";
 import FAQ from "./pages/faq";
 import Start from "./pages/start";
+import Privacy from "./pages/privacy";
+
 
 export default function App() {
   const location = useLocation();
@@ -33,6 +33,7 @@ export default function App() {
             <Route path="/basecamp" element={<Basecamp />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/start" element={<Start />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </PageTransition>
       </main>
