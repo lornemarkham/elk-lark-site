@@ -24,13 +24,14 @@ export default function Footer() {
             <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
             <li><Link to="/faq" className="hover:underline">What to Expect</Link></li>
             <li><Link to="/start" className="hover:underline">Start Your Lark</Link></li>
+            <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
           </ul>
         </div>
 
         {/* Contact + Social */}
         <div className="space-y-2">
           <h4 className="text-lg font-semibold">Connect</h4>
-          <p className="text-sm text-gray-400">Email: hello@elklark.com</p>
+          <p className="text-sm text-gray-400">Email: elklarknow@gmail.com</p>
           <div className="flex gap-4 mt-2">
             <a href="#" className="hover:text-amber-600">Instagram</a>
             <a href="#" className="hover:text-amber-600">Facebook</a>
