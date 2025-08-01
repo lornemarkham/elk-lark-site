@@ -37,7 +37,7 @@ export default function Footer() {
             <a href="https://www.facebook.com/profile.php?id=61578311131612" className="hover:text-amber-600">Facebook</a>
           </div>
         </div>
-      </div>
+      </div> 
 
       {/* Bottom line */}
       <div className="mt-8 text-center text-xs text-gray-500">
