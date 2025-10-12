@@ -50,7 +50,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
           {/* Tagline */}
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
-            Escape Ordinary. Live the Lark.
+            Escape Ordinary. Live the Lark. Winter Here 
           </h1>
 
           {/* Description */}
