@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-
+import SeasonToggle from "./SeasonToggle";
 import logo from "../assets/elk-lark-logo.png";
 
 export default function Header() {
@@ -21,10 +21,19 @@ export default function Header() {
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-md sticky top-0 z-50">
-      {/* Logo */}
-      <Link to="/" className="flex items-center">
-        <img src={logo} alt="ELK Lark logo" className="h-10 w-auto" />
-      </Link>
+      {/* Logo + Toggle (desktop) */}
+      <div className="flex items-center gap-3">
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="ELK Lark logo" className="h-10 w-auto" />
+        </Link>
+        <div className="hidden md:block">
+          {/* <SeasonToggle variant="pill" size="sm" /> */}
+          {/* // <SeasonToggle variant="icon" size="sm" />
+          // <SeasonToggle variant="segmented" size="sm" />
+          // <SeasonToggle variant="chip" size="sm" /> */}
+          <SeasonToggle variant="underline" size="sm" />
+        </div>
+      </div>
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-6 text-lg font-light">
@@ -60,14 +69,13 @@ export default function Header() {
               key={to}
               to={to}
               onClick={() => setIsMobileOpen(false)}
-              className={({ isActive }) =>
-                `block w-full ${linkStyles(isActive)} text-left`
-              }
+              className={({ isActive }) => `block w-full ${linkStyles(isActive)} text-left`}
             >
               {label}
             </NavLink>
           ))}
-          {/* Mobile-only CTA */}
+
+          {/* Mobile-only CTA + Toggle */}
           <Link
             to="/start"
             onClick={() => setIsMobileOpen(false)}
@@ -75,6 +83,7 @@ export default function Header() {
           >
             Start Your Lark
           </Link>
+          <SeasonToggle size="sm" />
         </div>
       )}
     </header>

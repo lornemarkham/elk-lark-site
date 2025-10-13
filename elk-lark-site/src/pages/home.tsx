@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import HeroBackground from "../components/HeroBackground";
 import BasecampCarousel from "../components/BasecampCarousel";
 import Footer from "../components/footer";
+import { useSeason } from "../state/SeasonContext";
 
 export default function Home() {
   const [hoverTarget, setHoverTarget] = useState("");
+  const { season } = useSeason();
 
   let leaveTimeout: NodeJS.Timeout;
 
@@ -25,9 +27,14 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative min-h-screen text-white overflow-hidden">
         <HeroBackground hoverTarget={hoverTarget} />
-        <div className="absolute inset-0 bg-black/60 z-10" />
+              <div
+        className={`absolute inset-0 z-10 ${
+          season === "winter" ? "bg-black/70" : "bg-black/50"
+        }`}
+      />
 
-        {/* Logo top-center */}
+        /* Logo / Slogan top-center */
+        {season !== "winter" && (
         <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
           <img
             src={
@@ -45,49 +52,53 @@ export default function Home() {
             className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
           />
         </div>
+      )}
+
 
         {/* Main CTA */}
         <div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
           {/* Tagline */}
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
-            Escape Ordinary. Live the Lark. Winter Here 
-          </h1>
+  {season === "winter"
+    ? "Escape Ordinary. Live the Lark. Winter Here."
+    : "Escape Ordinary. Live the Lark. Summer Awaits."}
+</h1>
 
-          {/* Description */}
-          <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
-            Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the
-            heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.
-          </p>
+  <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
+  {season === "winter"
+      ? "When the valley goes quiet, ELK Lark wakes up. Trade beaches for bonfires, bikes for sleds, and long days for longer nights around the fire. From mountain trails to garage tinkering sessions, winter at the Lark is where stories get built and memories thaw slow."
+      : " Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.   "}
+  </p>
 
-          {/* CTA Buttons */}
-          <div
-            className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
-            onMouseLeave={handleMouseLeave}
+        {/* CTA Buttons */}
+        <div
+          className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
+          onMouseLeave={handleMouseLeave}
+        >
+          <Link
+            to="/experiences/outlaw"
+            onMouseEnter={() => handleMouseEnter("outlaw")}
+            className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
           >
-            <Link
-              to="/experiences/outlaw"
-              onMouseEnter={() => handleMouseEnter("outlaw")}
-              className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
-            >
-              Outlaw Lark
-            </Link>
+            {season === "winter" ? "Adventure Lark" : "Outlaw Lark"}
+          </Link>
 
-            <Link
-              to="/experiences/restore"
-              onMouseEnter={() => handleMouseEnter("restore")}
-              className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
-            >
-              Restore Lark
-            </Link>
+          <Link
+            to="/experiences/restore"
+            onMouseEnter={() => handleMouseEnter("restore")}
+            className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
+          >
+            {season === "winter" ? "Cozy Lark" : "Restore Lark"}
+          </Link>
 
-            <Link
-              to="/experiences/strategy"
-              onMouseEnter={() => handleMouseEnter("strategy")}
-              className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
-            >
-              Strategy Lark
-            </Link>
-          </div>
+          <Link
+            to="/experiences/strategy"
+            onMouseEnter={() => handleMouseEnter("strategy")}
+            className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
+          >
+            {season === "winter" ? "Lab Lark" : "Strategy Lark"}
+          </Link>
+        </div>
         </div>
       </div>
 

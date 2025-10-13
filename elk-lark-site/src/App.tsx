@@ -13,6 +13,7 @@ import Basecamp from "./pages/basecamp";
 import FAQ from "./pages/faq";
 import Start from "./pages/start";
 import Privacy from "./pages/privacy";
+import { SeasonProvider } from "./state/SeasonContext";
 
 
 export default function App() {
@@ -20,8 +21,9 @@ export default function App() {
 
   return (
     <>
+     <SeasonProvider>
       <Header />
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-[var(--bg)] text-[var(--fg)]">
         <PageTransition>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
@@ -37,6 +39,7 @@ export default function App() {
           </Routes>
         </PageTransition>
       </main>
+      </SeasonProvider>
     </>
   );
 }
