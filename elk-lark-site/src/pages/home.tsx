@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import HeroBackground from "../components/HeroBackground";
+import WinterHeroCarousel from "../components/WinterHeroCarousel";
 import BasecampCarousel from "../components/BasecampCarousel";
 import Footer from "../components/footer";
 import { useSeason } from "../state/SeasonContext";
@@ -9,94 +10,124 @@ export default function Home() {
   const [hoverTarget, setHoverTarget] = useState("");
   const { season } = useSeason();
 
-  let leaveTimeout: NodeJS.Timeout;
+  const leaveTimeout = useRef<number | null>(null);
 
   const handleMouseEnter = (target: string) => {
-    clearTimeout(leaveTimeout);
+    if (leaveTimeout.current) {
+      clearTimeout(leaveTimeout.current);
+      leaveTimeout.current = null;
+    }
     setHoverTarget(target);
   };
 
   const handleMouseLeave = () => {
-    leaveTimeout = setTimeout(() => {
+    if (leaveTimeout.current) clearTimeout(leaveTimeout.current);
+    leaveTimeout.current = window.setTimeout(() => {
       setHoverTarget("");
+      leaveTimeout.current = null;
     }, 2000);
   };
 
   return (
     <>
       {/* Hero Section */}
-      <div className="relative min-h-screen text-white overflow-hidden">
-        <HeroBackground hoverTarget={hoverTarget} />
-              <div
-        className={`absolute inset-0 z-10 ${
-          season === "winter" ? "bg-black/70" : "bg-black/50"
-        }`}
-      />
+      <div
+        className="relative text-white overflow-hidden"
+        style={{ minHeight: "calc(100vh - 60px)" }}
+      >
+        {season === "winter" ? (
+          <WinterHeroCarousel />
+        ) : (
+          <HeroBackground hoverTarget={hoverTarget} />
+        )}
 
-        /* Logo / Slogan top-center */
+        {/* overlay: keep for summer but hide during winter so hero shows through */}
         {season !== "winter" && (
-        <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
-          <img
-            src={
-              typeof window !== "undefined" && window.innerWidth >= 640
-                ? hoverTarget === "outlaw"
-                  ? "/logo-outlaw.png"
-                  : hoverTarget === "restore"
-                  ? "/logo-restore.png"
-                  : hoverTarget === "strategy"
-                  ? "/logo-strategy.png"
-                  : "/logo-white.png"
-                : "/logo-white.png"
-            }
-            alt="ELK Lark Logo"
-            className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
+          <div
+            className={`absolute inset-0 z-10 bg-black/50`}
           />
-        </div>
-      )}
+        )}
+
+        {/* Logo / Slogan top-center (hidden in winter) */}
+        {season !== "winter" && (
+          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
+            <img
+              src={
+                typeof window !== "undefined" && window.innerWidth >= 640
+                  ? hoverTarget === "outlaw"
+                    ? "/logo-outlaw.png"
+                    : hoverTarget === "restore"
+                    ? "/logo-restore.png"
+                    : hoverTarget === "strategy"
+                    ? "/logo-strategy.png"
+                    : "/logo-white.png"
+                  : "/logo-white.png"
+              }
+              alt="ELK Lark Logo"
+              className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
+            />
+          </div>
+        )}
 
 
-        {/* Main CTA */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-screen text-center px-4 sm:px-6 lg:px-8">
+  {/* Main CTA - absolutely centered so content stays centered even when hero height is adjusted */}
+  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
           {/* Tagline */}
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug">
-  {season === "winter"
-    ? "Escape Ordinary. Live the Lark. Winter Here."
-    : "Escape Ordinary. Live the Lark. Summer Awaits."}
-</h1>
+          <h1
+            className={`text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug ${
+              season === "winter" ? "text-black" : "text-white"
+            } ${season === "winter" ? "bg-white/30 px-3 py-1 rounded inline-block" : ""}`}
+            data-testid="hero-title"
+          >
+            {season === "winter"
+              ? "When the Valley Slows Down, ELK Lark Turns On."
+              : "Escape Ordinary. Live the Lark. Summer Awaits."}
+          </h1>
 
-  <p className="text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans">
-  {season === "winter"
-      ? "When the valley goes quiet, ELK Lark wakes up. Trade beaches for bonfires, bikes for sleds, and long days for longer nights around the fire. From mountain trails to garage tinkering sessions, winter at the Lark is where stories get built and memories thaw slow."
-      : " Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.   "}
-  </p>
+          <p
+            className={`text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans ${
+              season === "winter" ? "text-black" : "text-white"
+            } ${season === "winter" ? "bg-white/30 px-3 py-2 rounded inline-block leading-[1.4]" : ""}`}
+            data-testid="hero-copy"
+          >
+            {season === "winter"
+              ? "Winter at ELK Lark isn't about escaping the cold — it's about leaning into it. Bonfires instead of beach days. Snowy trails, late-night garage hangs, and slow mornings that turn into long conversations. This is the season for smaller groups, quieter energy, and experiences that don't exist on a booking site."
+              : " Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.   "}
+          </p>
 
         {/* CTA Buttons */}
         <div
           className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
-          onMouseLeave={handleMouseLeave}
+          onMouseLeave={season === "winter" ? undefined : handleMouseLeave}
         >
           <Link
             to="/experiences/outlaw"
-            onMouseEnter={() => handleMouseEnter("outlaw")}
-            className="bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center"
+            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("outlaw")}
+            className={`bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center ${
+              season === "winter" ? "text-white" : ""
+            }`}
           >
-            {season === "winter" ? "Adventure Lark" : "Outlaw Lark"}
+            Outlaw Lark
           </Link>
 
           <Link
             to="/experiences/restore"
-            onMouseEnter={() => handleMouseEnter("restore")}
-            className="bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center"
+            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("restore")}
+            className={`bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center ${
+              season === "winter" ? "text-white" : ""
+            }`}
           >
-            {season === "winter" ? "Cozy Lark" : "Restore Lark"}
+            Restore Lark
           </Link>
 
           <Link
             to="/experiences/strategy"
-            onMouseEnter={() => handleMouseEnter("strategy")}
-            className="bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center"
+            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("strategy")}
+            className={`bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center ${
+              season === "winter" ? "text-white" : ""
+            }`}
           >
-            {season === "winter" ? "Lab Lark" : "Strategy Lark"}
+            Strategy Lark
           </Link>
         </div>
         </div>
