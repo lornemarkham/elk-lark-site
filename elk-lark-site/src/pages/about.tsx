@@ -59,7 +59,7 @@ export default function About() {
         {/* Lorne */}
         <div className="md:flex md:flex-row-reverse items-center gap-6 space-y-6 md:space-y-0">
           <img
-            src="/images/lorne.jpg"
+            src="/images/lorne2.jpg"
             alt="Lorne"
             className="w-full md:w-48 rounded-xl object-cover"
           />
