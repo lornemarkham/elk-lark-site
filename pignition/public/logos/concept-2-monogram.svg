@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" fill="#0f0f0f"/>
+  <!-- Stamp frame -->
+  <rect x="22" y="22" width="156" height="156" rx="6" fill="none" stroke="#f5f0e8" stroke-width="4"/>
+  <!-- P: vertical stem -->
+  <rect x="48" y="44" width="14" height="112" fill="#f5f0e8"/>
+  <!-- P: top bar + bowl (bold slab) -->
+  <path d="M 62 44 L 62 52 L 118 52 L 118 76 L 62 76 L 62 44 Z" fill="#f5f0e8"/>
+  <path d="M 70 60 L 70 68 L 110 68 L 110 60 Z" fill="#0f0f0f"/>
+  <!-- Accent -->
+  <circle cx="156" cy="156" r="6" fill="#c2410c"/>
+</svg>
