@@ -10,6 +10,8 @@ export default function Header() {
   const navItems = [
     { label: "The ELK Story", to: "/about" },
     { label: "Your Experience", to: "/experience" },
+    { label: "Packages", to: "/packages" },
+    { label: "Guest Experiences", to: "/guest-experiences" },
     { label: "Basecamp", to: "/basecamp" },
     { label: "What to Expect", to: "/faq" },
   ];
@@ -46,7 +48,7 @@ export default function Header() {
 
       {/* CTA Button */}
       <Link
-        to="/start"
+        to="/guest-experiences"
         className="hidden md:inline-block ml-6 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
       >
         Start Your Lark
@@ -77,7 +79,7 @@ export default function Header() {
 
           {/* Mobile-only CTA + Toggle */}
           <Link
-            to="/start"
+            to="/guest-experiences"
             onClick={() => setIsMobileOpen(false)}
             className="block w-full mt-2 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-center transition"
           >

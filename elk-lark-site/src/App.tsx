@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import PageTransition from "./components/PageTransition";
 
@@ -10,8 +10,9 @@ import OutlawLark from "./pages/experiences/outlaw";
 import RestoreLark from "./pages/experiences/restore";
 import StrategyLark from "./pages/experiences/strategy";
 import Basecamp from "./pages/basecamp";
+import Packages from "./pages/packages";
+import GuestExperiences from "./pages/guest-experiences";
 import FAQ from "./pages/faq";
-import Start from "./pages/start";
 import Privacy from "./pages/privacy";
 import { SeasonProvider } from "./state/SeasonContext";
 
@@ -33,8 +34,10 @@ export default function App() {
             <Route path="/experiences/restore" element={<RestoreLark />} />
             <Route path="/experiences/strategy" element={<StrategyLark />} />
             <Route path="/basecamp" element={<Basecamp />} />
+            <Route path="/packages" element={<Packages />} />
+            <Route path="/guest-experiences" element={<GuestExperiences />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/start" element={<Start />} />
+            <Route path="/start" element={<Navigate to="/guest-experiences" replace />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </PageTransition>

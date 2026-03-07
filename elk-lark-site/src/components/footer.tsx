@@ -21,9 +21,11 @@ export default function Footer() {
           <ul className="space-y-1 text-sm">
             <li><Link to="/about" className="hover:underline">The ELK Story</Link></li>
             <li><Link to="/experience" className="hover:underline">Your Experience</Link></li>
+            <li><Link to="/packages" className="hover:underline">Packages</Link></li>
+            <li><Link to="/guest-experiences" className="hover:underline">Guest Experiences</Link></li>
             <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
             <li><Link to="/faq" className="hover:underline">What to Expect</Link></li>
-            <li><Link to="/start" className="hover:underline">Start Your Lark</Link></li>
+            <li><Link to="/guest-experiences" className="hover:underline">Start Your Lark</Link></li>
             <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
           </ul>
         </div>

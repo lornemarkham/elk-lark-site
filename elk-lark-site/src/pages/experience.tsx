@@ -139,7 +139,7 @@ export default function Services() {
           *We don’t publicly offer overnight stays yet — but we do host services for friends. Email us to plan something custom.
         </p>
         <Link
-          to="/start"
+          to="/guest-experiences"
           className="mt-8 inline-block bg-amber-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-amber-700 transition"
         >
           Contact Us to Craft Your Lark →

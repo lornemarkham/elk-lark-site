@@ -49,7 +49,7 @@ export default function FAQ() {
           Reach out with your questions — we’ll give it to you straight.
         </p>
         <a
-          href="/start"
+          href="/guest-experiences"
           className="inline-block bg-orange-600 text-white px-10 py-4 rounded-xl text-lg shadow-lg hover:shadow-xl hover:bg-orange-700 transition"
         >
           Start Your Lark →

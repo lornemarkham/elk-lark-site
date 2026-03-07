@@ -112,7 +112,7 @@ export default function RestoreLark() {
             : "Restore Lark is flexible, effortless, and designed around you. Just reach out — and we’ll create something worth dreaming about."}
         </p>
 
-        <Link to="/start">
+        <Link to="/guest-experiences">
           <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition">
             Start Your Lark
           </button>
