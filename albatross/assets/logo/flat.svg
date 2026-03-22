@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Albatross logo flat">
+  <title>Albatross — flat mark</title>
+  <path
+    fill="#1D4ED8"
+    d="M256 76
+       C378 76 460 198 460 372
+       C460 412 420 450 380 424
+       L256 240
+       L132 424
+       C92 450 52 412 52 372
+       C52 198 134 76 256 76
+       Z"
+  />
+  <path
+    fill="#1D4ED8"
+    d="M186 84
+       C168 84 152 100 158 118
+       C162 128 174 130 184 122
+       L210 86
+       C204 82 194 84 186 84
+       Z"
+  />
+</svg>

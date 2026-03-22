@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Albatross logo hero">
+  <title>Albatross — hero mark</title>
+  <defs>
+    <linearGradient id="albatrossGrad" x1="256" y1="64" x2="256" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#93C5FD"/>
+    </linearGradient>
+    <filter id="albatrossShadow" x="-12%" y="-12%" width="124%" height="124%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1E3A5F" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect x="28" y="28" width="456" height="456" rx="104" ry="104" fill="#E8F2FC"/>
+  <g filter="url(#albatrossShadow)">
+    <!-- A + wings: outer curves meet at inner apex (256, 240) -->
+    <path
+      fill="url(#albatrossGrad)"
+      d="M256 76
+         C378 76 460 198 460 372
+         C460 412 420 450 380 424
+         L256 240
+         L132 424
+         C92 450 52 412 52 372
+         C52 198 134 76 256 76
+         Z"
+    />
+    <!-- Head / beak chip (fine detail at apex) -->
+    <path
+      fill="url(#albatrossGrad)"
+      d="M186 84
+         C168 84 152 100 158 118
+         C162 128 174 130 184 122
+         L210 86
+         C204 82 194 84 186 84
+         Z"
+    />
+  </g>
+</svg>

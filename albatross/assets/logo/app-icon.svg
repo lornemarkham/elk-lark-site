@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Albatross logo app icon">
+  <title>Albatross — app icon</title>
+  <!-- Simplified for small sizes: no separate beak; softer apex; bold wedge -->
+  <path
+    fill="#2563EB"
+    d="M256 104
+       C360 104 432 210 432 364
+       C432 396 400 424 364 400
+       L256 264
+       L148 400
+       C112 424 80 396 80 364
+       C80 210 152 104 256 104
+       Z"
+  />
+</svg>
