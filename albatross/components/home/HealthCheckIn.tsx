@@ -27,7 +27,11 @@ export function HealthCheckIn({ comingSoon = true }: Props) {
     <SectionCard
       eyebrow={copy.eyebrow}
       title={copy.title}
-      description={copy.description}
+      description={
+        comingSoon
+          ? `${copy.description}\n\n${copy.comingSoonNote}`
+          : copy.description
+      }
       right={
         comingSoon ? (
           <View style={styles.comingSoonBadge}>

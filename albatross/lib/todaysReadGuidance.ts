@@ -28,44 +28,86 @@ export function isMorningAtDefaults(m: MorningInputs): boolean {
 }
 
 /**
- * Rule-based copy from morning sliders + identity. No network, no AI.
+ * Rule-based copy from morning sliders + identity + intention. No network, no AI.
  * Call only when `!isMorningAtDefaults(m)`.
  */
 export function buildTodaysRead(m: MorningInputs): TodaysReadGuidance {
-  const { mood, energy, stress } = m;
+  const { mood, energy, stress, intention } = m;
   const chosen = chosenStateLabel(m.identity);
+  const intent = intention.trim();
+  const intentClip =
+    intent.length > 72 ? `${intent.slice(0, 69)}…` : intent;
 
   let tone: string;
   let focus: string;
   let watchOut: string;
 
-  // Priority: stress → mood → energy patterns → blended fatigue → steady default
+  // Branches combine mood, energy, and stress; identity and intention layer on after.
   if (stress >= 7) {
-    tone = 'Stress is elevated — keep things simple today.';
+    tone =
+      stress >= 8
+        ? 'Stress is carrying a lot of weight — the day will reward a narrower, kinder scope.'
+        : 'Stress is elevated — keep the frame small and recoverable.';
     focus =
-      'Reduce friction, shorten your list, and protect time for real recovery.';
-    watchOut = 'Defer what can wait; not every request needs a yes today.';
+      mood <= 4
+        ? 'Protect one honest pause; let mood stay soft while you trim what can wait.'
+        : energy <= 4
+          ? 'Shrink the list to what truly needs you; pair moves with rest, not proof.'
+          : 'Channel energy into fewer commitments so pressure has somewhere to land.';
+    watchOut =
+      'Watch for saying yes on reflex — friction is information, not failure.';
   } else if (mood <= 4) {
-    tone = 'Your mood is running low — take pressure off.';
-    focus = 'Focus on one small win. Progress can be quiet.';
-    watchOut = 'Be gentle if momentum feels slow — that’s still a valid day.';
-  } else if (energy >= 7 && stress <= 4) {
-    tone = 'You have strong energy today.';
+    tone =
+      'Mood is running low — take pressure off and let progress be quiet.';
     focus =
-      'Channel it into one meaningful task before you stack on more.';
-    watchOut = 'Spreading too thin will dull the impact of that energy.';
+      energy <= 4
+        ? 'One small win is enough; rest isn’t the opposite of showing up.'
+        : 'Use the energy you have on one meaningful task, then reassess gently.';
+    watchOut =
+      'Be gentle if momentum feels slow — that’s still a valid day.';
+  } else if (energy >= 7 && stress <= 4 && mood >= 6) {
+    tone = 'Mood and energy are giving you room — steer it with intention.';
+    focus =
+      'Put your first real block on something that matters before the day fragments.';
+    watchOut =
+      'Bright days can hide overcommitment — watch for scattering.';
   } else if (energy <= 4 && stress >= 5) {
-    tone = 'Energy is modest while demand feels higher.';
-    focus = 'Protect short breaks and finish one thing before the next.';
-    watchOut = 'Watch for pushing through fatigue — pace is protective.';
+    tone = 'Energy is modest while demand feels higher — pace is protective.';
+    focus =
+      'Finish one thing before the next; treat short breaks as non-negotiable.';
+    watchOut =
+      'Pushing through fatigue often costs more than it yields.';
+  } else if (energy >= 7 && stress <= 4) {
+    tone = 'You have useful energy — name a priority before noise picks it for you.';
+    focus =
+      'Let momentum build around one anchor task, not around every ping.';
+    watchOut =
+      'Spreading thin will blunt the impact of a strong battery.';
+  } else if (energy <= 4) {
+    tone = 'Energy is on the low side — smaller moves are the right scale.';
+    focus =
+      'Protect one pocket of genuine rest; trade quantity for steadiness.';
+    watchOut =
+      'Watch for self-judgment on slow days — sustainability beats sprinting.';
   } else {
-    tone = 'You’re in a steady range today.';
-    focus = 'Prioritize one meaningful task and protect your time.';
-    watchOut = 'Avoid overloading your schedule on autopilot.';
+    tone =
+      mood >= 7
+        ? 'You’re in a workable, slightly lighter range — steady beats heroic.'
+        : 'You’re in a workable range — anchor before the day accelerates.';
+    focus =
+      'Prioritize one meaningful task and guard the time around it.';
+    watchOut =
+      stress >= 5
+        ? 'Mid-level stress can still stack quietly — notice when the calendar tightens.'
+        : 'Autopilot scheduling can overload a day that felt “fine.”';
   }
 
   if (chosen) {
-    focus = `You chose to lead as ${chosen}. ${focus}`;
+    focus = `As ${chosen}: ${focus}`;
+  }
+
+  if (intentClip) {
+    focus = `Hold “${intentClip}” in view — ${focus}`;
   }
 
   return { tone, focus, watchOut };

@@ -1,7 +1,7 @@
 import type { HabitItem, TopThreeItem } from '@/types/home';
 import { weekHabitsMockSnapshot } from '@/lib/mock/weekHabitsSnapshot';
 
-/** Scroll order for the home feed (progress dots + list). */
+/** Scroll order for the home feed. */
 export const HOME_SECTION_ORDER = [
   'morning',
   'todaysRead',
@@ -72,14 +72,12 @@ export const homeSections = {
     descriptionIdle:
       'Once you’ve checked in, this becomes a simple guide for the day — calm, not prescriptive.',
     /** Placeholder lines (not fake personalization) — same labels as active state. */
-    placeholderTone:
-      'Your tone for the day will appear here after you check in.',
-    placeholderFocus:
-      'Direction shows up when you move a slider, choose a posture, or add one honest line.',
+    placeholderTone: 'Your read will take shape as you check in.',
+    placeholderFocus: 'Start with your morning sliders or intention.',
     placeholderWatchOut:
-      'Nothing to watch for yet — just enough input to reflect you, not a template.',
+      'Small inputs create better guidance over time.',
     /** Soft link to Insights — bottom of card in both empty and active states. */
-    insightsLink: 'See how your week is unfolding',
+    insightsLink: 'See how this connects to your week',
   },
   topThree: {
     eyebrow: 'Focus',
@@ -91,6 +89,9 @@ export const homeSections = {
     title: 'Health Check-In',
     description:
       'Sleep, movement, recovery — a signal for awareness, not a verdict.',
+    /** Shown in Coming Soon preview under the main description. */
+    comingSoonNote:
+      'Full check-in is on the way — this preview is for layout and tone only.',
   },
   habits: {
     eyebrow: 'Rhythm',

@@ -396,6 +396,12 @@ const styles = StyleSheet.create({
     color: theme.colors.textMuted,
     lineHeight: 24,
   },
+  emptyWeekPosition: {
+    ...theme.typography.caption,
+    color: theme.colors.textMuted,
+    lineHeight: 20,
+    marginTop: theme.spacing.sm,
+  },
   emptyProgressLabel: {
     ...theme.typography.caption,
     fontFamily: 'DMSans_500Medium',

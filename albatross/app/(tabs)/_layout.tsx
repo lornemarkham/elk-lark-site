@@ -1,13 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AppLogoFloatingAction } from '@/components/branding/AppLogoFloatingAction';
 import { theme } from '@/constants/theme';
 
 const ICON_SIZE = 24;
+/** Matches floating logo offset — tab bar height approximation. */
+const TAB_BAR_APPROX = 52;
 
 export default function TabLayout() {
+  const insets = useSafeAreaInsets();
+
   return (
     <View style={styles.root}>
       <Tabs
@@ -93,6 +98,19 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
+      <View
+        pointerEvents="none"
+        style={[
+          styles.prototypeNote,
+          { bottom: TAB_BAR_APPROX + insets.bottom + 4 },
+        ]}
+        accessibilityElementsHidden
+        importantForAccessibility="no"
+      >
+        <Text style={styles.prototypeNoteText}>
+          Prototype for feedback — some features are still evolving
+        </Text>
+      </View>
       <AppLogoFloatingAction />
     </View>
   );
@@ -101,5 +119,20 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  prototypeNote: {
+    position: 'absolute',
+    left: theme.spacing.md,
+    right: theme.spacing.md,
+    alignItems: 'center',
+    zIndex: 4,
+    paddingHorizontal: theme.spacing.xl,
+  },
+  prototypeNoteText: {
+    fontSize: 10,
+    lineHeight: 14,
+    color: theme.colors.textMuted,
+    opacity: 0.72,
+    textAlign: 'center',
   },
 });

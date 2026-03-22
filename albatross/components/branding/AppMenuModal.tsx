@@ -66,8 +66,9 @@ export function AppMenuModal({
       if (__DEV__) {
         console.log(`[Albatross] Menu: ${id} (placeholder)`);
       }
+      onClose();
     },
-    [onSelectItem],
+    [onSelectItem, onClose],
   );
 
   return (

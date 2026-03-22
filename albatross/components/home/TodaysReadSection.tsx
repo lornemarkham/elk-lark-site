@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import {
   Animated,
   Easing,
@@ -16,6 +15,11 @@ import { homeSections } from '@/constants/home';
 import { theme } from '@/constants/theme';
 import { buildTodaysRead, isMorningAtDefaults } from '@/lib/todaysReadGuidance';
 import type { MorningInputs } from '@/types/morning';
+
+const FADE_DELAY_FROM_IDLE_MS = 120;
+const FADE_IN_FROM_IDLE_MS = 200;
+const CROSSFADE_OUT_MS = 100;
+const CROSSFADE_IN_MS = 180;
 
 type Props = {
   morning: MorningInputs;
@@ -81,24 +85,47 @@ export function TodaysReadSection({ morning }: Props) {
       const t = setTimeout(() => {
         Animated.timing(opacity, {
           toValue: 1,
-          duration: 300,
+          duration: FADE_IN_FROM_IDLE_MS,
           easing: Easing.out(Easing.cubic),
           useNativeDriver: true,
         }).start();
-      }, 200);
+      }, FADE_DELAY_FROM_IDLE_MS);
       return () => clearTimeout(t);
     }
 
-    opacity.setValue(0.78);
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 260,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
+    const anim = Animated.sequence([
+      Animated.timing(opacity, {
+        toValue: 0.52,
+        duration: CROSSFADE_OUT_MS,
+        easing: Easing.out(Easing.quad),
+        useNativeDriver: true,
+      }),
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: CROSSFADE_IN_MS,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }),
+    ]);
+
+    anim.start();
+
+    return () => {
+      opacity.stopAnimation();
+    };
   }, [atDefaults, contentSignature, opacity]);
 
   const bodyStyle = atDefaults ? styles.bodyPlaceholder : styles.body;
+  const contentOpacity = atDefaults ? 1 : opacity;
+
+  const rows = useMemo(
+    () => [
+      { key: 'tone', label: 'Tone', text: lines.tone },
+      { key: 'focus', label: 'Focus', text: lines.focus },
+      { key: 'watch', label: 'Watch out', text: lines.watchOut },
+    ],
+    [lines.focus, lines.tone, lines.watchOut],
+  );
 
   return (
     <SectionCard
@@ -106,27 +133,24 @@ export function TodaysReadSection({ morning }: Props) {
       title={copy.title}
       description={atDefaults ? copy.descriptionIdle : copy.description}
     >
-      <Animated.View style={atDefaults ? undefined : { opacity }}>
+      <Animated.View style={{ opacity: contentOpacity }}>
         <View style={styles.stack}>
-          <View style={styles.block}>
-            <Text style={styles.label}>Tone</Text>
-            <Text style={bodyStyle}>{lines.tone}</Text>
-          </View>
-          <View style={styles.block}>
-            <Text style={styles.label}>Focus</Text>
-            <Text style={bodyStyle}>{lines.focus}</Text>
-          </View>
-          <View style={styles.block}>
-            <Text style={styles.label}>Watch out</Text>
-            <Text style={bodyStyle}>{lines.watchOut}</Text>
-          </View>
+          {rows.map((row, index) => (
+            <View key={row.key}>
+              {index > 0 ? <View style={styles.divider} /> : null}
+              <View style={styles.block}>
+                <Text style={styles.label}>{row.label}</Text>
+                <Text style={bodyStyle}>{row.text}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       </Animated.View>
 
       <Pressable
         onPress={() => router.push('/insights')}
         accessibilityRole="link"
-        accessibilityHint="Opens the Insights tab"
+        accessibilityHint="Opens Insights to see your week in context"
         hitSlop={{ top: 8, bottom: 8, left: 4, right: 4 }}
         style={({ pressed }) => [
           styles.insightsLinkPressable,
@@ -134,17 +158,7 @@ export function TodaysReadSection({ morning }: Props) {
           pressed && styles.insightsLinkPressed,
         ]}
       >
-        <View style={styles.insightsLinkRow}>
-          <Text style={styles.insightsLinkText}>{copy.insightsLink}</Text>
-          <Ionicons
-            name="chevron-forward"
-            size={14}
-            color={theme.colors.accent}
-            style={styles.insightsLinkIcon}
-            accessibilityElementsHidden
-            importantForAccessibility="no"
-          />
-        </View>
+        <Text style={styles.insightsLinkText}>{copy.insightsLink}</Text>
       </Pressable>
     </SectionCard>
   );
@@ -152,7 +166,13 @@ export function TodaysReadSection({ morning }: Props) {
 
 const styles = StyleSheet.create({
   stack: {
-    gap: theme.spacing.lg,
+    gap: 0,
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: theme.colors.borderStrong,
+    marginVertical: theme.spacing.md,
+    alignSelf: 'stretch',
   },
   block: {
     gap: theme.spacing.xs,
@@ -179,29 +199,25 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: theme.spacing.lg,
     maxWidth: '100%',
+    paddingVertical: 10,
+    paddingHorizontal: 8,
+    marginLeft: -8,
+    borderRadius: theme.radii.sm,
   },
   insightsLinkWeb: {
     cursor: 'pointer' as const,
   },
   insightsLinkPressed: {
-    opacity: 0.82,
-  },
-  insightsLinkRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: theme.spacing.xs,
+    opacity: 0.85,
+    backgroundColor: theme.colors.accentSoft,
   },
   insightsLinkText: {
     ...theme.typography.caption,
     fontFamily: 'DMSans_500Medium',
-    fontSize: 12,
-    lineHeight: 18,
-    color: theme.colors.accent,
+    fontSize: 13,
+    lineHeight: 20,
+    color: theme.colors.dotActive,
     textDecorationLine: 'underline',
     textDecorationColor: theme.colors.accentMuted,
-  },
-  insightsLinkIcon: {
-    marginTop: 1,
   },
 });

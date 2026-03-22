@@ -1,12 +1,5 @@
-import { useCallback, useRef, useState } from 'react';
-import {
-  FlatList,
-  ListRenderItem,
-  StyleSheet,
-  Text,
-  View,
-  type ViewToken,
-} from 'react-native';
+import { useCallback, useState } from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { EveningReflection } from '@/components/home/EveningReflection';
@@ -30,26 +23,11 @@ export function HomeScreen() {
   const contentMaxWidth =
     theme.layout.maxContentWidth + horizontalPadding * 2;
 
-  const [activeIndex, setActiveIndex] = useState(0);
   const [morning, setMorning] = useState<MorningInputs>(DEFAULT_MORNING_INPUTS);
 
   const patchMorning = useCallback((patch: Partial<MorningInputs>) => {
     setMorning((prev) => ({ ...prev, ...patch }));
   }, []);
-
-  const onViewableItemsChanged = useCallback(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      const first = viewableItems[0];
-      if (first?.index != null) {
-        setActiveIndex(first.index);
-      }
-    },
-    [],
-  );
-
-  const viewabilityConfig = useRef({
-    itemVisiblePercentThreshold: 55,
-  }).current;
 
   const renderItem: ListRenderItem<HomeSectionKey> = ({ item }) => {
     const bridge =
@@ -104,12 +82,7 @@ export function HomeScreen() {
           data={[...HOME_SECTION_ORDER]}
           keyExtractor={(k) => k}
           renderItem={renderItem}
-          ListHeaderComponent={
-            <HomeHeader
-              activeIndex={activeIndex}
-              sectionCount={HOME_SECTION_ORDER.length}
-            />
-          }
+          ListHeaderComponent={<HomeHeader />}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
           contentContainerStyle={[
             styles.listContent,
@@ -118,8 +91,6 @@ export function HomeScreen() {
               maxWidth: contentMaxWidth,
             },
           ]}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
           showsVerticalScrollIndicator={false}
         />
       </View>
