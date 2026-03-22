@@ -1,0 +1,154 @@
+/* ELK Wrench — dashboard shell (garage dark theme) */
+
+#root {
+  /* Palette */
+  --ew-bg-deep: #121418;
+  --ew-bg-mid: #161a20;
+  --ew-card: #1f252e;
+  --ew-card-hover: #252b36;
+  --ew-border: rgba(255, 255, 255, 0.08);
+  --ew-border-hover: rgba(255, 255, 255, 0.14);
+  --ew-text: #f4f4f5;
+  --ew-muted: #9ca3af;
+  --ew-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --ew-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(232, 184, 74, 0.12);
+
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  color: var(--ew-text);
+  background-color: var(--ew-bg-deep);
+  background-image: radial-gradient(
+      ellipse 100% 80% at 50% -30%,
+      rgba(55, 65, 85, 0.45),
+      transparent 55%
+    ),
+    linear-gradient(165deg, var(--ew-bg-mid) 0%, var(--ew-bg-deep) 55%, #0c0e11 100%);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  color-scheme: dark;
+}
+
+.shell {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 2.75rem);
+}
+
+.shell-header {
+  text-align: center;
+  max-width: 36rem;
+}
+
+.shell-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.875rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--ew-text);
+}
+
+.shell-subtitle {
+  margin: 0;
+  font-size: clamp(0.95rem, 2vw, 1.0625rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ew-muted);
+  line-height: 1.5;
+}
+
+.shell-grid {
+  width: 100%;
+  display: grid;
+  gap: 1.125rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .shell-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.shell-card {
+  position: relative;
+  margin: 0;
+  padding: 1.5rem 1.375rem;
+  min-height: 6.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  text-align: center;
+  justify-content: center;
+  background: linear-gradient(145deg, var(--ew-card) 0%, #1a1f27 100%);
+  border: 1px solid var(--ew-border);
+  box-shadow: var(--ew-shadow);
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    border-color 0.22s ease, background 0.22s ease;
+}
+
+.shell-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(232, 184, 74, 0.14),
+    transparent 62%
+  );
+}
+
+.shell-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--ew-border-hover);
+  background: linear-gradient(145deg, var(--ew-card-hover) 0%, #1e242d 100%);
+  box-shadow: var(--ew-shadow-hover);
+}
+
+.shell-card:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell-card {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .shell-card:hover {
+    transform: none;
+  }
+
+  .shell-card::after {
+    transition: none;
+  }
+}
+
+.shell-card-title {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--ew-text);
+}
+
+.shell-card:hover .shell-card-title {
+  color: #fafafa;
+}

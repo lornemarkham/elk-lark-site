@@ -1,3 +1,6 @@
 # Prevent accidentally adding parent-level node_modules
 node_modules/
 .DS_Store
+
+# Pignition is its own separate project/repo
+pignition/

@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-parchment: #faf7f2;
+  --color-clay: #e8dfd4;
+  --color-sage: #6b7f5a;
+  --color-bark: #4a3f35;
+  --color-cream: #fffdf9;
+}
+
+body {
+  @apply bg-parchment text-bark antialiased;
+}
