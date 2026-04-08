@@ -1,0 +1,31 @@
+/* src/index.css */
+@import 'keen-slider/keen-slider.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Seasonal theme variables --- */
+:root {
+  --bg: #fffdf7;
+  --fg: #0f172a;
+  --accent: #10b981;
+}
+
+.season-summer {
+  --bg: #fffdf7;
+  --fg: #0f172a;
+  --accent: #10b981;
+}
+
+.season-winter {
+  --bg: #fff;
+  --fg: #e6f0ff;
+  --accent: #79c0ff;
+}
+
+/* Optional body fallback */
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
