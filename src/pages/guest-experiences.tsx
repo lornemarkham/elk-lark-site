@@ -251,6 +251,12 @@ export default function GuestExperiences() {
             Make your stay even more memorable by adding curated adventures, meals, and special
             touches during your time at Elk Lark.
           </p>
+          <a
+            href="#inquiry-form"
+            className="mt-8 inline-block bg-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-amber-700 transition shadow-md"
+          >
+            Start Your Lark
+          </a>
         </div>
       </section>
 
@@ -331,7 +337,7 @@ export default function GuestExperiences() {
           href="#inquiry-form"
           className="inline-block bg-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-amber-700 transition"
         >
-          Start Planning Your Stay
+          Tell Us What You&apos;re Thinking
         </a>
       </section>
 
@@ -436,8 +442,9 @@ export default function GuestExperiences() {
           )}
           {!submitted && !submitError && (
             <>
-              <p className="text-gray-600 text-center mb-10">
-                Fill out the form below and we’ll get back to you to plan your experience.
+              <p className="text-gray-600 text-center mb-10 max-w-xl mx-auto leading-relaxed">
+                Tell us what you&apos;re thinking and we&apos;ll help shape the right ELK Lark
+                experience for you.
               </p>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <input type="hidden" name="_subject" value="New Elk Lark Experience Request" />
