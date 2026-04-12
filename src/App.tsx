@@ -12,6 +12,7 @@ import StrategyLark from "./pages/experiences/strategy";
 import Basecamp from "./pages/basecamp";
 import Packages from "./pages/packages";
 import GuestExperiences from "./pages/guest-experiences";
+import MicroWeddings from "./pages/micro-weddings";
 import FAQ from "./pages/faq";
 import Privacy from "./pages/privacy";
 import { SeasonProvider } from "./state/SeasonContext";
@@ -36,6 +37,7 @@ export default function App() {
             <Route path="/basecamp" element={<Basecamp />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/guest-experiences" element={<GuestExperiences />} />
+            <Route path="/micro-weddings" element={<MicroWeddings />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/start" element={<Navigate to="/guest-experiences" replace />} />
             <Route path="/privacy" element={<Privacy />} />

@@ -23,6 +23,7 @@ export default function Footer() {
             <li><Link to="/experience" className="hover:underline">Your Experience</Link></li>
             <li><Link to="/packages" className="hover:underline">Packages</Link></li>
             <li><Link to="/guest-experiences" className="hover:underline">Guest Experiences</Link></li>
+            <li><Link to="/micro-weddings" className="hover:underline">Micro Weddings</Link></li>
             <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
             <li><Link to="/faq" className="hover:underline">What to Expect</Link></li>
             <li><Link to="/guest-experiences" className="hover:underline">Start Your Lark</Link></li>

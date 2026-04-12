@@ -12,6 +12,7 @@ export default function Header() {
     { label: "Your Experience", to: "/experience" },
     { label: "Packages", to: "/packages" },
     { label: "Guest Experiences", to: "/guest-experiences" },
+    { label: "Micro Weddings", to: "/micro-weddings" },
     { label: "Basecamp", to: "/basecamp" },
     { label: "What to Expect", to: "/faq" },
   ];
