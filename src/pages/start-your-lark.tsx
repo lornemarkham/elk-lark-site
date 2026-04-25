@@ -229,7 +229,17 @@ export default function StartYourLark() {
             {!submitted && !submitError ? (
               <p className="mt-4 text-sm text-gray-500">We&apos;ll follow up with next steps after reviewing your request.</p>
             ) : null}
-            {submitted ? <p className="mt-4 text-sm text-green-700">Thanks - your intake was submitted.</p> : null}
+            {submitted ? (
+              <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-5 text-emerald-900">
+                <p className="flex items-center gap-2 text-base font-semibold">
+                  <span aria-hidden>✓</span>
+                  You&apos;re in - we&apos;ll take it from here.
+                </p>
+                <p className="mt-2 text-sm">
+                  We&apos;ll review your plan and follow up shortly with next steps.
+                </p>
+              </div>
+            ) : null}
             {submitError ? (
               <p className="mt-4 text-sm text-red-700">Something went wrong. Please try again.</p>
             ) : null}

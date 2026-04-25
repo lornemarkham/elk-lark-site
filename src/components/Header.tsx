@@ -63,7 +63,14 @@ export default function Header() {
      ${isActive ? "bg-amber-50 text-amber-700 font-semibold" : "text-gray-800 hover:bg-stone-50"}`;
 
   const mobileDropdownLinkClass = (isActive: boolean) =>
-    `block py-2 text-base ${isActive ? "text-amber-600 font-semibold" : "text-gray-700"}`;
+    `block py-3 pl-5 text-lg transition-colors ${
+      isActive ? "text-amber-700 font-medium" : "text-gray-700 hover:text-gray-900"
+    }`;
+
+  const mobileNavLinkClass = (isActive: boolean) =>
+    `block w-full py-3 text-left text-2xl leading-tight transition-colors ${
+      isActive ? "text-amber-700 font-medium" : "text-gray-800"
+    }`;
 
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-md sticky top-0 z-50">
@@ -145,7 +152,7 @@ export default function Header() {
       </Link>
 
       <button
-        className="md:hidden"
+        className="md:hidden text-stone-800 transition-colors hover:text-amber-600"
         onClick={() => setIsMobileOpen((prev) => !prev)}
         aria-label="Toggle menu"
       >
@@ -153,11 +160,11 @@ export default function Header() {
       </button>
 
       {isMobileOpen && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md border-t mt-2 flex flex-col items-start px-6 py-4 gap-2 text-lg font-light md:hidden z-40">
+        <div className="absolute top-full left-0 z-40 mt-0 flex w-full flex-col items-start gap-1 border-t bg-white px-6 pb-5 pt-4 shadow-md md:hidden">
           <NavLink
             to="/about"
             onClick={closeMobileMenu}
-            className={({ isActive }) => `block w-full py-2 ${linkStyles(isActive)} text-left`}
+            className={({ isActive }) => mobileNavLinkClass(isActive)}
           >
             The ELK Story
           </NavLink>
@@ -166,7 +173,9 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileExperiencesOpen((o) => !o)}
-              className={`flex w-full items-center justify-between py-2 text-left ${linkStyles(isExperiencesSectionActive)}`}
+              className={`flex w-full items-center justify-between py-3 text-left text-2xl leading-tight transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:ring-offset-2 ${
+                isExperiencesSectionActive ? "text-amber-600 font-medium" : "text-gray-800"
+              }`}
               aria-expanded={mobileExperiencesOpen}
               aria-controls="mobile-experiences-subnav"
             >
@@ -177,7 +186,7 @@ export default function Header() {
               />
             </button>
             {mobileExperiencesOpen && (
-              <div id="mobile-experiences-subnav" className="ml-3 flex flex-col border-l border-stone-200 pl-3">
+              <div id="mobile-experiences-subnav" className="mt-1 flex flex-col space-y-3">
                 {renderExperiencesMenuItems(mobileDropdownLinkClass, closeMobileMenu)}
               </div>
             )}
@@ -188,20 +197,24 @@ export default function Header() {
               key={to}
               to={to}
               onClick={closeMobileMenu}
-              className={({ isActive }) => `block w-full py-2 ${linkStyles(isActive)} text-left`}
+              className={({ isActive }) => mobileNavLinkClass(isActive)}
             >
               {label}
             </NavLink>
           ))}
 
-          <Link
-            to="/start-your-lark"
-            onClick={closeMobileMenu}
-            className="block w-full mt-2 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-center transition"
-          >
-            Start Your Lark
-          </Link>
-          <SeasonToggle size="sm" />
+          <div className="mt-3 w-full border-t border-stone-200 pt-3">
+            <Link
+              to="/start-your-lark"
+              onClick={closeMobileMenu}
+              className="block w-full rounded-full bg-amber-600 px-5 py-3 text-center text-lg font-semibold text-white transition hover:bg-amber-700"
+            >
+              Start Your Lark
+            </Link>
+          </div>
+          <div className="mt-4">
+            <SeasonToggle variant="underline" size="sm" className="text-stone-500" />
+          </div>
         </div>
       )}
     </header>
