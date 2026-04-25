@@ -1,9 +1,13 @@
 // src/components/SeasonToggle.tsx
-import { useSeason } from "../state/SeasonContext";
+import { Snowflake, Sun } from "lucide-react";
 import { useMemo } from "react";
+import { useSeason } from "../state/SeasonContext";
 
 type Variant = "pill" | "icon" | "segmented" | "chip" | "underline";
 type Size = "sm" | "md";
+
+const SUN_CLASS = "h-4 w-4 shrink-0 text-amber-700";
+const SNOW_CLASS = "h-4 w-4 shrink-0 text-sky-600";
 
 export default function SeasonToggle({
   variant = "pill",
@@ -18,7 +22,6 @@ export default function SeasonToggle({
   const isWinter = season === "winter";
   const next = isWinter ? "summer" : "winter";
   const label = isWinter ? "Winter" : "Summer";
-  const icon = isWinter ? "❄️" : "☀️";
 
   const sizing = useMemo(() => {
     return size === "sm"
@@ -28,7 +31,6 @@ export default function SeasonToggle({
 
   const toggle = () => setSeason(next as "winter" | "summer");
 
-  // 🌞 Pill variant
   if (variant === "pill") {
     return (
       <button
@@ -44,18 +46,17 @@ export default function SeasonToggle({
                       transition-all duration-200 ease-out
                       ${isWinter ? "translate-x-[calc(100%-0.25rem)] bg-sky-600" : "translate-x-1 bg-amber-500"}`}
         />
-        <span className="flex w-full justify-between px-3 z-10 font-medium">
-          <span className={isWinter ? "text-gray-600" : "text-amber-900"}>☀️</span>
+        <span className="flex w-full justify-between items-center px-3 z-10 font-medium">
+          <Sun className={isWinter ? "text-gray-400" : SUN_CLASS} aria-hidden />
           <span className={isWinter ? "text-gray-800" : "text-gray-900"}>
             {isWinter ? "Winter" : "Summer"}
           </span>
-          <span className={isWinter ? "text-gray-600" : "text-black/70"}>❄️</span>
+          <Snowflake className={isWinter ? SNOW_CLASS : "text-gray-400"} aria-hidden />
         </span>
       </button>
     );
   }
 
-  // 🌞 Icon variant
   if (variant === "icon") {
     return (
       <button
@@ -65,16 +66,15 @@ export default function SeasonToggle({
         className={`inline-flex items-center justify-center rounded-full border border-black/10 shadow-sm
                     bg-white/80 backdrop-blur hover:bg-white transition ${size === "sm" ? "h-8 w-8" : "h-10 w-10"} ${className}`}
       >
-        <span
-          className={`${isWinter ? "text-gray-700 animate-[pulse_2s_ease-in-out_infinite]" : "text-amber-700"}`}
-        >
-          {icon}
-        </span>
+        {isWinter ? (
+          <Snowflake className="h-5 w-5 text-gray-700 animate-[pulse_2s_ease-in-out_infinite]" aria-hidden />
+        ) : (
+          <Sun className="h-5 w-5 text-amber-700" aria-hidden />
+        )}
       </button>
     );
   }
 
-  // 🌞 Segmented variant
   if (variant === "segmented") {
     return (
       <div
@@ -86,31 +86,28 @@ export default function SeasonToggle({
           role="tab"
           aria-selected={!isWinter}
           onClick={() => setSeason("summer")}
-          className={`px-3 ${sizing.seg} rounded-full transition ${
-            !isWinter
-              ? "bg-amber-500 text-white"
-              : "text-gray-800 hover:bg-black/5"
+          className={`inline-flex items-center justify-center gap-1 px-3 ${sizing.seg} rounded-full transition ${
+            !isWinter ? "bg-amber-500 text-white" : "text-gray-800 hover:bg-black/5"
           }`}
         >
-          ☀️ Summer
+          <Sun className="h-4 w-4 shrink-0" aria-hidden />
+          Summer
         </button>
         <button
           role="tab"
           aria-selected={isWinter}
           onClick={() => setSeason("winter")}
-          className={`px-3 ${sizing.seg} rounded-full transition ${
-            isWinter
-              ? "bg-sky-600 text-white"
-              : "text-gray-800 hover:bg-black/5"
+          className={`inline-flex items-center justify-center gap-1 px-3 ${sizing.seg} rounded-full transition ${
+            isWinter ? "bg-sky-600 text-white" : "text-gray-800 hover:bg-black/5"
           }`}
         >
-          ❄️ Winter
+          <Snowflake className="h-4 w-4 shrink-0" aria-hidden />
+          Winter
         </button>
       </div>
     );
   }
 
-  // 🌞 Chip variant
   if (variant === "chip") {
     return (
       <button
@@ -119,7 +116,11 @@ export default function SeasonToggle({
                     hover:bg-white transition ${sizing.chip} ${className}`}
         title={`Switch to ${next}`}
       >
-        <span className={isWinter ? "text-gray-700" : "text-amber-800"}>{icon}</span>
+        {isWinter ? (
+          <Snowflake className="h-4 w-4 shrink-0 text-gray-700" aria-hidden />
+        ) : (
+          <Sun className="h-4 w-4 shrink-0 text-amber-800" aria-hidden />
+        )}
         <span className={isWinter ? "text-gray-800 font-medium" : "text-gray-900 font-medium"}>
           {label}
         </span>
@@ -127,16 +128,17 @@ export default function SeasonToggle({
     );
   }
 
-  // 🌞 Underline variant
   return (
     <button
       onClick={toggle}
       className={`group inline-flex items-center gap-1 text-sm ${className}`}
       title={`Switch to ${next}`}
     >
-      <span className={isWinter ? "text-gray-700 opacity-80" : "text-amber-700 opacity-80"}>
-        {icon}
-      </span>
+      {isWinter ? (
+        <Snowflake className="h-4 w-4 shrink-0 text-gray-700 opacity-80" aria-hidden />
+      ) : (
+        <Sun className="h-4 w-4 shrink-0 text-amber-700 opacity-80" aria-hidden />
+      )}
       <span
         className={`relative font-medium ${
           isWinter ? "text-gray-800" : "text-gray-900"

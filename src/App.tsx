@@ -12,8 +12,14 @@ import StrategyLark from "./pages/experiences/strategy";
 import Basecamp from "./pages/basecamp";
 import Packages from "./pages/packages";
 import GuestExperiences from "./pages/guest-experiences";
+import WellnessRetreats from "./pages/wellness-retreats";
+import MicroWeddings from "./pages/micro-weddings";
+import GroupGetaways from "./pages/group-getaways";
+import StartYourLark from "./pages/start-your-lark";
 import FAQ from "./pages/faq";
 import Privacy from "./pages/privacy";
+import TheLarkLife from "./pages/the-lark-life";
+import Contact from "./pages/contact";
 import { SeasonProvider } from "./state/SeasonContext";
 
 
@@ -34,10 +40,16 @@ export default function App() {
             <Route path="/experiences/restore" element={<RestoreLark />} />
             <Route path="/experiences/strategy" element={<StrategyLark />} />
             <Route path="/basecamp" element={<Basecamp />} />
+            <Route path="/the-lark-life" element={<TheLarkLife />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/wellness-retreats" element={<WellnessRetreats />} />
+            <Route path="/micro-weddings" element={<MicroWeddings />} />
+            <Route path="/group-getaways" element={<GroupGetaways />} />
+            <Route path="/start-your-lark" element={<StartYourLark />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/guest-experiences" element={<GuestExperiences />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/start" element={<Navigate to="/guest-experiences" replace />} />
+            <Route path="/start" element={<Navigate to="/start-your-lark" replace />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </PageTransition>

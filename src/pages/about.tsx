@@ -1,37 +1,36 @@
 import React from "react";
+import { Compass, Sparkles, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
+import SiteHero from "../components/SiteHero";
+
+const ABOUT_HEADING_ICON = "h-5 w-5 shrink-0 text-amber-600";
 
 export default function About() {
   return (
     <>
-      {/* Mini Hero Section */}
-      <section className="relative h-72 w-full">
-        <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80"
-          alt="Okanagan Nature"
-          className="absolute inset-0 object-cover w-full h-full"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <h1 className="text-white text-4xl md:text-5xl font-bold font-serif text-center px-4">
-            The ELK Story
-          </h1>
-        </div>
-      </section>
+      <SiteHero
+        title="The ELK Story"
+        backgroundImage="/images/adventures/adventure4.jpg"
+        backgroundImageFallback="/images/stays/outdoor.jpg"
+        overlayClassName="bg-black/25"
+        backgroundAlt="Okanagan landscape near ELK Lark"
+      />
 
       {/* About Section */}
       <div className="bg-white text-gray-800 px-6 py-16">
         <div className="max-w-4xl mx-auto">
           <p className="text-lg mb-6">
-            ELK Lark is a passion project built by three generations — Ember, Lorne, and Kathy — to
-            bring something truly rare to the Okanagan. Whether it’s tearing up dirt trails, sipping
-            wine by the lake, or planning your next big move, ELK Lark is about the kind of
-            experience that doesn’t come in a brochure.
+            ELK Lark is a passion project rooted in family — Ember, Lorne, Kathy, and Angela — here
+            to bring something truly rare to the Okanagan. Angela is our master event planner. She
+            brings the event-planning brain — the person who knows how to turn a loose idea into a day
+            that actually flows. Whether it’s
+            time on the trails, wine by the lake, or a gathering that finally feels like yours, ELK
+            Lark is about the kind of experience that doesn’t come in a brochure.
           </p>
 
           <p className="text-lg mb-6">
-            Every offering is hand-curated, drawing from our land, our gear, our stories — and the
+            Every experience is hand-curated, drawing from our land, our gear, our stories — and the
             kind of people we love to host. It’s not about luxury or budget. It’s about soul.
           </p>
         </div>
@@ -47,7 +46,10 @@ export default function About() {
             className="w-full md:w-48 rounded-xl object-cover"
           />
           <div>
-            <h3 className="text-xl font-semibold">🧁 Ember – The Spark</h3>
+            <h3 className="text-xl font-semibold flex items-center gap-2">
+              <Sparkles className={ABOUT_HEADING_ICON} aria-hidden />
+              Ember – The Spark
+            </h3>
             <p>
               At just 4 years old, Ember is the heart of ELK. With strong snack opinions,
               spontaneous dance parties, and a real eye for pinecones, she’s got big COO energy.
@@ -64,7 +66,10 @@ export default function About() {
             className="w-full md:w-48 rounded-xl object-cover"
           />
           <div>
-            <h3 className="text-xl font-semibold">🧔 Lorne – The Builder</h3>
+            <h3 className="text-xl font-semibold flex items-center gap-2">
+              <Wrench className={ABOUT_HEADING_ICON} aria-hidden />
+              Lorne – The Builder
+            </h3>
             <p>
               Lorne brings the muscle and the mischief. Whether he’s building trails, fixing bikes,
               or crafting backend logic, he’s the engine behind ELK’s big ideas. Mostly found near a
@@ -81,7 +86,10 @@ export default function About() {
             className="w-full md:w-48 rounded-xl object-cover"
           />
           <div>
-            <h3 className="text-xl font-semibold">🌿 Kathy – The Compass</h3>
+            <h3 className="text-xl font-semibold flex items-center gap-2">
+              <Compass className={ABOUT_HEADING_ICON} aria-hidden />
+              Kathy – The Compass
+            </h3>
             <p>
               Kathy is the soul of the operation — the calm, the class, the garden-grown grounding
               force. With decades of hospitality under her belt, she’s the reason things feel right.
@@ -96,74 +104,64 @@ export default function About() {
         </p>
       </section>
 
-      {/* Video Card Section */}
+      {/* Experience direction */}
       <section className="grid md:grid-cols-3 gap-6 px-6 pb-20">
-        {/* Outlaw Lark */}
         <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src="/videos/outlaw.mp4"
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <img
+            src="/images/stays/outdoor.jpg"
+            alt="Outdoor space at ELK Lark"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
-            <h3 className="text-white text-2xl font-bold mb-2">Outlaw Lark</h3>
-            <p className="text-white text-sm mb-4">
-              Unplug. Get rugged. Hit the wild side of the Okanagan.
+          <div className="absolute inset-0 z-10 flex flex-col justify-end bg-black/50 p-6">
+            <h3 className="mb-2 text-2xl font-bold text-white">Wellness Retreats</h3>
+            <p className="mb-4 text-sm text-white">
+              Space to slow down, reset, reconnect, or host something meaningful.
             </p>
             <Link
-              to="/experiences/outlaw"
-              className="inline-block bg-restore text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+              to="/wellness-retreats"
+              className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
             >
-              Ride the Wild →
+              Explore wellness retreats →
             </Link>
           </div>
         </div>
 
-        {/* Restore Lark */}
         <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src="/videos/restore.mp4"
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <img
+            src="/images/stays/gazebo.jpg"
+            alt="Gazebo at ELK Lark"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
-            <h3 className="text-white text-2xl font-bold mb-2">Restore Lark</h3>
-            <p className="text-white text-sm mb-4">Relax, sip, float — this is your recharge zone.</p>
+          <div className="absolute inset-0 z-10 flex flex-col justify-end bg-black/50 p-6">
+            <h3 className="mb-2 text-2xl font-bold text-white">Micro Weddings</h3>
+            <p className="mb-4 text-sm text-white">
+              Small, relaxed celebrations with room for food, family, and a real sense of place.
+            </p>
             <Link
-              to="/experiences/restore"
-              className="inline-block bg-accent text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+              to="/micro-weddings"
+              className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
             >
-              Restore Yourself →
+              Explore micro weddings →
             </Link>
           </div>
         </div>
 
-        {/* Strategy Lark */}
         <div className="relative h-80 rounded-xl overflow-hidden group shadow-lg">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src="/videos/strategy.mp4"
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          <img
+            src="/images/pool/pool2.jpg"
+            alt="Pool at ELK Lark"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black/50 z-10 flex flex-col justify-end p-6">
-            <h3 className="text-white text-2xl font-bold mb-2">Strategy Lark</h3>
-            <p className="text-white text-sm mb-4">
-              Work smarter in the wild. Plan, think, launch.
+          <div className="absolute inset-0 z-10 flex flex-col justify-end bg-black/50 p-6">
+            <h3 className="mb-2 text-2xl font-bold text-white">Group Getaways</h3>
+            <p className="mb-4 text-sm text-white">
+              Private pool days, garage hangs, BBQs, lake access, and weekends that turn into stories.
             </p>
             <Link
-              to="/experiences/strategy"
-              className="inline-block bg-strategy text-white px-4 py-2 rounded hover:bg-opacity-80 transition z-20"
+              to="/group-getaways"
+              className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
             >
-              Think Bigger →
+              Explore group getaways →
             </Link>
           </div>
         </div>

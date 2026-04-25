@@ -1,37 +1,33 @@
 import React, { useState } from "react";
+import type { LucideIcon } from "lucide-react";
+import { CalendarDays, Compass, House, Info, Map } from "lucide-react";
 import Footer from "../components/footer";
+import SiteHero from "../components/SiteHero";
+
+const FAQ_SECTION_ICON = "h-5 w-5 shrink-0 text-amber-600";
 
 export default function FAQ() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[40vh] w-full overflow-hidden">
-        <img
-          src="/images/hero-faq.jpg"
-          alt="FAQ Hero"
-          className="absolute inset-0 w-full h-full object-cover scale-105 transform transition-all duration-700 ease-in-out"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <h1 className="text-white text-5xl font-bold text-center px-4 font-serif animate-fade-in">
-            What to Expect
-          </h1>
-        </div>
-      </section>
-
-      {/* Intro */}
-      <section className="bg-white py-14 px-6 text-center text-gray-800">
-        <p className="text-xl max-w-3xl mx-auto font-light animate-fade-in delay-200">
-          Answers to questions you didn’t know you had — and some you probably should’ve asked.
-        </p>
-      </section>
+      <SiteHero
+        title="What to Expect"
+        subtitle="Answers to questions you didn’t know you had — and some you probably should’ve asked."
+        backgroundImage="/images/hero-faq.jpg"
+        backgroundImageFallback="/images/stays/outdoor.jpg"
+        backgroundAlt="What to Expect"
+      />
 
       {/* FAQ Section */}
       <section className="bg-gray-50 py-16 px-6 md:px-12">
         <div className="max-w-4xl mx-auto space-y-14">
           {faqGroups.map((group, i) => (
             <div key={i}>
-              <h2 className={`text-2xl font-semibold mb-6 ${group.color}`}>{group.heading}</h2>
+              <h2
+                className={`flex items-center gap-2 text-2xl font-semibold mb-6 ${group.color}`}
+              >
+                <group.Icon className={FAQ_SECTION_ICON} aria-hidden />
+                {group.heading}
+              </h2>
               <div className="space-y-4">
                 {group.qs.map((item, j) => (
                   <Accordion key={j} question={item.q} answer={item.a} />
@@ -88,9 +84,15 @@ function Accordion({ question, answer }: { question: string; answer: string }) {
   );
 }
 
-const faqGroups = [
+const faqGroups: {
+  heading: string;
+  color: string;
+  Icon: LucideIcon;
+  qs: { q: string; a: string }[];
+}[] = [
   {
-    heading: "🏕️ The Experience",
+    heading: "The Experience",
+    Icon: Map,
     color: "text-brown-700",
     qs: [
       {
@@ -108,7 +110,8 @@ const faqGroups = [
     ],
   },
   {
-    heading: "🎯 Booking & Planning",
+    heading: "Booking & Planning",
+    Icon: CalendarDays,
     color: "text-orange-700",
     qs: [
       {
@@ -126,7 +129,8 @@ const faqGroups = [
     ],
   },
   {
-    heading: "🛁 Comfort & Amenities",
+    heading: "Comfort & Amenities",
+    Icon: House,
     color: "text-teal-700",
     qs: [
       {
@@ -144,7 +148,8 @@ const faqGroups = [
     ],
   },
   {
-    heading: "🏹 Activities & Add-Ons",
+    heading: "Activities & Add-Ons",
+    Icon: Compass,
     color: "text-brown-700",
     qs: [
       {
@@ -162,7 +167,8 @@ const faqGroups = [
     ],
   },
   {
-    heading: "👀 Stuff You Should Know",
+    heading: "Stuff You Should Know",
+    Icon: Info,
     color: "text-orange-700",
     qs: [
       {

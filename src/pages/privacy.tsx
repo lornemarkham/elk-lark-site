@@ -8,11 +8,11 @@ export default function About() {
       {/* Mini Hero Section */}
       <section className="relative h-72 w-full">
         <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80"
+          src="/images/stays/outdoor.jpg"
           alt="Okanagan Nature"
-          className="absolute inset-0 object-cover w-full h-full"
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex items-center justify-center h-full">
           <h1 className="text-white text-4xl md:text-5xl font-bold font-serif text-center px-4">
             Privacy Policy

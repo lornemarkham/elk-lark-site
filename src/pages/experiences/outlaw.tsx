@@ -1,7 +1,10 @@
 import React from "react";
+import { Bike, Check, Flame, Target, Utensils, Waves, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer";
 import { useSeason } from "../../state/SeasonContext";
+
+const OUTLAW_LIST_ICON = "h-5 w-5 shrink-0 text-amber-600 mt-0.5";
 
 
 export default function OutlawLark() {
@@ -50,12 +53,30 @@ export default function OutlawLark() {
         You Might Find Yourself...
       </h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-800 text-lg">
-        <li>🔥 Lighting up a bonfire with outlaw karaoke echoing in the trees</li>
-        <li>🏍️ Tearing up forest roads on your dirt bike (or ours, soon...)</li>
-        <li>🍖 Crushing smoked meat off the grill — powered by our Pignition crew</li>
-        <li>🛠️ Fixing something in the gear garage while the music hits just right</li>
-        <li>💦 Cannonballing into the pool after a day of dust and sun</li>
-        <li>🎯 Maybe — just maybe — shooting cans (if you ask nicely)</li>
+        <li className="flex items-start gap-2">
+          <Flame className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Lighting up a bonfire with outlaw karaoke echoing in the trees</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Bike className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Tearing up forest roads on your dirt bike (or ours, soon...)</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Utensils className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Crushing smoked meat off the grill — powered by our Pignition crew</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Wrench className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Fixing something in the gear garage while the music hits just right</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Waves className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Cannonballing into the pool after a day of dust and sun</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Target className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Maybe — just maybe — shooting cans (if you ask nicely)</span>
+        </li>
       </ul>
     </div>
   </section>
@@ -371,21 +392,57 @@ export default function OutlawLark() {
   <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto text-left text-gray-700">
     {season === "winter" ? (
       <>
-        <li>✅ Warm boots (you’ll use them)</li>
-        <li>✅ Layers — cold mornings, warm fires</li>
-        <li>✅ Snow gear or winter activity kit</li>
-        <li>✅ Gloves, toque, and dry socks</li>
-        <li>✅ Snacks, drinks, après essentials</li>
-        <li>✅ A sense of humour (still non-negotiable)</li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Warm boots (you’ll use them)</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Layers — cold mornings, warm fires</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Snow gear or winter activity kit</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Gloves, toque, and dry socks</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Snacks, drinks, après essentials</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>A sense of humour (still non-negotiable)</span>
+        </li>
       </>
     ) : (
       <>
-        <li>✅ Decent boots</li>
-        <li>✅ Towel for the pool or lake</li>
-        <li>✅ Your own bike or hiking gear</li>
-        <li>✅ Respect for the land and people</li>
-        <li>✅ Cooler, snacks, whatever fuels your lark</li>
-        <li>✅ A sense of humour (non-negotiable)</li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Decent boots</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Towel for the pool or lake</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Your own bike or hiking gear</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Respect for the land and people</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>Cooler, snacks, whatever fuels your lark</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <Check className={OUTLAW_LIST_ICON} aria-hidden />
+          <span>A sense of humour (non-negotiable)</span>
+        </li>
       </>
     )}
   </ul>
