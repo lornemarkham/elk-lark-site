@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import PackageCard from "../components/PackageCard";
+import SiteHero from "../components/SiteHero";
 
 const PACKAGES = [
   {
@@ -69,20 +70,12 @@ const PACKAGES = [
 export default function Packages() {
   return (
     <>
-      {/* Mini Hero */}
-      <section className="relative h-72 w-full overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80"
-          alt="Okanagan valley and mountains"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <h1 className="text-white text-4xl md:text-5xl font-bold font-serif text-center px-4">
-            Curated Packages
-          </h1>
-        </div>
-      </section>
+      <SiteHero
+        title="Curated Packages"
+        backgroundImage="/images/stays/outdoor.jpg"
+        backgroundImageFallback="/images/pool/pool6.jpg"
+        backgroundAlt="Okanagan stay at ELK Lark"
+      />
 
       {/* Intro */}
       <section className="bg-white py-14 px-6 text-center text-gray-800">

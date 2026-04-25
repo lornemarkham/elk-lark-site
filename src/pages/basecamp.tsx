@@ -1,12 +1,23 @@
 import React from "react";
+import type { LucideIcon } from "lucide-react";
+import { Home, Mountain, Utensils, Waves, Wrench } from "lucide-react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 import Footer from "../components/footer";
+import SiteHero from "../components/SiteHero";
+
+const GALLERY_ICON = "h-5 w-5 shrink-0 text-amber-600";
 
 export default function LarkLife() {
-  const gallerySections = [
+  const gallerySections: {
+    title: string;
+    Icon: LucideIcon;
+    caption: string;
+    images: { src: string; caption: string }[];
+  }[] = [
     {
-      title: "🌊 Water Days",
+      title: "Water Days",
+      Icon: Waves,
       caption: "Dive in. Float on. Paddle out.",
       images: [
         { src: "/images/pool/pool6.jpg", caption: "A view that stretches beyond the pool — Kalamalka and calm for miles." },
@@ -17,7 +28,8 @@ export default function LarkLife() {
       ],
     },
     {
-      title: "🛠 Garage Vibes",
+      title: "Garage Vibes",
+      Icon: Wrench,
       caption: "Wrench. Lift. Laugh. Chill. AI tools, Xbox, karaoke, darts, and space to just be.",
       images: [
         { src: "/images/garage/garage-darts4.jpg", caption: "Darts, bikes, and a wide-open door to freedom." },
@@ -29,7 +41,8 @@ export default function LarkLife() {
       ],
     },
     {
-      title: "🏕 Adventure Scenes",
+      title: "Adventure Scenes",
+      Icon: Mountain,
       caption: "Dirt trails. Deep woods. Unexpected turns.",
       images: [
         { src: "/images/adventures/adventure4.jpg", caption: "Some views silence even the loudest minds." },
@@ -40,7 +53,8 @@ export default function LarkLife() {
       ],
     },
     {
-      title: "🔥 Backyard Bites",
+      title: "Backyard Bites",
+      Icon: Utensils,
       caption: "Healthy. Hearty. Homemade. Always shared.",
       images: [
         { src: "/images/food/food2.jpg", caption: "Grilled pork and kimchi over roasted cauliflower. Dinner with a kick." },
@@ -55,7 +69,8 @@ export default function LarkLife() {
       ],
     },
     {
-      title: "🛏 The Not-So-Secret Suite",
+      title: "The Not-So-Secret Suite",
+      Icon: Home,
       caption: "Blackout curtains. A bed that hits like a cloud. Steps from the pool with a morning coffee in hand. Not listed. Not rented. Just offered — to those who vibe with the Lark life.",
       images: [
         { src: "/images/stays/kitchen.jpg", caption: "Marshall fridge. Sleek cabinets. Full kitchen. Full send." },
@@ -69,16 +84,23 @@ export default function LarkLife() {
   ];
 
   return (
-    <div className="bg-white py-16 px-6 text-gray-800">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-2">The Lark Life</h1>
-        <p className="text-center text-gray-600 italic mb-12 max-w-2xl mx-auto">
-          Offbeat, off-grid, and off-the-record. The Lark Life isn’t a rental — it’s an invitation to unwind your way. The pool’s warm, the fridge is full, and there’s always a seat at the fire or a floatie with your name on it. Here’s what you might stumble into...
-        </p>
-
+    <>
+      <SiteHero
+        title="Basecamp"
+        subtitle="Your private Okanagan base — pool, food, space, and everything in one place."
+        backgroundImage="/images/stays/pool.jpg"
+        backgroundImageFallback="/images/stays/outdoor.jpg"
+        overlayClassName="bg-black/20"
+        backgroundAlt="Pool, waterslide, and lake view at ELK Lark"
+      />
+      <div className="bg-white py-16 px-6 text-gray-800">
+        <div className="max-w-6xl mx-auto">
         {gallerySections.map((section, idx) => (
           <div key={idx} className="mb-16">
-            <h2 className="text-2xl font-semibold mb-2">{section.title}</h2>
+            <h2 className="text-2xl font-semibold mb-2 flex items-center gap-2 text-gray-800">
+              <section.Icon className={GALLERY_ICON} aria-hidden />
+              {section.title}
+            </h2>
             <p className="text-gray-600 mb-4 italic">{section.caption}</p>
 
             <PhotoProvider>
@@ -101,8 +123,9 @@ export default function LarkLife() {
             </PhotoProvider>
           </div>
         ))}
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }

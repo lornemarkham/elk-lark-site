@@ -5,41 +5,24 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import SeasonToggle from "./SeasonToggle";
 import logo from "../assets/elk-lark-logo.png";
 
-type ExperiencesMenuEntry =
-  | { kind: "link"; label: string; to: string }
-  | { kind: "divider" };
-
-const EXPERIENCES_MENU: ExperiencesMenuEntry[] = [
-  { kind: "link", label: "Wellness Retreats", to: "/wellness-retreats" },
-  { kind: "link", label: "Micro Weddings", to: "/micro-weddings" },
-  { kind: "link", label: "Group Getaways", to: "/group-getaways" },
-  { kind: "divider" },
-  { kind: "link", label: "Plan Your Experience", to: "/experience" },
+const EXPERIENCES_MENU = [
+  { label: "Wellness Retreats", to: "/wellness-retreats" },
+  { label: "Micro Weddings", to: "/micro-weddings" },
+  { label: "Group Getaways", to: "/group-getaways" },
 ];
 
 const EXPERIENCES_PATHS = ["/wellness-retreats", "/micro-weddings", "/group-getaways", "/experience"] as const;
 
 const AFTER_EXPERIENCES = [
   { label: "Basecamp", to: "/basecamp" },
-  { label: "The Lark Life", to: "/the-lark-life" },
-  { label: "What to Expect", to: "/faq" },
-  { label: "Get in Touch", to: "/contact" },
+  { label: "How It Works", to: "/faq" },
 ] as const;
 
 function renderExperiencesMenuItems(
   navLinkClass: (isActive: boolean) => string,
   onNavigate?: () => void
 ) {
-  return EXPERIENCES_MENU.map((entry, i) => {
-    if (entry.kind === "divider") {
-      return (
-        <div
-          key={`exp-div-${i}`}
-          className="mx-2 my-1 border-t border-stone-200"
-          role="separator"
-        />
-      );
-    }
+  return EXPERIENCES_MENU.map((entry) => {
     return (
       <NavLink
         key={entry.to}
@@ -57,6 +40,7 @@ export default function Header() {
   const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileExperiencesOpen, setMobileExperiencesOpen] = useState(false);
+  const [desktopExperiencesOpen, setDesktopExperiencesOpen] = useState(false);
 
   const isExperiencesSectionActive = EXPERIENCES_PATHS.some((p) => location.pathname === p);
 
@@ -68,6 +52,10 @@ export default function Header() {
   const closeMobileMenu = () => {
     setIsMobileOpen(false);
     setMobileExperiencesOpen(false);
+  };
+
+  const closeDesktopDropdown = () => {
+    setDesktopExperiencesOpen(false);
   };
 
   const desktopDropdownLinkClass = (isActive: boolean) =>
@@ -89,42 +77,68 @@ export default function Header() {
       </div>
 
       <nav className="hidden md:flex items-center gap-6 text-lg font-light">
-        <NavLink to="/about" className={({ isActive }) => linkStyles(isActive)}>
+        <NavLink
+          to="/about"
+          onMouseEnter={closeDesktopDropdown}
+          onFocus={closeDesktopDropdown}
+          className={({ isActive }) => linkStyles(isActive)}
+        >
           The ELK Story
         </NavLink>
 
-        <div className="relative group">
-          <button
-            type="button"
+        <div
+          className="relative"
+          onMouseEnter={() => setDesktopExperiencesOpen(true)}
+          onMouseLeave={closeDesktopDropdown}
+          onFocusCapture={() => setDesktopExperiencesOpen(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+              closeDesktopDropdown();
+            }
+          }}
+        >
+          <NavLink
+            to="/experience"
             className={`relative flex items-center gap-1 px-1 transition-all duration-300 outline-none
               ${isExperiencesSectionActive ? "text-amber-600 font-semibold" : "text-black"}
               after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-amber-600 after:transition-all after:duration-300
-              ${isExperiencesSectionActive ? "after:w-full" : "after:w-0 group-hover:after:w-full"}`}
+              ${isExperiencesSectionActive ? "after:w-full" : "after:w-0 hover:after:w-full"}`}
             aria-haspopup="menu"
+            aria-expanded={desktopExperiencesOpen}
           >
             Experiences
             <ChevronDownIcon className="h-4 w-4 opacity-70" aria-hidden />
-          </button>
+          </NavLink>
           <div
-            className="absolute left-0 top-full z-50 pt-2 translate-y-0.5 opacity-0 pointer-events-none transition-all duration-150
-              group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto
-              group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:pointer-events-auto"
+            className={`absolute left-0 top-full z-50 pt-2 transition-all duration-100 ${
+              desktopExperiencesOpen
+                ? "translate-y-0 opacity-100 pointer-events-auto"
+                : "translate-y-0.5 opacity-0 pointer-events-none"
+            }`}
           >
             <div className="min-w-[220px] rounded-lg border border-stone-200 bg-white py-2 shadow-md">
-              {renderExperiencesMenuItems(desktopDropdownLinkClass)}
+              {renderExperiencesMenuItems(desktopDropdownLinkClass, closeDesktopDropdown)}
             </div>
           </div>
         </div>
 
         {AFTER_EXPERIENCES.map(({ label, to }) => (
-          <NavLink key={to} to={to} className={({ isActive }) => linkStyles(isActive)}>
+          <NavLink
+            key={to}
+            to={to}
+            onMouseEnter={closeDesktopDropdown}
+            onFocus={closeDesktopDropdown}
+            className={({ isActive }) => linkStyles(isActive)}
+          >
             {label}
           </NavLink>
         ))}
       </nav>
 
       <Link
-        to="/guest-experiences"
+        to="/start-your-lark"
+        onMouseEnter={closeDesktopDropdown}
+        onFocus={closeDesktopDropdown}
         className="hidden md:inline-block ml-6 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
       >
         Start Your Lark
@@ -181,7 +195,7 @@ export default function Header() {
           ))}
 
           <Link
-            to="/guest-experiences"
+            to="/start-your-lark"
             onClick={closeMobileMenu}
             className="block w-full mt-2 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold text-center transition"
           >

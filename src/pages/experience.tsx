@@ -4,23 +4,29 @@ import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
 import ExperienceCard from "../components/ExperienceCard";
 
+/** Okanagan adventure hero — use adventure1.jpg if this reads too dark on your display. */
+const EXPERIENCES_HERO_IMAGE = "/images/adventures/adventure2.jpg";
+
 const FUNNEL_CARDS = [
   {
     title: "Wellness Retreats",
-    description: "Relax, recharge, and reset in a private Okanagan setting.",
+    description:
+      "Reset, reconnect, or host something meaningful in a private Okanagan setting.",
     ctaLabel: "View Wellness Retreats",
     to: "/wellness-retreats",
   },
   {
     title: "Micro Weddings",
-    description: "Intimate, unforgettable celebrations tailored to your vision.",
+    description:
+      "Small, relaxed celebrations with space for food, family, and a real sense of place.",
     ctaLabel: "View Micro Weddings",
     to: "/micro-weddings",
   },
   {
     title: "Group Getaways",
-    description: "Bring your people together for a curated Okanagan experience.",
-    ctaLabel: "Plan Your Group Getaway",
+    description:
+      "Pool days, BBQs, garage hangs, lake access, and weekends that turn into stories.",
+    ctaLabel: "View Group Getaways",
     to: "/group-getaways",
   },
 ];
@@ -28,24 +34,24 @@ const FUNNEL_CARDS = [
 export default function Services() {
   return (
     <>
+      {/* Each page MUST use a unique hero image — no shared or fallback images */}
       <SiteHero
-        title="Your Experience"
-        backgroundImage="https://images.unsplash.com/photo-1607746882042-944635dfe10e"
-        backgroundAlt="Okanagan experience"
+        title="Choose Your Experience"
+        subtitle="Pick your path based on how you want to stay, celebrate, or gather."
+        backgroundImage={EXPERIENCES_HERO_IMAGE}
+        overlayClassName="bg-black/20"
+        backgroundAlt="Okanagan landscape near ELK Lark"
       />
 
-      <section className="bg-white py-20 px-6 text-center text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">
-          Three ways to shape your stay
-        </h2>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600">
-          Start with the path that matches your group. Each option has its own details and next
-          steps.
+      <section className="bg-white px-6 py-14 text-center text-gray-800">
+        <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Three ways to start</h2>
+        <p className="mx-auto max-w-2xl text-lg text-gray-600">
+          Choose the path that fits your group — we’ll shape the details around it.
         </p>
       </section>
 
-      <section className="bg-stone-50 py-20 px-6">
-        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-3">
+      <section className="bg-stone-50 px-6 py-14">
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3 md:items-stretch">
           {FUNNEL_CARDS.map((card) => (
             <ExperienceCard
               key={card.to}
@@ -58,16 +64,16 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-white py-20 px-6 text-center text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 font-serif">Need something custom?</h2>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600 mb-10">
+      <section className="border-t border-stone-200 bg-white px-6 pb-16 pt-12 text-center text-gray-800">
+        <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Need something custom?</h2>
+        <p className="mx-auto mb-6 max-w-2xl text-lg text-gray-600">
           {"Not sure which path fits? We'll help you design the right experience."}
         </p>
         <Link
           to="/guest-experiences"
-          className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white hover:bg-amber-700 transition"
+          className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
-          Plan Your Experience
+          Start Your Lark
         </Link>
       </section>
 

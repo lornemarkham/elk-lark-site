@@ -1,184 +1,117 @@
-import React, { useState, useRef } from "react";
+import React from "react";
+import { Bike, Home as HomeIcon, Sprout, Truck, Waves, Wrench } from "lucide-react";
 import { Link } from "react-router-dom";
-import HeroBackground from "../components/HeroBackground";
-import WinterHeroCarousel from "../components/WinterHeroCarousel";
 import BasecampCarousel from "../components/BasecampCarousel";
+import ExperienceCard from "../components/ExperienceCard";
 import Footer from "../components/footer";
+import SiteHero from "../components/SiteHero";
 import { useSeason } from "../state/SeasonContext";
 
+const FUNNEL_CARDS = [
+  {
+    title: "Wellness Retreats",
+    description: "Slow down, reset, and host something that matters",
+    to: "/wellness-retreats",
+    ctaLabel: "Explore wellness retreats",
+    accentColor: "accent" as const,
+  },
+  {
+    title: "Micro Weddings",
+    description: "Intimate, relaxed, and fully taken care of — start to finish",
+    to: "/micro-weddings",
+    ctaLabel: "Explore micro weddings",
+    accentColor: "restore" as const,
+  },
+  {
+    title: "Group Getaways",
+    description: "Friends, teams, and weekends that become stories",
+    to: "/group-getaways",
+    ctaLabel: "Explore group getaways",
+    accentColor: "strategy" as const,
+  },
+];
+
 export default function Home() {
-  const [hoverTarget, setHoverTarget] = useState("");
   const { season } = useSeason();
-
-  const leaveTimeout = useRef<number | null>(null);
-
-  const handleMouseEnter = (target: string) => {
-    if (leaveTimeout.current) {
-      clearTimeout(leaveTimeout.current);
-      leaveTimeout.current = null;
-    }
-    setHoverTarget(target);
-  };
-
-  const handleMouseLeave = () => {
-    if (leaveTimeout.current) clearTimeout(leaveTimeout.current);
-    leaveTimeout.current = window.setTimeout(() => {
-      setHoverTarget("");
-      leaveTimeout.current = null;
-    }, 2000);
-  };
 
   return (
     <>
-      {/* Hero Section */}
-      <div
-        className="relative text-white overflow-hidden"
-        style={{ minHeight: "calc(100vh - 60px)" }}
-      >
-        {season === "winter" ? (
-          <WinterHeroCarousel />
-        ) : (
-          <HeroBackground hoverTarget={hoverTarget} />
-        )}
+      <SiteHero
+        title={
+          season === "winter"
+            ? "Winter stays that feel intentional."
+            : "Pick your path. We’ll host the rest."
+        }
+        subtitle={
+          season === "winter"
+            ? "Smaller groups and quieter energy on the property — trails, bonfires, and long conversations without the summer rush."
+            : "Wellness retreats, micro weddings, and group getaways — privately hosted in the Okanagan."
+        }
+        overlayClassName="bg-black/30"
+        backgroundImage="/images/pool/pool6.jpg"
+        backgroundAlt="Pool at ELK Lark"
+        ctaText="Start Your Lark"
+        ctaLink="/guest-experiences"
+        titleTestId="hero-title"
+        subtitleTestId="hero-copy"
+      />
 
-        {/* overlay: keep for summer but hide during winter so hero shows through */}
-        {season !== "winter" && (
-          <div
-            className={`absolute inset-0 z-10 bg-black/50`}
-          />
-        )}
-
-        {/* Logo / Slogan top-center (hidden in winter) */}
-        {season !== "winter" && (
-          <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20 pt-12">
-            <img
-              src={
-                typeof window !== "undefined" && window.innerWidth >= 640
-                  ? hoverTarget === "outlaw"
-                    ? "/logo-outlaw.png"
-                    : hoverTarget === "restore"
-                    ? "/logo-restore.png"
-                    : hoverTarget === "strategy"
-                    ? "/logo-strategy.png"
-                    : "/logo-white.png"
-                  : "/logo-white.png"
-              }
-              alt="ELK Lark Logo"
-              className="h-32 sm:h-40 md:h-48 lg:h-56 transition-all duration-300"
-            />
-          </div>
-        )}
-
-
-  {/* Main CTA - absolutely centered so content stays centered even when hero height is adjusted */}
-  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
-          {/* Tagline */}
-          <h1
-            className={`text-2xl sm:text-4xl lg:text-5xl font-bold mb-4 font-serif leading-snug ${
-              season === "winter" ? "text-black" : "text-white"
-            } ${season === "winter" ? "bg-white/30 px-3 py-1 rounded inline-block" : ""}`}
-            data-testid="hero-title"
-          >
-            {season === "winter"
-              ? "When the Valley Slows Down, ELK Lark Turns On."
-              : "Escape Ordinary. Live the Lark. Summer Awaits."}
-          </h1>
-
-          <p
-            className={`text-base sm:text-xl max-w-md sm:max-w-2xl mb-8 font-sans ${
-              season === "winter" ? "text-black" : "text-white"
-            } ${season === "winter" ? "bg-white/30 px-3 py-2 rounded inline-block leading-[1.4]" : ""}`}
-            data-testid="hero-copy"
-          >
-            {season === "winter"
-              ? "Winter at ELK Lark isn't about escaping the cold — it's about leaning into it. Bonfires instead of beach days. Snowy trails, late-night garage hangs, and slow mornings that turn into long conversations. This is the season for smaller groups, quieter energy, and experiences that don't exist on a booking site."
-              : " Crafted by three generations, ELK Lark delivers epic, hand-curated experiences in the heart of the Okanagan. Adventure harder. Recharge deeper. Strategize smarter.   "}
-          </p>
-
-        {/* CTA Buttons */}
-        <div
-          className="flex flex-col sm:flex-row gap-4 font-sans w-full sm:w-auto max-w-xs sm:max-w-none"
-          onMouseLeave={season === "winter" ? undefined : handleMouseLeave}
-        >
-          <Link
-            to="/experiences/outlaw"
-            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("outlaw")}
-            className={`bg-restore hover:bg-restore px-6 py-3 rounded text-lg font-semibold text-center ${
-              season === "winter" ? "text-white" : ""
-            }`}
-          >
-            Outlaw Lark
-          </Link>
-
-          <Link
-            to="/experiences/restore"
-            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("restore")}
-            className={`bg-accent hover:bg-secondary px-6 py-3 rounded text-lg font-semibold text-center ${
-              season === "winter" ? "text-white" : ""
-            }`}
-          >
-            Restore Lark
-          </Link>
-
-          <Link
-            to="/experiences/strategy"
-            onMouseEnter={season === "winter" ? undefined : () => handleMouseEnter("strategy")}
-            className={`bg-strategy hover:bg-strategy px-6 py-3 rounded text-lg font-semibold text-center ${
-              season === "winter" ? "text-white" : ""
-            }`}
-          >
-            Strategy Lark
-          </Link>
-        </div>
-        </div>
-      </div>
-
-      {/* Why We Built ELK Lark */}
+      {/* Start with your kind of stay */}
       <section className="bg-white py-20 px-6 text-center text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">
-          Why We Built ELK Lark
-        </h2>
-        <div className="max-w-5xl mx-auto grid gap-10 md:grid-cols-3 text-left">
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold">🌲 Cross-Generational Roots</h3>
-            <p className="text-gray-600">
-              ELK Lark was born from three generations — Ember, Lorne, and Kathy — crafting something worth sharing: the soul of the Okanagan.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold">🔥 Experiences, Not Itineraries</h3>
-            <p className="text-gray-600">
-              This isn’t a tour. It’s a vibe. We host moments, not minutes. You come to live, not check boxes.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold">🛠️ Private. Unlisted. Unfiltered.</h3>
-            <p className="text-gray-600">
-              No corporate packages. No busloads of strangers. Just access to something real — and rare.
-            </p>
-          </div>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Start with your kind of stay</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-12 text-lg">
+          Choose what you're planning — we’ll shape everything around it.
+        </p>
+        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-3 text-left">
+          {FUNNEL_CARDS.map((card) => (
+            <ExperienceCard
+              key={card.to}
+              title={card.title}
+              description={card.description}
+              ctaLabel={card.ctaLabel}
+              ctaTo={card.to}
+              accentColor={card.accentColor}
+            />
+          ))}
         </div>
       </section>
 
-      {/* Your Private Basecamp */}
+      {/* Basecamp */}
       <section className="bg-stone-100 py-20 px-6 text-center text-gray-800">
-        <h2 className="text-3xl md:text-4xl font-bold mb-10">Your Private Basecamp</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-serif">Your private basecamp</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-10">
+          Pool, garage hangout, trails, and space to make it your own.
+        </p>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-          {/* Carousel */}
           <BasecampCarousel />
-
-          {/* Details */}
           <ul className="space-y-3 text-left text-gray-600">
-            <li>🏖️ Huge private pool with a waterslide</li>
-            <li>🔧 Fully equipped garage hangout (TV, karaoke, fridge, darts)</li>
-            <li>🛻 Access to forest service roads in a rugged truck</li>
-            <li>🏍️ Dirt bike, paddleboards, and seasonal gear</li>
-            <li>🌱 Seasonal garden-to-table tastings (when the harvest is right)</li>
-            <li>🛏️ Home base for your crew — not open to the public</li>
+            <li className="flex items-start gap-2">
+              <Waves className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Private pool with waterslide</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Wrench className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Garage hangout (TV, karaoke, darts)</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Truck className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Access to forest service roads</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Bike className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Paddleboards, bikes, seasonal gear</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <Sprout className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Garden-to-table options (seasonal)</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <HomeIcon className="h-5 w-5 shrink-0 text-amber-600 mt-0.5" aria-hidden />
+              <span>Private base — not open to the public</span>
+            </li>
           </ul>
         </div>
 
-        {/* CTA Button */}
         <div className="mt-12">
           <Link
             to="/basecamp"
