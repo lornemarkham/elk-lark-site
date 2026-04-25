@@ -60,14 +60,14 @@ export default function WellnessRetreats() {
           <div className="grid gap-8 md:grid-cols-2">
             <div className="overflow-hidden rounded-xl border border-stone-200">
               <img
-                src="/images/pool.jpg"
+                src="/images/stays/pool.jpg"
                 alt="Pool at ELK Lark"
                 className="h-64 w-full object-cover md:h-72"
               />
             </div>
             <div className="overflow-hidden rounded-xl border border-stone-200">
               <img
-                src="/images/patio.jpg"
+                src="/images/stays/outdoor.jpg"
                 alt="Patio at ELK Lark"
                 className="h-64 w-full object-cover md:h-72"
               />
