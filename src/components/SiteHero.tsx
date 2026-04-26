@@ -14,6 +14,7 @@ export type SiteHeroProps = {
   backgroundImageClassName?: string;
   ctaText?: string;
   ctaLink?: string;
+  ctaOnClick?: () => void;
   titleTestId?: string;
   subtitleTestId?: string;
 };
@@ -31,6 +32,7 @@ export default function SiteHero({
   backgroundImageClassName,
   ctaText,
   ctaLink,
+  ctaOnClick,
   titleTestId,
   subtitleTestId,
 }: SiteHeroProps) {
@@ -80,6 +82,7 @@ export default function SiteHero({
         {showCta ? (
           <Link
             to={ctaLink!}
+            onClick={ctaOnClick}
             className="mt-8 inline-block rounded-full bg-amber-600 px-8 py-3 font-sans font-semibold text-white transition hover:bg-amber-700"
           >
             {ctaText}

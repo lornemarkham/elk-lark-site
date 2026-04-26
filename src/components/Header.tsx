@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import SeasonToggle from "./SeasonToggle";
 import logo from "../assets/elk-lark-logo.png";
+import { trackCtaClick } from "../lib/analytics";
 
 const EXPERIENCES_MENU = [
   { label: "Wellness Retreats", to: "/wellness-retreats" },
@@ -144,6 +145,14 @@ export default function Header() {
 
       <Link
         to="/start-your-lark"
+        onClick={() =>
+          trackCtaClick({
+            cta_text: "Start Your Lark",
+            placement: "header_desktop",
+            from_path: location.pathname,
+            to_path: "/start-your-lark",
+          })
+        }
         onMouseEnter={closeDesktopDropdown}
         onFocus={closeDesktopDropdown}
         className="hidden md:inline-block ml-6 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
@@ -206,7 +215,15 @@ export default function Header() {
           <div className="mt-3 w-full border-t border-stone-200 pt-3">
             <Link
               to="/start-your-lark"
-              onClick={closeMobileMenu}
+              onClick={() => {
+                trackCtaClick({
+                  cta_text: "Start Your Lark",
+                  placement: "header_mobile",
+                  from_path: location.pathname,
+                  to_path: "/start-your-lark",
+                });
+                closeMobileMenu();
+              }}
               className="block w-full rounded-full bg-amber-600 px-5 py-3 text-center text-lg font-semibold text-white transition hover:bg-amber-700"
             >
               Start Your Lark

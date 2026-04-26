@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import PageTransition from "./components/PageTransition";
+import RouteAnalytics from "./components/RouteAnalytics";
 
 import Home from "./pages/home";
 import About from "./pages/about";
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <>
      <SeasonProvider>
+      <RouteAnalytics />
       <Header />
       <main className="min-h-screen bg-[var(--bg)] text-[var(--fg)]">
         <PageTransition>

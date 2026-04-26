@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
+import { trackCtaClick } from "../lib/analytics";
 const INSPIRATION_GROUPS: Array<{
   title: string;
   items: Array<{ title: string; description: string }>;
@@ -54,6 +55,13 @@ export default function GuestExperiences() {
         backgroundAlt="Okanagan stay at ELK Lark"
         ctaText="Start Your Lark"
         ctaLink="/start"
+        ctaOnClick={() =>
+          trackCtaClick({
+            cta_text: "Start Your Lark",
+            placement: "guest_experiences_hero",
+            to_path: "/start",
+          })
+        }
       />
 
       <section className="bg-white px-6 py-16">
@@ -83,6 +91,13 @@ export default function GuestExperiences() {
         <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Ready to plan your stay?</h2>
         <Link
           to="/start-your-lark"
+          onClick={() =>
+            trackCtaClick({
+              cta_text: "Start Your Lark",
+              placement: "guest_experiences_bottom",
+              to_path: "/start-your-lark",
+            })
+          }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
           Start Your Lark

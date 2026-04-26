@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
+import { trackCtaClick } from "../lib/analytics";
 
 const LOOKS_LIKE_ITEMS = [
   "Small group gatherings",
@@ -40,6 +41,13 @@ export default function WellnessRetreats() {
         backgroundAlt="Outdoor stay at ELK Lark"
         ctaText="Start Your Wellness Retreat"
         ctaLink="/start-your-lark?type=wellness"
+        ctaOnClick={() =>
+          trackCtaClick({
+            cta_text: "Start Your Wellness Retreat",
+            placement: "wellness_hero",
+            to_path: "/start-your-lark?type=wellness",
+          })
+        }
       />
 
       <section className="bg-white text-gray-800">
@@ -160,6 +168,13 @@ export default function WellnessRetreats() {
         </p>
         <Link
           to="/start-your-lark?type=wellness"
+          onClick={() =>
+            trackCtaClick({
+              cta_text: "Start Your Lark",
+              placement: "wellness_bottom",
+              to_path: "/start-your-lark?type=wellness",
+            })
+          }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
           Start Your Lark

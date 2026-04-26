@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
+import {
+  trackAddOnSelected,
+  trackExperienceSelected,
+  trackFormError,
+  trackFormStart,
+  trackFormSubmitAttempt,
+  trackFormSubmitSuccess,
+} from "../lib/analytics";
 
 const FORMSPREE_ACTION = "https://formspree.io/f/mreygjya";
 
@@ -45,6 +53,7 @@ export default function StartYourLark() {
   const [submitError, setSubmitError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const hasTrackedFormStartRef = useRef(false);
 
   const [selectedType, setSelectedType] = useState<IntakeType>(parseType(searchParams.get("type")) ?? "custom");
   const ctaSource = searchParams.get("source") ?? "";
@@ -55,10 +64,35 @@ export default function StartYourLark() {
     const next = new URLSearchParams(searchParams);
     next.set("type", type);
     setSearchParams(next, { replace: true });
+    trackExperienceSelected({
+      selected_type: type,
+      cta_source: ctaSource || undefined,
+      action: "selected",
+    });
   };
 
   const toggleAddOn = (item: string) => {
-    setSelectedAddOns((prev) => (prev.includes(item) ? prev.filter((entry) => entry !== item) : [...prev, item]));
+    setSelectedAddOns((prev) => {
+      const isSelected = prev.includes(item);
+      const next = isSelected ? prev.filter((entry) => entry !== item) : [...prev, item];
+      trackAddOnSelected({
+        add_on_name: item,
+        action: isSelected ? "deselected" : "selected",
+        selected_count: next.length,
+        selected_type: selectedType,
+        cta_source: ctaSource || undefined,
+      });
+      return next;
+    });
+  };
+
+  const handleFormStart = () => {
+    if (hasTrackedFormStartRef.current) return;
+    hasTrackedFormStartRef.current = true;
+    trackFormStart({
+      selected_type: selectedType,
+      cta_source: ctaSource || undefined,
+    });
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,6 +101,18 @@ export default function StartYourLark() {
     setSubmitError(false);
 
     const formData = new FormData(e.currentTarget);
+    const startDate = String(formData.get("startDate") ?? "").trim();
+    const endDate = String(formData.get("endDate") ?? "").trim();
+    const hasDates = Boolean(startDate || endDate);
+    const addOnCount = selectedAddOns.length;
+
+    trackFormSubmitAttempt({
+      selected_type: selectedType,
+      cta_source: ctaSource || undefined,
+      has_add_ons: addOnCount > 0,
+      add_on_count: addOnCount,
+      has_dates: hasDates,
+    });
 
     try {
       const response = await fetch(FORMSPREE_ACTION, {
@@ -75,10 +121,30 @@ export default function StartYourLark() {
         headers: { Accept: "application/json" },
       });
       if (!response.ok) {
-        throw new Error("Form submit failed");
+        trackFormError({
+          selected_type: selectedType,
+          cta_source: ctaSource || undefined,
+          error_type: "non_ok_response",
+          status: response.status,
+        });
+        setSubmitError(true);
+        return;
       }
+      trackFormSubmitSuccess({
+        selected_type: selectedType,
+        cta_source: ctaSource || undefined,
+        has_add_ons: addOnCount > 0,
+        add_on_count: addOnCount,
+        has_dates: hasDates,
+        status: response.status,
+      });
       setSubmitted(true);
     } catch {
+      trackFormError({
+        selected_type: selectedType,
+        cta_source: ctaSource || undefined,
+        error_type: "network_or_exception",
+      });
       setSubmitError(true);
     } finally {
       setIsSubmitting(false);
@@ -131,7 +197,12 @@ export default function StartYourLark() {
             Share a few details and we&apos;ll build your plan around the experience you selected.
           </p>
 
-          <form onSubmit={onSubmit} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8">
+          <form
+            onSubmit={onSubmit}
+            onFocusCapture={handleFormStart}
+            onChangeCapture={handleFormStart}
+            className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm sm:p-8"
+          >
             <input type="hidden" name="selectedType" value={selectedType ?? ""} />
             <input type="hidden" name="ctaSource" value={ctaSource} />
             <input type="hidden" name="selectedAddOns" value={selectedAddOns.join(", ")} />

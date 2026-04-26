@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
+import { trackCtaClick } from "../lib/analytics";
 
 const WAYS_TO_USE = [
   {
@@ -90,6 +91,13 @@ export default function GroupGetaways() {
         backgroundAlt="Pool at ELK Lark"
         ctaText="Start Planning Your Getaway"
         ctaLink="/start-your-lark?type=group"
+        ctaOnClick={() =>
+          trackCtaClick({
+            cta_text: "Start Planning Your Getaway",
+            placement: "group_getaways_hero",
+            to_path: "/start-your-lark?type=group",
+          })
+        }
       />
 
       <section className="bg-white text-gray-800">
@@ -203,6 +211,13 @@ export default function GroupGetaways() {
         </p>
         <Link
           to="/start-your-lark?type=group"
+          onClick={() =>
+            trackCtaClick({
+              cta_text: "Start Your Lark",
+              placement: "group_getaways_bottom",
+              to_path: "/start-your-lark?type=group",
+            })
+          }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
           Start Your Lark

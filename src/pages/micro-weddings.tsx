@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
+import { trackCtaClick } from "../lib/analytics";
 
 const WHAT_YOU_GET = [
   "Intimate setting for 10–20 guests",
@@ -80,6 +81,13 @@ export default function MicroWeddings() {
         backgroundAlt="Outdoor gazebo at ELK Lark"
         ctaText="Start Your Micro Wedding"
         ctaLink="/start-your-lark?type=wedding"
+        ctaOnClick={() =>
+          trackCtaClick({
+            cta_text: "Start Your Micro Wedding",
+            placement: "micro_weddings_hero",
+            to_path: "/start-your-lark?type=wedding",
+          })
+        }
       />
 
       <section className="bg-white text-gray-800">
@@ -189,6 +197,13 @@ export default function MicroWeddings() {
         </p>
         <Link
           to="/start-your-lark?type=wedding"
+          onClick={() =>
+            trackCtaClick({
+              cta_text: "Start Your Lark",
+              placement: "micro_weddings_bottom",
+              to_path: "/start-your-lark?type=wedding",
+            })
+          }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
           Start Your Lark

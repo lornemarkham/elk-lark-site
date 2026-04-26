@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { trackCtaClick } from "../lib/analytics";
 
 export default function Footer() {
   return (
@@ -23,7 +24,22 @@ export default function Footer() {
             <li><Link to="/experience" className="hover:underline">Experiences</Link></li>
             <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
             <li><Link to="/faq" className="hover:underline">How It Works</Link></li>
-            <li className="pt-2"><Link to="/start-your-lark" className="hover:underline">Start Your Lark</Link></li>
+            <li className="pt-2">
+              <Link
+                to="/start-your-lark"
+                onClick={() =>
+                  trackCtaClick({
+                    cta_text: "Start Your Lark",
+                    placement: "footer",
+                    from_path: typeof window !== "undefined" ? window.location.pathname : undefined,
+                    to_path: "/start-your-lark",
+                  })
+                }
+                className="hover:underline"
+              >
+                Start Your Lark
+              </Link>
+            </li>
             <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
           </ul>
         </div>
