@@ -39,16 +39,19 @@ export default function WellnessRetreats() {
         backgroundImage="/images/stays/outdoor.jpg"
         backgroundImageFallback="/images/pool/pool6.jpg"
         backgroundAlt="Outdoor stay at ELK Lark"
-        ctaText="Start Your Wellness Retreat"
+        ctaText="Plan Your Retreat Now"
         ctaLink="/start-your-lark?type=wellness"
         ctaOnClick={() =>
           trackCtaClick({
-            cta_text: "Start Your Wellness Retreat",
+            cta_text: "Plan Your Retreat Now",
             placement: "wellness_hero",
             to_path: "/start-your-lark?type=wellness",
           })
         }
       />
+      <section className="bg-white text-center text-gray-800">
+        <p className="pb-6 text-sm text-gray-500">Takes less than a minute. We&apos;ll follow up personally.</p>
+      </section>
 
       <section className="bg-white text-gray-800">
         <div className="mx-auto max-w-3xl px-6 py-16">
@@ -56,9 +59,8 @@ export default function WellnessRetreats() {
             A different kind of wellness retreat
           </h2>
           <p className="text-lg leading-relaxed text-gray-600">
-            This is not a resort package. It&apos;s a hosted, small-group experience designed around
-            your goals. Whether you&apos;re joining a wellness-focused weekend or planning one of your
-            own, everything is built to feel personal, relaxed, and intentional.
+            Not a resort. Not a package. A private, hosted experience designed entirely around your
+            group. Everything is built to feel relaxed, personal, and effortless.
           </p>
         </div>
       </section>
@@ -100,6 +102,26 @@ export default function WellnessRetreats() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="bg-stone-50 px-6 py-16 text-center text-gray-800">
+        <p className="mx-auto mb-4 max-w-2xl text-lg text-gray-600">
+          If this feels like the kind of weekend you&apos;ve been needing, we can help you plan it.
+        </p>
+        <Link
+          to="/start-your-lark?type=wellness"
+          onClick={() =>
+            trackCtaClick({
+              cta_text: "Start Your Lark",
+              placement: "wellness_mid_clean",
+              to_path: "/start-your-lark?type=wellness",
+            })
+          }
+          className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+        >
+          Start Your Lark
+        </Link>
+        <p className="mt-3 text-sm text-gray-500">Tell us a bit about your group. We&apos;ll take it from there.</p>
       </section>
 
       <section className="bg-stone-50 text-gray-800">
@@ -162,9 +184,9 @@ export default function WellnessRetreats() {
       </section>
 
       <section className="bg-white px-6 py-20 text-center text-gray-800">
-        <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Start your wellness retreat</h2>
+        <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Start planning your retreat</h2>
         <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
-          Tell us what you&apos;re planning, and we&apos;ll help bring it to life.
+          Share a few details and we&apos;ll help bring it to life.
         </p>
         <Link
           to="/start-your-lark?type=wellness"
