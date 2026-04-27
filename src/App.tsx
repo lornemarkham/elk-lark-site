@@ -32,7 +32,7 @@ export default function App() {
      <SeasonProvider>
       <RouteAnalytics />
       <Header />
-      <main className="min-h-screen bg-[var(--bg)] text-[var(--fg)]">
+      <main className="min-h-screen max-w-[100vw] overflow-x-hidden bg-[var(--bg)] text-[var(--fg)]">
         <PageTransition>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />

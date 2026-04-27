@@ -111,7 +111,7 @@ export default function MicroWeddings() {
       },
       slides: {
         perView: 1,
-        spacing: 8,
+        spacing: 0,
       },
       breakpoints: {
         "(min-width: 640px)": {
@@ -229,8 +229,8 @@ export default function MicroWeddings() {
         </div>
       </section>
 
-      <section className="border-t border-teal-200 bg-gradient-to-b from-white to-cyan-50 text-gray-800">
-        <div className="mx-auto max-w-6xl px-6 py-32">
+      <section className="overflow-x-hidden border-t border-teal-200 bg-gradient-to-b from-white to-cyan-50 text-gray-800">
+        <div className="mx-auto w-full max-w-6xl min-w-0 px-6 py-32">
           <p className="mb-3 text-center text-sm font-semibold uppercase tracking-wide text-stone-500">
             Concept preview — yes, we used AI
           </p>
@@ -243,18 +243,23 @@ export default function MicroWeddings() {
             table.
           </p>
 
-          <div className="grid items-start gap-8 md:grid-cols-2">
-            <div>
+          <div className="grid min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-2">
+            <div className="min-w-0 max-w-full overflow-hidden">
               <div
                 ref={poolSliderRef}
-                className="keen-slider overflow-hidden rounded-xl shadow-lg"
+                className="keen-slider w-full max-w-full min-w-0 overflow-hidden rounded-xl shadow-lg"
               >
                 {poolSlides.map((slide) => (
-                  <div key={slide.src} className="keen-slider__slide">
+                  <div
+                    key={slide.src}
+                    className="keen-slider__slide min-w-0 max-w-full overflow-hidden"
+                  >
                     <img
                       src={slide.src}
                       alt={slide.alt}
-                      className="h-64 w-full object-cover md:h-80"
+                      className="block h-auto w-full max-w-full rounded-xl object-cover aspect-[4/3] md:aspect-auto md:h-80"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ))}
@@ -280,7 +285,7 @@ export default function MicroWeddings() {
                 toward — not a past event.
               </p>
             </div>
-            <div>
+            <div className="min-w-0 max-w-full">
               <div className="max-w-md border-l-2 border-teal-200/70 pl-4">
                 <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-stone-600">THE IDEA</h3>
                 <p className="text-gray-700">
