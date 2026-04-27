@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
 import { trackCtaClick } from "../lib/analytics";
@@ -72,6 +74,69 @@ const WHAT_DIFFERENT = [
 ];
 
 export default function MicroWeddings() {
+  const [currentPoolSlide, setCurrentPoolSlide] = useState(0);
+  const poolTimer = useRef<NodeJS.Timeout | null>(null);
+  const poolSlides = [
+    {
+      src: "/images/poolside-wedding-ai-concepts/poolside-wedding-gazebo-ceremony-ai.png",
+      alt: "Poolside wedding concept at ELK Lark",
+    },
+    {
+      src: "/images/poolside-wedding-ai-concepts/image.png",
+      alt: "Poolside wedding ceremony in swimwear concept at ELK Lark",
+    },
+    {
+      src: "/images/poolside-wedding-ai-concepts/poolside-wedding-pool-jump-ai.png",
+      alt: "Poolside wedding concept at ELK Lark",
+    },
+    {
+      src: "/images/poolside-wedding-ai-concepts/poolside-wedding-evening-wide-ai.png",
+      alt: "Poolside wedding concept at ELK Lark",
+    },
+    {
+      src: "/images/poolside-wedding-ai-concepts/poolside-wedding-toast-ai.png",
+      alt: "Poolside wedding concept at ELK Lark",
+    },
+    {
+      src: "/images/poolside-wedding-ai-concepts/poolside-wedding-night-pool-ai.png",
+      alt: "Poolside wedding concept at ELK Lark",
+    },
+  ] as const;
+
+  const [poolSliderRef, poolInstanceRef] = useKeenSlider<HTMLDivElement>(
+    {
+      loop: true,
+      slideChanged(slider) {
+        setCurrentPoolSlide(slider.track.details.rel);
+      },
+      slides: {
+        perView: 1,
+        spacing: 8,
+      },
+      breakpoints: {
+        "(min-width: 640px)": {
+          slides: { perView: 1, spacing: 12 },
+        },
+        "(min-width: 1024px)": {
+          slides: { perView: 1, spacing: 16 },
+        },
+      },
+    },
+    []
+  );
+
+  useEffect(() => {
+    poolTimer.current = setInterval(() => {
+      if (poolInstanceRef.current) {
+        poolInstanceRef.current.next();
+      }
+    }, 4500);
+
+    return () => {
+      if (poolTimer.current) clearInterval(poolTimer.current);
+    };
+  }, [poolInstanceRef]);
+
   return (
     <>
       <SiteHero
@@ -160,6 +225,86 @@ export default function MicroWeddings() {
                 <p className="mt-4 flex-1 text-gray-600">{card.copy}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-teal-200 bg-gradient-to-b from-white to-cyan-50 text-gray-800">
+        <div className="mx-auto max-w-6xl px-6 py-32">
+          <p className="mb-3 text-center text-sm font-semibold uppercase tracking-wide text-stone-500">
+            Concept preview — yes, we used AI
+          </p>
+          <h2 className="mb-4 text-center font-serif text-4xl font-bold md:text-5xl">
+            This could be your wedding
+          </h2>
+          <p className="mx-auto mb-10 max-w-3xl text-center text-lg text-gray-600">
+            We haven&apos;t hosted this exact wedding yet — so we imagined it. The space is real,
+            the view is real, and the kind of day you&apos;re looking at here is absolutely on the
+            table.
+          </p>
+
+          <div className="grid items-start gap-8 md:grid-cols-2">
+            <div>
+              <div
+                ref={poolSliderRef}
+                className="keen-slider overflow-hidden rounded-xl shadow-lg"
+              >
+                {poolSlides.map((slide) => (
+                  <div key={slide.src} className="keen-slider__slide">
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      className="h-64 w-full object-cover md:h-80"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex justify-center gap-2">
+                {poolSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => poolInstanceRef.current?.moveToIdx(idx)}
+                    className={`h-3 w-3 rounded-full transition-colors duration-300 ${
+                      currentPoolSlide === idx ? "bg-black" : "bg-gray-400"
+                    }`}
+                    aria-label={`Go to pool slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-gray-600">
+                This is the actual space — relaxed, open, and built for a full day together.
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-gray-500">
+                These images are AI-generated concept previews. They show the vibe we&apos;re building
+                toward — not a past event.
+              </p>
+            </div>
+            <div>
+              <div className="max-w-md border-l-2 border-teal-200/70 pl-4">
+                <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-stone-600">THE IDEA</h3>
+                <p className="text-gray-700">
+                  A real ceremony, then straight into food, music, drinks, poolside lounging, and
+                  the kind of night people actually talk about later. Less ballroom, more summer
+                  party with your favorite people.
+                </p>
+                <div className="mt-3 space-y-1">
+                  <p className="text-2xl font-extrabold leading-tight tracking-wide text-teal-800">
+                    AND YES — someone might end up in the pool.
+                  </p>
+                  <p className="text-xs italic text-gray-500">That&apos;s kind of the point.</p>
+                </div>
+                <div className="mt-3 space-y-1">
+                  <p className="text-sm text-gray-600">
+                    Perfect for couples who want something personal, relaxed, and a little
+                    unexpected.
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    If you&apos;re bold enough to be the first, we&apos;ll make it worth it.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
