@@ -1,13 +1,46 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import SeasonToggle from "./SeasonToggle";
 import logo from "../assets/elk-lark-logo.png";
-import { planPageTypeFromPathname, trackPlanCtaClick } from "../lib/analytics";
+import { type PlanCtaPageType, trackPlanCtaClick } from "../lib/analytics";
 
 const HEADER_PLAN_CTA = "Plan Your Retreat" as const;
-const HEADER_START_PATH = "/plan-your-retreat" as const;
+
+/** Sticky header Plan CTA: typed intake when on an experience page, else general. */
+function headerPlanCtaFromPathname(pathname: string): {
+  destination: string;
+  dataExperienceType: "wellness" | "wedding" | "group" | "general";
+  pageType: PlanCtaPageType;
+} {
+  if (pathname.startsWith("/wellness-retreats")) {
+    return {
+      destination: "/plan-your-retreat?type=wellness",
+      dataExperienceType: "wellness",
+      pageType: "wellness",
+    };
+  }
+  if (pathname.startsWith("/micro-weddings")) {
+    return {
+      destination: "/plan-your-retreat?type=wedding",
+      dataExperienceType: "wedding",
+      pageType: "wedding",
+    };
+  }
+  if (pathname.startsWith("/group-getaways")) {
+    return {
+      destination: "/plan-your-retreat?type=group",
+      dataExperienceType: "group",
+      pageType: "group",
+    };
+  }
+  return {
+    destination: "/plan-your-retreat",
+    dataExperienceType: "general",
+    pageType: "general",
+  };
+}
 
 const EXPERIENCES_MENU = [
   { label: "Wellness Retreats", to: "/wellness-retreats", dataExperienceType: "wellness" as const },
@@ -53,6 +86,7 @@ function renderExperiencesMenuItems(
 
 export default function Header() {
   const location = useLocation();
+  const headerPlan = useMemo(() => headerPlanCtaFromPathname(location.pathname), [location.pathname]);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mobileExperiencesOpen, setMobileExperiencesOpen] = useState(false);
   const [desktopExperiencesOpen, setDesktopExperiencesOpen] = useState(false);
@@ -161,13 +195,13 @@ export default function Header() {
       </nav>
 
       <Link
-        to={HEADER_START_PATH}
+        to={headerPlan.destination}
         onClick={() =>
           trackPlanCtaClick({
             cta_text: HEADER_PLAN_CTA,
             cta_context: "nav",
-            page_type: planPageTypeFromPathname(location.pathname),
-            destination: HEADER_START_PATH,
+            page_type: headerPlan.pageType,
+            destination: headerPlan.destination,
             from_path: location.pathname,
           })
         }
@@ -177,8 +211,8 @@ export default function Header() {
         data-analytics="cta_click"
         data-cta-location="header_cta"
         data-cta-text={HEADER_PLAN_CTA}
-        data-destination={HEADER_START_PATH}
-        data-experience-type="general"
+        data-destination={headerPlan.destination}
+        data-experience-type={headerPlan.dataExperienceType}
       >
         {HEADER_PLAN_CTA}
       </Link>
@@ -239,13 +273,13 @@ export default function Header() {
 
           <div className="mt-3 w-full border-t border-stone-200 pt-3">
             <Link
-              to={HEADER_START_PATH}
+              to={headerPlan.destination}
               onClick={() => {
                 trackPlanCtaClick({
                   cta_text: HEADER_PLAN_CTA,
                   cta_context: "nav",
-                  page_type: planPageTypeFromPathname(location.pathname),
-                  destination: HEADER_START_PATH,
+                  page_type: headerPlan.pageType,
+                  destination: headerPlan.destination,
                   from_path: location.pathname,
                 });
                 closeMobileMenu();
@@ -254,8 +288,8 @@ export default function Header() {
               data-analytics="cta_click"
               data-cta-location="header_cta"
               data-cta-text={HEADER_PLAN_CTA}
-              data-destination={HEADER_START_PATH}
-              data-experience-type="general"
+              data-destination={headerPlan.destination}
+              data-experience-type={headerPlan.dataExperienceType}
             >
               {HEADER_PLAN_CTA}
             </Link>

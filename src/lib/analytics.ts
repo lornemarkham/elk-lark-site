@@ -50,7 +50,7 @@ function ensureDataLayer(): Array<Record<string, unknown>> {
 }
 
 /** Experience funnel tags for primary planning CTAs (GTM). */
-export type PlanCtaPageType = "wellness" | "wedding" | "group";
+export type PlanCtaPageType = "wellness" | "wedding" | "group" | "general";
 
 /** Map URL to funnel type for shared CTAs (nav/footer). Defaults to wellness when unknown. */
 export function planPageTypeFromPathname(pathname: string): PlanCtaPageType {
