@@ -66,9 +66,9 @@ export function trackCtaClick(params: Pick<AnalyticsParams, "cta_text" | "placem
 }
 
 /**
- * Primary funnel CTAs that lead to Start Your Lark / intake. Event name is fixed so GTM never keys off button label.
+ * Primary planning/intake funnel CTAs. Event name is generic so GTM never keys off legacy brand wording.
  */
-export function trackStartYourLarkClick(
+export function trackPlanCtaClick(
   params: {
     cta_text: string;
     cta_context: NonNullable<AnalyticsParams["cta_context"]>;
@@ -78,7 +78,7 @@ export function trackStartYourLarkClick(
   }
 ): void {
   const { destination, ...rest } = params;
-  trackEvent("start_your_lark_click", {
+  trackEvent("plan_cta_click", {
     ...rest,
     destination,
     to_path: destination,

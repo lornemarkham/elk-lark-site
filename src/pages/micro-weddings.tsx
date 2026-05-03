@@ -4,7 +4,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackStartYourLarkClick } from "../lib/analytics";
+import { trackPlanCtaClick } from "../lib/analytics";
 
 const WEDDING_START_PATH = "/start-your-lark?type=wedding" as const;
 const WEDDING_PAGE_TYPE = "wedding" as const;
@@ -166,7 +166,7 @@ export default function MicroWeddings() {
         ctaText={PLAN_YOUR_WEDDING_CTA}
         ctaLink={WEDDING_START_PATH}
         ctaOnClick={() =>
-          trackStartYourLarkClick({
+          trackPlanCtaClick({
             cta_text: PLAN_YOUR_WEDDING_CTA,
             cta_context: "hero",
             page_type: WEDDING_PAGE_TYPE,
@@ -369,7 +369,7 @@ export default function MicroWeddings() {
         <Link
           to={WEDDING_START_PATH}
           onClick={() =>
-            trackStartYourLarkClick({
+            trackPlanCtaClick({
               cta_text: PLAN_YOUR_WEDDING_CTA,
               cta_context: "bottom",
               page_type: WEDDING_PAGE_TYPE,

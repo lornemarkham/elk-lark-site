@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackStartYourLarkClick } from "../lib/analytics";
+import { trackPlanCtaClick } from "../lib/analytics";
 
 const GROUP_START_PATH = "/start-your-lark?type=group" as const;
 const GROUP_PAGE_TYPE = "group" as const;
@@ -111,7 +111,7 @@ export default function GroupGetaways() {
         ctaText={PLAN_YOUR_GETAWAY_CTA}
         ctaLink={GROUP_START_PATH}
         ctaOnClick={() =>
-          trackStartYourLarkClick({
+          trackPlanCtaClick({
             cta_text: PLAN_YOUR_GETAWAY_CTA,
             cta_context: "hero",
             page_type: GROUP_PAGE_TYPE,
@@ -233,7 +233,7 @@ export default function GroupGetaways() {
         <Link
           to={GROUP_START_PATH}
           onClick={() =>
-            trackStartYourLarkClick({
+            trackPlanCtaClick({
               cta_text: PLAN_YOUR_GETAWAY_CTA,
               cta_context: "bottom",
               page_type: GROUP_PAGE_TYPE,

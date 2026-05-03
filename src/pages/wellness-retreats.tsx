@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackStartYourLarkClick } from "../lib/analytics";
+import { trackPlanCtaClick } from "../lib/analytics";
 
 const WELLNESS_START_PATH = "/start-your-lark?type=wellness" as const;
 
@@ -63,7 +63,7 @@ export default function WellnessRetreats() {
         ctaText={PLAN_YOUR_RETREAT_CTA}
         ctaLink={WELLNESS_START_PATH}
         ctaOnClick={() =>
-          trackStartYourLarkClick({
+          trackPlanCtaClick({
             cta_text: PLAN_YOUR_RETREAT_CTA,
             cta_context: "hero",
             page_type: WELLNESS_PAGE_TYPE,
@@ -191,7 +191,7 @@ export default function WellnessRetreats() {
         <Link
           to={WELLNESS_START_PATH}
           onClick={() =>
-            trackStartYourLarkClick({
+            trackPlanCtaClick({
               cta_text: PLAN_YOUR_RETREAT_CTA,
               cta_context: "bottom",
               page_type: WELLNESS_PAGE_TYPE,

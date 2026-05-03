@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import SeasonToggle from "./SeasonToggle";
 import logo from "../assets/elk-lark-logo.png";
-import { trackStartYourLarkClick } from "../lib/analytics";
+import { trackPlanCtaClick } from "../lib/analytics";
 
 const HEADER_PLAN_CTA = "Plan Your Retreat" as const;
 const HEADER_START_PATH = "/start-your-lark" as const;
@@ -149,7 +149,7 @@ export default function Header() {
       <Link
         to={HEADER_START_PATH}
         onClick={() =>
-          trackStartYourLarkClick({
+          trackPlanCtaClick({
             cta_text: HEADER_PLAN_CTA,
             cta_context: "nav",
             page_type: "global",
@@ -220,7 +220,7 @@ export default function Header() {
             <Link
               to={HEADER_START_PATH}
               onClick={() => {
-                trackStartYourLarkClick({
+                trackPlanCtaClick({
                   cta_text: HEADER_PLAN_CTA,
                   cta_context: "nav",
                   page_type: "global",
