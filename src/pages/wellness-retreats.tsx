@@ -2,7 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackCtaClick } from "../lib/analytics";
+import { trackStartYourLarkClick } from "../lib/analytics";
+
+const WELLNESS_START_PATH = "/start-your-lark?type=wellness" as const;
+
+const WELLNESS_PAGE_TYPE = "wellness" as const;
+
+/** Visible label + analytics cta_text — identical on every wellness CTA */
+const PLAN_YOUR_RETREAT_CTA = "Plan Your Retreat" as const;
+
+function RetreatPlanningTrustNotes({ variant }: { variant: "hero" | "section" }) {
+  const listClass =
+    variant === "hero"
+      ? "space-y-0.5 text-sm font-medium leading-snug text-white/90"
+      : "mt-2 space-y-0.5 text-sm leading-snug text-gray-500";
+  return (
+    <ul className={`mx-auto max-w-md text-center ${listClass}`}>
+      <li>✔ No commitment</li>
+      <li>✔ Fully customized to your group</li>
+      <li>✔ We&apos;ll follow up shortly</li>
+    </ul>
+  );
+}
 
 const LOOKS_LIKE_ITEMS = [
   "Small group gatherings",
@@ -39,19 +60,18 @@ export default function WellnessRetreats() {
         backgroundImage="/images/stays/outdoor.jpg"
         backgroundImageFallback="/images/pool/pool6.jpg"
         backgroundAlt="Outdoor stay at ELK Lark"
-        ctaText="Plan Your Retreat Now"
-        ctaLink="/start-your-lark?type=wellness"
+        ctaText={PLAN_YOUR_RETREAT_CTA}
+        ctaLink={WELLNESS_START_PATH}
         ctaOnClick={() =>
-          trackCtaClick({
-            cta_text: "Plan Your Retreat Now",
-            placement: "wellness_hero",
-            to_path: "/start-your-lark?type=wellness",
+          trackStartYourLarkClick({
+            cta_text: PLAN_YOUR_RETREAT_CTA,
+            cta_context: "hero",
+            page_type: WELLNESS_PAGE_TYPE,
+            destination: WELLNESS_START_PATH,
           })
         }
+        ctaSupporting={<RetreatPlanningTrustNotes variant="hero" />}
       />
-      <section className="bg-white text-center text-gray-800">
-        <p className="pb-6 text-sm text-gray-500">Takes less than a minute. We&apos;ll follow up personally.</p>
-      </section>
 
       <section className="bg-white text-gray-800">
         <div className="mx-auto max-w-3xl px-6 py-16">
@@ -102,26 +122,6 @@ export default function WellnessRetreats() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="bg-stone-50 px-6 py-16 text-center text-gray-800">
-        <p className="mx-auto mb-4 max-w-2xl text-lg text-gray-600">
-          If this feels like the kind of weekend you&apos;ve been needing, we can help you plan it.
-        </p>
-        <Link
-          to="/start-your-lark?type=wellness"
-          onClick={() =>
-            trackCtaClick({
-              cta_text: "Start Your Lark",
-              placement: "wellness_mid_clean",
-              to_path: "/start-your-lark?type=wellness",
-            })
-          }
-          className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
-        >
-          Start Your Lark
-        </Link>
-        <p className="mt-3 text-sm text-gray-500">Tell us a bit about your group. We&apos;ll take it from there.</p>
       </section>
 
       <section className="bg-stone-50 text-gray-800">
@@ -183,24 +183,26 @@ export default function WellnessRetreats() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-20 text-center text-gray-800">
+      <section className="bg-white px-6 pt-16 pb-12 text-center text-gray-800">
         <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Start planning your retreat</h2>
         <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-600">
           Share a few details and we&apos;ll help bring it to life.
         </p>
         <Link
-          to="/start-your-lark?type=wellness"
+          to={WELLNESS_START_PATH}
           onClick={() =>
-            trackCtaClick({
-              cta_text: "Start Your Lark",
-              placement: "wellness_bottom",
-              to_path: "/start-your-lark?type=wellness",
+            trackStartYourLarkClick({
+              cta_text: PLAN_YOUR_RETREAT_CTA,
+              cta_context: "bottom",
+              page_type: WELLNESS_PAGE_TYPE,
+              destination: WELLNESS_START_PATH,
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
-          Start Your Lark
+          {PLAN_YOUR_RETREAT_CTA}
         </Link>
+        <RetreatPlanningTrustNotes variant="section" />
       </section>
 
       <Footer />

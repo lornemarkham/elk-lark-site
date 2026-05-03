@@ -4,6 +4,12 @@ export type AnalyticsParams = {
   page_title?: string;
   from_path?: string;
   to_path?: string;
+  /** Route or URL the CTA navigates to (e.g. intake path with query). */
+  destination?: string;
+  /** High-level page funnel for start-your-lark CTAs (e.g. wellness). */
+  page_type?: string;
+  /** Where on the page the CTA appeared — stable for reporting (not derived from label). */
+  cta_context?: "hero" | "mid_page" | "bottom" | "nav";
   cta_text?: string;
   placement?: string;
   selected_type?: string;
@@ -57,6 +63,26 @@ export function trackEvent(eventName: string, params: AnalyticsParams = {}): voi
 
 export function trackCtaClick(params: Pick<AnalyticsParams, "cta_text" | "placement" | "to_path" | "from_path" | "cta_source">): void {
   trackEvent("cta_click", params);
+}
+
+/**
+ * Primary funnel CTAs that lead to Start Your Lark / intake. Event name is fixed so GTM never keys off button label.
+ */
+export function trackStartYourLarkClick(
+  params: {
+    cta_text: string;
+    cta_context: NonNullable<AnalyticsParams["cta_context"]>;
+    page_type: string;
+    destination: string;
+    from_path?: string;
+  }
+): void {
+  const { destination, ...rest } = params;
+  trackEvent("start_your_lark_click", {
+    ...rest,
+    destination,
+    to_path: destination,
+  });
 }
 
 export function trackFormStart(params: Pick<AnalyticsParams, "selected_type" | "cta_source"> = {}): void {

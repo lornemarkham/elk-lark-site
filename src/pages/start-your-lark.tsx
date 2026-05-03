@@ -155,7 +155,7 @@ export default function StartYourLark() {
     <>
       <SiteHero
         title="Start Your Lark"
-        subtitle="A guided intake built around your plans."
+        subtitle="Tell us what you're planning — we'll design your weekend and follow up within 24 hours."
         backgroundImage="/images/stays/outdoor.jpg"
         backgroundImageFallback="/images/pool/pool6.jpg"
         backgroundAlt="Outdoor stay at ELK Lark"

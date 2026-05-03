@@ -2,7 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackCtaClick } from "../lib/analytics";
+import { trackStartYourLarkClick } from "../lib/analytics";
+
+const GROUP_START_PATH = "/start-your-lark?type=group" as const;
+const GROUP_PAGE_TYPE = "group" as const;
+const PLAN_YOUR_GETAWAY_CTA = "Plan Your Getaway" as const;
+
+/** Matches Wellness page checklist styling (hero + section bottom CTAs only). */
+function PlanningCtaChecklist({ variant }: { variant: "hero" | "section" }) {
+  const listClass =
+    variant === "hero"
+      ? "space-y-0.5 text-sm font-medium leading-snug text-white/90"
+      : "mt-2 space-y-0.5 text-sm leading-snug text-gray-500";
+  return (
+    <ul className={`mx-auto max-w-md text-center ${listClass}`}>
+      <li>✔ No commitment</li>
+      <li>✔ Fully customized to your group</li>
+      <li>✔ We&apos;ll follow up shortly</li>
+    </ul>
+  );
+}
 
 const WAYS_TO_USE = [
   {
@@ -89,15 +108,17 @@ export default function GroupGetaways() {
         backgroundImage="/images/pool/pool2.jpg"
         backgroundImageFallback="/images/garage/garage-tv1.jpg"
         backgroundAlt="Pool at ELK Lark"
-        ctaText="Start Planning Your Getaway"
-        ctaLink="/start-your-lark?type=group"
+        ctaText={PLAN_YOUR_GETAWAY_CTA}
+        ctaLink={GROUP_START_PATH}
         ctaOnClick={() =>
-          trackCtaClick({
-            cta_text: "Start Planning Your Getaway",
-            placement: "group_getaways_hero",
-            to_path: "/start-your-lark?type=group",
+          trackStartYourLarkClick({
+            cta_text: PLAN_YOUR_GETAWAY_CTA,
+            cta_context: "hero",
+            page_type: GROUP_PAGE_TYPE,
+            destination: GROUP_START_PATH,
           })
         }
+        ctaSupporting={<PlanningCtaChecklist variant="hero" />}
       />
 
       <section className="bg-white text-gray-800">
@@ -210,18 +231,20 @@ export default function GroupGetaways() {
           Tell us who&apos;s coming and what kind of weekend you want. We&apos;ll help shape the rest.
         </p>
         <Link
-          to="/start-your-lark?type=group"
+          to={GROUP_START_PATH}
           onClick={() =>
-            trackCtaClick({
-              cta_text: "Start Your Lark",
-              placement: "group_getaways_bottom",
-              to_path: "/start-your-lark?type=group",
+            trackStartYourLarkClick({
+              cta_text: PLAN_YOUR_GETAWAY_CTA,
+              cta_context: "bottom",
+              page_type: GROUP_PAGE_TYPE,
+              destination: GROUP_START_PATH,
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
-          Start Your Lark
+          {PLAN_YOUR_GETAWAY_CTA}
         </Link>
+        <PlanningCtaChecklist variant="section" />
       </section>
 
       <Footer />

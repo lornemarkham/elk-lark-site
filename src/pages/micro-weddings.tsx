@@ -4,7 +4,26 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
-import { trackCtaClick } from "../lib/analytics";
+import { trackStartYourLarkClick } from "../lib/analytics";
+
+const WEDDING_START_PATH = "/start-your-lark?type=wedding" as const;
+const WEDDING_PAGE_TYPE = "wedding" as const;
+const PLAN_YOUR_WEDDING_CTA = "Plan Your Wedding" as const;
+
+/** Matches Wellness page checklist styling (hero + section bottom CTAs only). */
+function PlanningCtaChecklist({ variant }: { variant: "hero" | "section" }) {
+  const listClass =
+    variant === "hero"
+      ? "space-y-0.5 text-sm font-medium leading-snug text-white/90"
+      : "mt-2 space-y-0.5 text-sm leading-snug text-gray-500";
+  return (
+    <ul className={`mx-auto max-w-md text-center ${listClass}`}>
+      <li>✔ No commitment</li>
+      <li>✔ Fully customized to your group</li>
+      <li>✔ We&apos;ll follow up shortly</li>
+    </ul>
+  );
+}
 
 const WHAT_YOU_GET = [
   "Intimate setting for 10–20 guests",
@@ -144,15 +163,17 @@ export default function MicroWeddings() {
         subtitle="Intimate, fully hosted weddings for 10–20 guests — relaxed, personal, and built around you."
         backgroundImage="/images/stays/gazebo.jpg"
         backgroundAlt="Outdoor gazebo at ELK Lark"
-        ctaText="Start Your Micro Wedding"
-        ctaLink="/start-your-lark?type=wedding"
+        ctaText={PLAN_YOUR_WEDDING_CTA}
+        ctaLink={WEDDING_START_PATH}
         ctaOnClick={() =>
-          trackCtaClick({
-            cta_text: "Start Your Micro Wedding",
-            placement: "micro_weddings_hero",
-            to_path: "/start-your-lark?type=wedding",
+          trackStartYourLarkClick({
+            cta_text: PLAN_YOUR_WEDDING_CTA,
+            cta_context: "hero",
+            page_type: WEDDING_PAGE_TYPE,
+            destination: WEDDING_START_PATH,
           })
         }
+        ctaSupporting={<PlanningCtaChecklist variant="hero" />}
       />
 
       <section className="bg-white text-gray-800">
@@ -346,18 +367,20 @@ export default function MicroWeddings() {
           Tell us what you&apos;re thinking, and we&apos;ll help bring it together.
         </p>
         <Link
-          to="/start-your-lark?type=wedding"
+          to={WEDDING_START_PATH}
           onClick={() =>
-            trackCtaClick({
-              cta_text: "Start Your Lark",
-              placement: "micro_weddings_bottom",
-              to_path: "/start-your-lark?type=wedding",
+            trackStartYourLarkClick({
+              cta_text: PLAN_YOUR_WEDDING_CTA,
+              cta_context: "bottom",
+              page_type: WEDDING_PAGE_TYPE,
+              destination: WEDDING_START_PATH,
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
         >
-          Start Your Lark
+          {PLAN_YOUR_WEDDING_CTA}
         </Link>
+        <PlanningCtaChecklist variant="section" />
       </section>
 
       <Footer />

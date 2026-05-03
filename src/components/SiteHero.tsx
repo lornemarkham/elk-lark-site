@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 export type SiteHeroProps = {
@@ -15,6 +15,8 @@ export type SiteHeroProps = {
   ctaText?: string;
   ctaLink?: string;
   ctaOnClick?: () => void;
+  /** Rendered below the CTA link (e.g. trust notes). */
+  ctaSupporting?: ReactNode;
   titleTestId?: string;
   subtitleTestId?: string;
 };
@@ -33,6 +35,7 @@ export default function SiteHero({
   ctaText,
   ctaLink,
   ctaOnClick,
+  ctaSupporting,
   titleTestId,
   subtitleTestId,
 }: SiteHeroProps) {
@@ -80,13 +83,16 @@ export default function SiteHero({
           </p>
         ) : null}
         {showCta ? (
-          <Link
-            to={ctaLink!}
-            onClick={ctaOnClick}
-            className="mt-8 inline-block rounded-full bg-amber-600 px-8 py-3 font-sans font-semibold text-white transition hover:bg-amber-700"
-          >
-            {ctaText}
-          </Link>
+          <>
+            <Link
+              to={ctaLink!}
+              onClick={ctaOnClick}
+              className="mt-8 inline-block rounded-full bg-amber-600 px-8 py-3 font-sans font-semibold text-white transition hover:bg-amber-700"
+            >
+              {ctaText}
+            </Link>
+            {ctaSupporting ? <div className="mt-2 w-full max-w-md">{ctaSupporting}</div> : null}
+          </>
         ) : null}
       </div>
     </section>
