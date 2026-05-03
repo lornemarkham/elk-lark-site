@@ -9,7 +9,7 @@ export type AnalyticsParams = {
   /** High-level page funnel for start-your-lark CTAs (e.g. wellness). */
   page_type?: string;
   /** Where on the page the CTA appeared — stable for reporting (not derived from label). */
-  cta_context?: "hero" | "mid_page" | "bottom" | "nav";
+  cta_context?: "hero" | "mid_page" | "bottom" | "nav" | "footer";
   cta_text?: string;
   placement?: string;
   selected_type?: string;
@@ -49,6 +49,28 @@ function ensureDataLayer(): Array<Record<string, unknown>> {
   return window.dataLayer;
 }
 
+/** Experience funnel tags for primary planning CTAs (GTM). */
+export type PlanCtaPageType = "wellness" | "wedding" | "group";
+
+/** Map URL to funnel type for shared CTAs (nav/footer). Defaults to wellness when unknown. */
+export function planPageTypeFromPathname(pathname: string): PlanCtaPageType {
+  if (pathname.startsWith("/micro-weddings")) return "wedding";
+  if (pathname.startsWith("/group-getaways")) return "group";
+  if (pathname.startsWith("/wellness-retreats")) return "wellness";
+  return "wellness";
+}
+
+/**
+ * Minimal GTM push before navigation — matches standard tag wiring for plan CTAs.
+ */
+export function pushPlanCtaDataLayer(pageType: PlanCtaPageType): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+  const dataLayer = ensureDataLayer();
+  dataLayer.push({ event: "plan_cta_click", page_type: pageType });
+}
+
 export function trackEvent(eventName: string, params: AnalyticsParams = {}): void {
   if (typeof window === "undefined") {
     return;
@@ -66,22 +88,29 @@ export function trackCtaClick(params: Pick<AnalyticsParams, "cta_text" | "placem
 }
 
 /**
- * Primary planning/intake funnel CTAs. Event name is generic so GTM never keys off legacy brand wording.
+ * Primary planning/intake funnel CTAs — single dataLayer push before navigation (event + page_type + context).
  */
-export function trackPlanCtaClick(
-  params: {
-    cta_text: string;
-    cta_context: NonNullable<AnalyticsParams["cta_context"]>;
-    page_type: string;
-    destination: string;
-    from_path?: string;
+export function trackPlanCtaClick(params: {
+  cta_text: string;
+  cta_context: NonNullable<AnalyticsParams["cta_context"]>;
+  page_type: PlanCtaPageType;
+  destination: string;
+  from_path?: string;
+}): void {
+  if (typeof window === "undefined") {
+    return;
   }
-): void {
-  const { destination, ...rest } = params;
-  trackEvent("plan_cta_click", {
-    ...rest,
+  const dataLayer = ensureDataLayer();
+  const { destination, page_type, cta_text, cta_context, from_path } = params;
+  dataLayer.push({
+    event: "plan_cta_click",
+    page_type,
+    ...getPageContext(),
+    cta_text,
+    cta_context,
     destination,
     to_path: destination,
+    ...(from_path ? { from_path } : {}),
   });
 }
 

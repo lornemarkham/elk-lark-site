@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { trackCtaClick } from "../lib/analytics";
+import { Link, useLocation } from "react-router-dom";
+import { planPageTypeFromPathname, trackPlanCtaClick } from "../lib/analytics";
 
 export default function Footer() {
+  const location = useLocation();
+
   return (
     <footer className="bg-black text-white py-12 px-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
@@ -28,11 +30,12 @@ export default function Footer() {
               <Link
                 to="/start-your-lark"
                 onClick={() =>
-                  trackCtaClick({
+                  trackPlanCtaClick({
                     cta_text: "Start Your Lark",
-                    placement: "footer",
-                    from_path: typeof window !== "undefined" ? window.location.pathname : undefined,
-                    to_path: "/start-your-lark",
+                    cta_context: "footer",
+                    page_type: planPageTypeFromPathname(location.pathname),
+                    destination: "/start-your-lark",
+                    from_path: location.pathname,
                   })
                 }
                 className="hover:underline"
