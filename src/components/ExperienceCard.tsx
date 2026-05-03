@@ -9,6 +9,8 @@ export type ExperienceCardProps = {
   ctaLabel: string;
   ctaTo: string;
   accentColor?: "restore" | "accent" | "strategy" | "brand";
+  dataCtaLocation?: string;
+  dataExperienceType?: string;
 };
 
 const accentClasses = {
@@ -25,6 +27,8 @@ export default function ExperienceCard({
   ctaLabel,
   ctaTo,
   accentColor = "accent",
+  dataCtaLocation,
+  dataExperienceType,
 }: ExperienceCardProps) {
   return (
     <article className="flex h-full flex-col rounded-xl border border-stone-200 bg-white shadow-sm transition-shadow duration-200 ease-out hover:scale-[1.01] hover:shadow-lg">
@@ -39,6 +43,15 @@ export default function ExperienceCard({
         <Link
           to={ctaTo}
           className={`inline-block text-center px-5 py-3 rounded-full font-semibold transition ${accentClasses[accentColor]}`}
+          {...(dataCtaLocation && dataExperienceType
+            ? {
+                "data-analytics": "cta_click",
+                "data-cta-location": dataCtaLocation,
+                "data-cta-text": ctaLabel,
+                "data-destination": ctaTo,
+                "data-experience-type": dataExperienceType,
+              }
+            : {})}
         >
           {ctaLabel}
         </Link>

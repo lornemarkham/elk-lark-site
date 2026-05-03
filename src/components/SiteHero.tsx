@@ -17,6 +17,9 @@ export type SiteHeroProps = {
   ctaOnClick?: () => void;
   /** Rendered below the CTA link (e.g. trust notes). */
   ctaSupporting?: ReactNode;
+  /** When both set with CTA, adds data-* analytics attributes to the CTA link. */
+  ctaDataLocation?: string;
+  ctaDataExperienceType?: string;
   titleTestId?: string;
   subtitleTestId?: string;
 };
@@ -36,6 +39,8 @@ export default function SiteHero({
   ctaLink,
   ctaOnClick,
   ctaSupporting,
+  ctaDataLocation,
+  ctaDataExperienceType,
   titleTestId,
   subtitleTestId,
 }: SiteHeroProps) {
@@ -88,6 +93,15 @@ export default function SiteHero({
               to={ctaLink!}
               onClick={ctaOnClick}
               className="mt-8 inline-block rounded-full bg-amber-600 px-8 py-3 font-sans font-semibold text-white transition hover:bg-amber-700"
+              {...(ctaDataLocation && ctaDataExperienceType
+                ? {
+                    "data-analytics": "cta_click",
+                    "data-cta-location": ctaDataLocation,
+                    "data-cta-text": ctaText!,
+                    "data-destination": ctaLink!,
+                    "data-experience-type": ctaDataExperienceType,
+                  }
+                : {})}
             >
               {ctaText}
             </Link>

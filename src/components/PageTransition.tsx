@@ -6,8 +6,20 @@ export default function PageTransition({ children }: { children: React.ReactNode
   const location = useLocation();
 
   useEffect(() => {
+    const raw = location.hash;
+    if (raw && raw !== "#") {
+      const id = decodeURIComponent(raw.slice(1));
+      const scrollToTarget = () => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "auto", block: "start" });
+      };
+      const delaysMs = [0, 100, 300, 600, 1000];
+      const timers = delaysMs.map((ms) => window.setTimeout(scrollToTarget, ms));
+      return () => {
+        timers.forEach((t) => clearTimeout(t));
+      };
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   return (
     <AnimatePresence mode="wait">

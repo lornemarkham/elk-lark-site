@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../components/Footer";
-import { useKeenSlider } from "keen-slider/react";
+import ImageFadeCarousel from "../components/ImageFadeCarousel";
 
 const sections = [
   {
@@ -101,31 +101,19 @@ function FeatureCard({
   images: string[];
   features: string[];
 }) {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: {
-      perView: 1,
-    },
-  });
+  const slides = images.map((src, i) => ({
+    src,
+    alt: `${title} — photo ${i + 1}`,
+  }));
 
   return (
     <div className="rounded-xl overflow-hidden shadow hover:shadow-lg transition">
-      {/* Carousel if multiple images */}
-      {images.length > 1 ? (
-        <div ref={sliderRef} className="keen-slider h-64 md:h-72">
-          {images.map((img, i) => (
-            <div key={i} className="keen-slider__slide">
-              <img src={img} alt={`${title} ${i + 1}`} className="w-full h-full object-cover" />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <img
-          src={images[0]}
-          alt={title}
-          className="w-full h-64 md:h-72 object-cover"
-        />
-      )}
+      <ImageFadeCarousel
+        slides={slides}
+        tone="nested"
+        dotsClassName="mt-3 flex justify-center gap-2 px-2"
+        dotAriaLabelPrefix={`${title} slide`}
+      />
 
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2">{title}</h3>

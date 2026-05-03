@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
 import Footer from "../components/footer";
+import ImageFadeCarousel from "../components/ImageFadeCarousel";
 import SiteHero from "../components/SiteHero";
 import { trackPlanCtaClick } from "../lib/analytics";
 
-const WEDDING_START_PATH = "/start-your-lark?type=wedding" as const;
+const WEDDING_START_PATH = "/plan-your-retreat?type=wedding" as const;
 const WEDDING_PAGE_TYPE = "wedding" as const;
 const PLAN_YOUR_WEDDING_CTA = "Plan Your Wedding" as const;
 
@@ -93,8 +92,6 @@ const WHAT_DIFFERENT = [
 ];
 
 export default function MicroWeddings() {
-  const [currentPoolSlide, setCurrentPoolSlide] = useState(0);
-  const poolTimer = useRef<NodeJS.Timeout | null>(null);
   const poolSlides = [
     {
       src: "/images/poolside-wedding-ai-concepts/poolside-wedding-gazebo-ceremony-ai.png",
@@ -122,40 +119,6 @@ export default function MicroWeddings() {
     },
   ] as const;
 
-  const [poolSliderRef, poolInstanceRef] = useKeenSlider<HTMLDivElement>(
-    {
-      loop: true,
-      slideChanged(slider) {
-        setCurrentPoolSlide(slider.track.details.rel);
-      },
-      slides: {
-        perView: 1,
-        spacing: 0,
-      },
-      breakpoints: {
-        "(min-width: 640px)": {
-          slides: { perView: 1, spacing: 12 },
-        },
-        "(min-width: 1024px)": {
-          slides: { perView: 1, spacing: 16 },
-        },
-      },
-    },
-    []
-  );
-
-  useEffect(() => {
-    poolTimer.current = setInterval(() => {
-      if (poolInstanceRef.current) {
-        poolInstanceRef.current.next();
-      }
-    }, 4500);
-
-    return () => {
-      if (poolTimer.current) clearInterval(poolTimer.current);
-    };
-  }, [poolInstanceRef]);
-
   return (
     <>
       <SiteHero
@@ -174,6 +137,8 @@ export default function MicroWeddings() {
           })
         }
         ctaSupporting={<PlanningCtaChecklist variant="hero" />}
+        ctaDataLocation="wedding_hero"
+        ctaDataExperienceType="wedding"
       />
 
       <section className="bg-white text-gray-800">
@@ -251,14 +216,16 @@ export default function MicroWeddings() {
       </section>
 
       <section className="overflow-x-hidden border-t border-teal-200 bg-gradient-to-b from-white to-cyan-50 text-gray-800">
-        <div className="mx-auto w-full max-w-6xl min-w-0 px-6 py-32">
-          <p className="mb-3 text-center text-sm font-semibold uppercase tracking-wide text-stone-500">
-            Concept preview — yes, we used AI
-          </p>
-          <h2 className="mb-4 text-center font-serif text-4xl font-bold md:text-5xl">
-            This could be your wedding
-          </h2>
-          <p className="mx-auto mb-10 max-w-3xl text-center text-lg text-gray-600">
+        <div className="mx-auto w-full max-w-6xl min-w-0 px-6 py-20 md:py-24">
+          <div id="poolside-concept" className="scroll-mt-28">
+            <p className="mb-3 text-center text-sm font-semibold uppercase tracking-wide text-stone-500">
+              Concept preview — yes, we used AI
+            </p>
+            <h2 className="mb-4 text-center font-serif text-4xl font-bold md:text-5xl">
+              This could be your wedding
+            </h2>
+          </div>
+          <p className="mx-auto mb-8 max-w-3xl text-center text-lg text-gray-600 md:mb-9">
             We haven&apos;t hosted this exact wedding yet — so we imagined it. The space is real,
             the view is real, and the kind of day you&apos;re looking at here is absolutely on the
             table.
@@ -266,38 +233,11 @@ export default function MicroWeddings() {
 
           <div className="grid min-w-0 grid-cols-1 items-start gap-8 md:grid-cols-2">
             <div className="min-w-0 max-w-full overflow-hidden">
-              <div
-                ref={poolSliderRef}
-                className="keen-slider w-full max-w-full min-w-0 overflow-hidden rounded-xl shadow-lg"
-              >
-                {poolSlides.map((slide) => (
-                  <div
-                    key={slide.src}
-                    className="keen-slider__slide min-w-0 max-w-full overflow-hidden"
-                  >
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      className="block h-auto w-full max-w-full rounded-xl object-cover aspect-[4/3] md:aspect-auto md:h-80"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 flex justify-center gap-2">
-                {poolSlides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => poolInstanceRef.current?.moveToIdx(idx)}
-                    className={`h-3 w-3 rounded-full transition-colors duration-300 ${
-                      currentPoolSlide === idx ? "bg-black" : "bg-gray-400"
-                    }`}
-                    aria-label={`Go to pool slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
+              <ImageFadeCarousel
+                slides={poolSlides}
+                intervalMs={4500}
+                dotAriaLabelPrefix="Go to pool slide"
+              />
               <p className="mt-4 text-sm leading-relaxed text-gray-600">
                 This is the actual space — relaxed, open, and built for a full day together.
               </p>
@@ -331,6 +271,28 @@ export default function MicroWeddings() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mx-auto mt-10 flex justify-center sm:mt-12">
+            <Link
+              to={WEDDING_START_PATH}
+              onClick={() =>
+                trackPlanCtaClick({
+                  cta_text: PLAN_YOUR_WEDDING_CTA,
+                  cta_context: "mid_page",
+                  page_type: WEDDING_PAGE_TYPE,
+                  destination: WEDDING_START_PATH,
+                })
+              }
+              className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+              data-analytics="cta_click"
+              data-cta-location="wedding_poolside_concept"
+              data-cta-text={PLAN_YOUR_WEDDING_CTA}
+              data-destination={WEDDING_START_PATH}
+              data-experience-type="wedding"
+            >
+              {PLAN_YOUR_WEDDING_CTA}
+            </Link>
           </div>
         </div>
       </section>
@@ -377,6 +339,11 @@ export default function MicroWeddings() {
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+          data-analytics="cta_click"
+          data-cta-location="wedding_bottom"
+          data-cta-text={PLAN_YOUR_WEDDING_CTA}
+          data-destination={WEDDING_START_PATH}
+          data-experience-type="wedding"
         >
           {PLAN_YOUR_WEDDING_CTA}
         </Link>

@@ -15,10 +15,15 @@ export default function Contact() {
             .
           </p>
           <Link
-            to="/guest-experiences"
+            to="/plan-your-retreat"
             className="inline-block rounded-full bg-amber-600 px-6 py-3 font-semibold text-white hover:bg-amber-700 transition"
+            data-analytics="cta_click"
+            data-cta-location="contact_page_cta"
+            data-cta-text="Plan Your Retreat"
+            data-destination="/plan-your-retreat"
+            data-experience-type="general"
           >
-            Start Your Lark
+            Plan Your Retreat
           </Link>
         </div>
       </section>

@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
 import { trackPlanCtaClick } from "../lib/analytics";
 
-const WELLNESS_START_PATH = "/start-your-lark?type=wellness" as const;
+const WELLNESS_START_PATH = "/plan-your-retreat?type=wellness" as const;
 
 const WELLNESS_PAGE_TYPE = "wellness" as const;
 
@@ -71,6 +71,8 @@ export default function WellnessRetreats() {
           })
         }
         ctaSupporting={<RetreatPlanningTrustNotes variant="hero" />}
+        ctaDataLocation="wellness_hero"
+        ctaDataExperienceType="wellness"
       />
 
       <section className="bg-white text-gray-800">
@@ -199,6 +201,11 @@ export default function WellnessRetreats() {
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+          data-analytics="cta_click"
+          data-cta-location="wellness_bottom"
+          data-cta-text={PLAN_YOUR_RETREAT_CTA}
+          data-destination={WELLNESS_START_PATH}
+          data-experience-type="wellness"
         >
           {PLAN_YOUR_RETREAT_CTA}
         </Link>

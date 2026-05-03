@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
 import { trackPlanCtaClick } from "../lib/analytics";
 
-const GROUP_START_PATH = "/start-your-lark?type=group" as const;
+const GROUP_START_PATH = "/plan-your-retreat?type=group" as const;
 const GROUP_PAGE_TYPE = "group" as const;
 const PLAN_YOUR_GETAWAY_CTA = "Plan Your Getaway" as const;
 
@@ -119,6 +119,8 @@ export default function GroupGetaways() {
           })
         }
         ctaSupporting={<PlanningCtaChecklist variant="hero" />}
+        ctaDataLocation="group_hero"
+        ctaDataExperienceType="group"
       />
 
       <section className="bg-white text-gray-800">
@@ -241,6 +243,11 @@ export default function GroupGetaways() {
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+          data-analytics="cta_click"
+          data-cta-location="group_bottom"
+          data-cta-text={PLAN_YOUR_GETAWAY_CTA}
+          data-destination={GROUP_START_PATH}
+          data-experience-type="group"
         >
           {PLAN_YOUR_GETAWAY_CTA}
         </Link>

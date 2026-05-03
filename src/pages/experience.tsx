@@ -14,6 +14,7 @@ const FUNNEL_CARDS = [
       "Reset, reconnect, or host something meaningful in a private Okanagan setting.",
     ctaLabel: "View Wellness Retreats",
     to: "/wellness-retreats",
+    dataExperienceType: "wellness" as const,
   },
   {
     title: "Micro Weddings",
@@ -21,6 +22,7 @@ const FUNNEL_CARDS = [
       "Small, relaxed celebrations with space for food, family, and a real sense of place.",
     ctaLabel: "View Micro Weddings",
     to: "/micro-weddings",
+    dataExperienceType: "wedding" as const,
   },
   {
     title: "Group Getaways",
@@ -28,6 +30,7 @@ const FUNNEL_CARDS = [
       "Pool days, BBQs, garage hangs, lake access, and weekends that turn into stories.",
     ctaLabel: "View Group Getaways",
     to: "/group-getaways",
+    dataExperienceType: "group" as const,
   },
 ];
 
@@ -59,6 +62,8 @@ export default function Services() {
               description={card.description}
               ctaLabel={card.ctaLabel}
               ctaTo={card.to}
+              dataCtaLocation="experience_hub_cards"
+              dataExperienceType={card.dataExperienceType}
             />
           ))}
         </div>
@@ -70,10 +75,15 @@ export default function Services() {
           {"Not sure which path fits? We'll help you design the right experience."}
         </p>
         <Link
-          to="/guest-experiences"
+          to="/plan-your-retreat"
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+          data-analytics="cta_click"
+          data-cta-location="experience_hub_bottom"
+          data-cta-text="Plan Your Retreat"
+          data-destination="/plan-your-retreat"
+          data-experience-type="general"
         >
-          Start Your Lark
+          Plan Your Retreat
         </Link>
       </section>
 

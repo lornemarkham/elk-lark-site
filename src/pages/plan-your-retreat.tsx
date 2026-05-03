@@ -47,7 +47,7 @@ function parseType(param: string | null): IntakeType | null {
   return null;
 }
 
-export default function StartYourLark() {
+export default function PlanYourRetreat() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
@@ -154,7 +154,7 @@ export default function StartYourLark() {
   return (
     <>
       <SiteHero
-        title="Start Your Lark"
+        title="Plan Your Retreat"
         subtitle="Tell us what you're planning — we'll design your weekend and follow up within 24 hours."
         backgroundImage="/images/stays/outdoor.jpg"
         backgroundImageFallback="/images/pool/pool6.jpg"
@@ -292,8 +292,13 @@ export default function StartYourLark() {
                 type="submit"
                 disabled={isSubmitting}
                 className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-70"
+                data-analytics="cta_click"
+                data-cta-location="form_submit"
+                data-cta-text={isSubmitting ? "Sending..." : "Request My Plan"}
+                data-destination="/plan-your-retreat"
+                data-experience-type={selectedType === "custom" ? "general" : selectedType}
               >
-                {isSubmitting ? "Sending..." : "Send My Plan"}
+                {isSubmitting ? "Sending..." : "Request My Plan"}
               </button>
             </div>
 

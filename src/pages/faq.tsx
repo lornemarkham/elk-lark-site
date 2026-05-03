@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import { CalendarDays, Compass, House, Info, Map } from "lucide-react";
+import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import SiteHero from "../components/SiteHero";
 
@@ -44,12 +45,17 @@ export default function FAQ() {
         <p className="text-lg mb-8 text-gray-600">
           Reach out with your questions — we’ll give it to you straight.
         </p>
-        <a
-          href="/guest-experiences"
+        <Link
+          to="/plan-your-retreat"
           className="inline-block bg-orange-600 text-white px-10 py-4 rounded-xl text-lg shadow-lg hover:shadow-xl hover:bg-orange-700 transition"
+          data-analytics="cta_click"
+          data-cta-location="faq_page_cta"
+          data-cta-text="Plan Your Retreat →"
+          data-destination="/plan-your-retreat"
+          data-experience-type="general"
         >
-          Start Your Lark →
-        </a>
+          Plan Your Retreat →
+        </Link>
       </section>
 
       <Footer />
@@ -116,7 +122,7 @@ const faqGroups: {
     qs: [
       {
         q: "How do I book an experience?",
-        a: "Use the “Start Your Lark” button or email us. We'll figure it out together.",
+        a: "Use the “Plan Your Retreat” button or email us. We'll figure it out together.",
       },
       {
         q: "Do you require a deposit?",

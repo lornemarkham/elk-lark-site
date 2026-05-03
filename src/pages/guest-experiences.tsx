@@ -53,15 +53,17 @@ export default function GuestExperiences() {
         backgroundImage="/images/stays/outdoor.jpg"
         backgroundImageFallback="/images/pool/pool6.jpg"
         backgroundAlt="Okanagan stay at ELK Lark"
-        ctaText="Start Your Lark"
-        ctaLink="/start"
+        ctaText="Plan Your Retreat"
+        ctaLink="/plan-your-retreat"
         ctaOnClick={() =>
           trackCtaClick({
-            cta_text: "Start Your Lark",
+            cta_text: "Plan Your Retreat",
             placement: "guest_experiences_hero",
-            to_path: "/start",
+            to_path: "/plan-your-retreat",
           })
         }
+        ctaDataLocation="guest_experiences_hero"
+        ctaDataExperienceType="general"
       />
 
       <section className="bg-white px-6 py-16">
@@ -90,17 +92,22 @@ export default function GuestExperiences() {
       <section className="border-t border-stone-200 bg-stone-50 px-6 py-16 text-center text-gray-800">
         <h2 className="mb-4 font-serif text-3xl font-bold md:text-4xl">Ready to plan your stay?</h2>
         <Link
-          to="/start-your-lark"
+          to="/plan-your-retreat"
           onClick={() =>
             trackCtaClick({
-              cta_text: "Start Your Lark",
+              cta_text: "Plan Your Retreat",
               placement: "guest_experiences_bottom",
-              to_path: "/start-your-lark",
+              to_path: "/plan-your-retreat",
             })
           }
           className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+          data-analytics="cta_click"
+          data-cta-location="guest_experiences_bottom"
+          data-cta-text="Plan Your Retreat"
+          data-destination="/plan-your-retreat"
+          data-experience-type="general"
         >
-          Start Your Lark
+          Plan Your Retreat
         </Link>
       </section>
 

@@ -14,7 +14,7 @@ export default function StartYourLark() {
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 flex items-center justify-center h-full">
           <h1 className="text-white text-5xl font-bold text-center px-4 font-serif animate-fade-in">
-            Start Your Lark
+            Plan Your Retreat
           </h1>
         </div>
       </section>

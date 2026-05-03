@@ -93,7 +93,12 @@ export default function Packages() {
           </h2>
           <div className="grid sm:grid-cols-2 gap-8">
             {PACKAGES.map((pkg, i) => (
-              <PackageCard key={i} {...pkg} />
+              <PackageCard
+                key={i}
+                {...pkg}
+                dataCtaLocation="packages_card"
+                dataExperienceType="general"
+              />
             ))}
           </div>
         </div>
@@ -106,10 +111,15 @@ export default function Packages() {
           moment.
         </p>
         <Link
-          to="/guest-experiences"
+          to="/plan-your-retreat"
           className="inline-block bg-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-amber-700 transition"
+          data-analytics="cta_click"
+          data-cta-location="packages_bottom"
+          data-cta-text="Plan Your Retreat →"
+          data-destination="/plan-your-retreat"
+          data-experience-type="general"
         >
-          Start Your Lark →
+          Plan Your Retreat →
         </Link>
       </section>
 

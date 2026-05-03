@@ -6,7 +6,7 @@ export type AnalyticsParams = {
   to_path?: string;
   /** Route or URL the CTA navigates to (e.g. intake path with query). */
   destination?: string;
-  /** High-level page funnel for start-your-lark CTAs (e.g. wellness). */
+  /** High-level page funnel for plan-your-retreat CTAs (e.g. wellness). */
   page_type?: string;
   /** Where on the page the CTA appeared — stable for reporting (not derived from label). */
   cta_context?: "hero" | "mid_page" | "bottom" | "nav" | "footer";

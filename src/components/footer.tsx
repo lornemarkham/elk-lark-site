@@ -2,6 +2,21 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { planPageTypeFromPathname, trackPlanCtaClick } from "../lib/analytics";
 
+function footerLinkAttrs(
+  dataCtaLocation: string,
+  ctaText: string,
+  destination: string,
+  experienceType: string
+) {
+  return {
+    "data-analytics": "cta_click",
+    "data-cta-location": dataCtaLocation,
+    "data-cta-text": ctaText,
+    "data-destination": destination,
+    "data-experience-type": experienceType,
+  } as const;
+}
+
 export default function Footer() {
   const location = useLocation();
 
@@ -22,28 +37,49 @@ export default function Footer() {
         <div className="space-y-2">
           <h4 className="text-lg font-semibold">Explore</h4>
           <ul className="space-y-1 text-sm">
-            <li><Link to="/about" className="hover:underline">The ELK Story</Link></li>
-            <li><Link to="/experience" className="hover:underline">Experiences</Link></li>
-            <li><Link to="/basecamp" className="hover:underline">Basecamp</Link></li>
-            <li><Link to="/faq" className="hover:underline">How It Works</Link></li>
+            <li>
+              <Link to="/about" className="hover:underline" {...footerLinkAttrs("footer", "The ELK Story", "/about", "general")}>
+                The ELK Story
+              </Link>
+            </li>
+            <li>
+              <Link to="/experience" className="hover:underline" {...footerLinkAttrs("footer", "Experiences", "/experience", "general")}>
+                Experiences
+              </Link>
+            </li>
+            <li>
+              <Link to="/basecamp" className="hover:underline" {...footerLinkAttrs("footer", "Basecamp", "/basecamp", "basecamp")}>
+                Basecamp
+              </Link>
+            </li>
+            <li>
+              <Link to="/faq" className="hover:underline" {...footerLinkAttrs("footer", "How It Works", "/faq", "general")}>
+                How It Works
+              </Link>
+            </li>
             <li className="pt-2">
               <Link
-                to="/start-your-lark"
+                to="/plan-your-retreat"
                 onClick={() =>
                   trackPlanCtaClick({
-                    cta_text: "Start Your Lark",
+                    cta_text: "Plan Your Retreat",
                     cta_context: "footer",
                     page_type: planPageTypeFromPathname(location.pathname),
-                    destination: "/start-your-lark",
+                    destination: "/plan-your-retreat",
                     from_path: location.pathname,
                   })
                 }
                 className="hover:underline"
+                {...footerLinkAttrs("footer_cta", "Plan Your Retreat", "/plan-your-retreat", "general")}
               >
-                Start Your Lark
+                Plan Your Retreat
               </Link>
             </li>
-            <li><Link to="/privacy" className="hover:underline">Privacy Policy</Link></li>
+            <li>
+              <Link to="/privacy" className="hover:underline" {...footerLinkAttrs("footer", "Privacy Policy", "/privacy", "general")}>
+                Privacy Policy
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -13,6 +13,7 @@ const FUNNEL_CARDS = [
     to: "/wellness-retreats",
     ctaLabel: "Explore wellness retreats",
     accentColor: "accent" as const,
+    dataExperienceType: "wellness" as const,
   },
   {
     title: "Micro Weddings",
@@ -20,6 +21,7 @@ const FUNNEL_CARDS = [
     to: "/micro-weddings",
     ctaLabel: "Explore micro weddings",
     accentColor: "restore" as const,
+    dataExperienceType: "wedding" as const,
   },
   {
     title: "Group Getaways",
@@ -27,6 +29,7 @@ const FUNNEL_CARDS = [
     to: "/group-getaways",
     ctaLabel: "Explore group getaways",
     accentColor: "strategy" as const,
+    dataExperienceType: "group" as const,
   },
 ];
 
@@ -39,8 +42,10 @@ export default function Home() {
         overlayClassName="bg-black/30"
         backgroundImage="/images/pool/pool6.jpg"
         backgroundAlt="Pool at ELK Lark"
-        ctaText="Start Your Lark"
-        ctaLink="/guest-experiences"
+        ctaText="Plan Your Retreat"
+        ctaLink="/plan-your-retreat"
+        ctaDataLocation="homepage_hero"
+        ctaDataExperienceType="general"
         titleTestId="hero-title"
         subtitleTestId="hero-copy"
       />
@@ -60,6 +65,8 @@ export default function Home() {
               ctaLabel={card.ctaLabel}
               ctaTo={card.to}
               accentColor={card.accentColor}
+              dataCtaLocation="homepage_experience_cards"
+              dataExperienceType={card.dataExperienceType}
             />
           ))}
         </div>
@@ -87,8 +94,13 @@ export default function Home() {
             </p>
             <div className="mt-8">
               <Link
-                to="/micro-weddings"
+                to="/micro-weddings#poolside-concept"
                 className="inline-block rounded-full bg-amber-600 px-8 py-3 font-semibold text-white transition hover:bg-amber-700"
+                data-analytics="cta_click"
+                data-cta-location="homepage_poolside_feature"
+                data-cta-text="See the micro wedding concept"
+                data-destination="/micro-weddings#poolside-concept"
+                data-experience-type="wedding"
               >
                 See the micro wedding concept
               </Link>
@@ -177,6 +189,11 @@ export default function Home() {
           <Link
             to="/basecamp"
             className="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition"
+            data-analytics="cta_click"
+            data-cta-location="homepage_basecamp"
+            data-cta-text="Explore the Basecamp"
+            data-destination="/basecamp"
+            data-experience-type="basecamp"
           >
             Explore the Basecamp
           </Link>

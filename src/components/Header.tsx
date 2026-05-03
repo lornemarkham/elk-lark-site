@@ -7,13 +7,23 @@ import logo from "../assets/elk-lark-logo.png";
 import { planPageTypeFromPathname, trackPlanCtaClick } from "../lib/analytics";
 
 const HEADER_PLAN_CTA = "Plan Your Retreat" as const;
-const HEADER_START_PATH = "/start-your-lark" as const;
+const HEADER_START_PATH = "/plan-your-retreat" as const;
 
 const EXPERIENCES_MENU = [
-  { label: "Wellness Retreats", to: "/wellness-retreats" },
-  { label: "Micro Weddings", to: "/micro-weddings" },
-  { label: "Group Getaways", to: "/group-getaways" },
+  { label: "Wellness Retreats", to: "/wellness-retreats", dataExperienceType: "wellness" as const },
+  { label: "Micro Weddings", to: "/micro-weddings", dataExperienceType: "wedding" as const },
+  { label: "Group Getaways", to: "/group-getaways", dataExperienceType: "group" as const },
 ];
+
+function headerNavLinkAttrs(ctaText: string, destination: string, experienceType: string) {
+  return {
+    "data-analytics": "cta_click",
+    "data-cta-location": "header_nav",
+    "data-cta-text": ctaText,
+    "data-destination": destination,
+    "data-experience-type": experienceType,
+  } as const;
+}
 
 const EXPERIENCES_PATHS = ["/wellness-retreats", "/micro-weddings", "/group-getaways", "/experience"] as const;
 
@@ -33,6 +43,7 @@ function renderExperiencesMenuItems(
         to={entry.to}
         onClick={onNavigate}
         className={({ isActive }) => navLinkClass(isActive)}
+        {...headerNavLinkAttrs(entry.label, entry.to, entry.dataExperienceType)}
       >
         {entry.label}
       </NavLink>
@@ -79,7 +90,7 @@ export default function Header() {
   return (
     <header className="w-full flex items-center justify-between px-6 py-4 bg-white shadow-md sticky top-0 z-50">
       <div className="flex items-center gap-3">
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center" {...headerNavLinkAttrs("ELK Lark logo", "/", "general")}>
           <img src={logo} alt="ELK Lark logo" className="h-10 w-auto" />
         </Link>
         <div className="hidden md:block">
@@ -93,6 +104,7 @@ export default function Header() {
           onMouseEnter={closeDesktopDropdown}
           onFocus={closeDesktopDropdown}
           className={({ isActive }) => linkStyles(isActive)}
+          {...headerNavLinkAttrs("The ELK Story", "/about", "general")}
         >
           The ELK Story
         </NavLink>
@@ -116,6 +128,7 @@ export default function Header() {
               ${isExperiencesSectionActive ? "after:w-full" : "after:w-0 hover:after:w-full"}`}
             aria-haspopup="menu"
             aria-expanded={desktopExperiencesOpen}
+            {...headerNavLinkAttrs("Experiences", "/experience", "general")}
           >
             Experiences
             <ChevronDownIcon className="h-4 w-4 opacity-70" aria-hidden />
@@ -140,6 +153,7 @@ export default function Header() {
             onMouseEnter={closeDesktopDropdown}
             onFocus={closeDesktopDropdown}
             className={({ isActive }) => linkStyles(isActive)}
+            {...headerNavLinkAttrs(label, to, to === "/basecamp" ? "basecamp" : "general")}
           >
             {label}
           </NavLink>
@@ -160,6 +174,11 @@ export default function Header() {
         onMouseEnter={closeDesktopDropdown}
         onFocus={closeDesktopDropdown}
         className="hidden md:inline-block ml-6 px-5 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-semibold transition"
+        data-analytics="cta_click"
+        data-cta-location="header_cta"
+        data-cta-text={HEADER_PLAN_CTA}
+        data-destination={HEADER_START_PATH}
+        data-experience-type="general"
       >
         {HEADER_PLAN_CTA}
       </Link>
@@ -178,6 +197,7 @@ export default function Header() {
             to="/about"
             onClick={closeMobileMenu}
             className={({ isActive }) => mobileNavLinkClass(isActive)}
+            {...headerNavLinkAttrs("The ELK Story", "/about", "general")}
           >
             The ELK Story
           </NavLink>
@@ -211,6 +231,7 @@ export default function Header() {
               to={to}
               onClick={closeMobileMenu}
               className={({ isActive }) => mobileNavLinkClass(isActive)}
+              {...headerNavLinkAttrs(label, to, to === "/basecamp" ? "basecamp" : "general")}
             >
               {label}
             </NavLink>
@@ -230,6 +251,11 @@ export default function Header() {
                 closeMobileMenu();
               }}
               className="block w-full rounded-full bg-amber-600 px-5 py-3 text-center text-lg font-semibold text-white transition hover:bg-amber-700"
+              data-analytics="cta_click"
+              data-cta-location="header_cta"
+              data-cta-text={HEADER_PLAN_CTA}
+              data-destination={HEADER_START_PATH}
+              data-experience-type="general"
             >
               {HEADER_PLAN_CTA}
             </Link>

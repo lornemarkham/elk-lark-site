@@ -9,6 +9,8 @@ export type PackageCardProps = {
   ctaLabel: string;
   ctaTo: string;
   accentColor?: "restore" | "accent" | "strategy" | "brand";
+  dataCtaLocation?: string;
+  dataExperienceType?: string;
 };
 
 const accentClasses = {
@@ -26,6 +28,8 @@ export default function PackageCard({
   ctaLabel,
   ctaTo,
   accentColor = "accent",
+  dataCtaLocation,
+  dataExperienceType,
 }: PackageCardProps) {
   return (
     <article className="flex flex-col rounded-xl border border-stone-200 bg-white shadow-sm overflow-hidden transition-shadow hover:shadow-md">
@@ -48,6 +52,15 @@ export default function PackageCard({
         <Link
           to={ctaTo}
           className={`inline-block text-center px-5 py-3 rounded-full font-semibold transition ${accentClasses[accentColor]}`}
+          {...(dataCtaLocation && dataExperienceType
+            ? {
+                "data-analytics": "cta_click",
+                "data-cta-location": dataCtaLocation,
+                "data-cta-text": ctaLabel,
+                "data-destination": ctaTo,
+                "data-experience-type": dataExperienceType,
+              }
+            : {})}
         >
           {ctaLabel}
         </Link>

@@ -120,6 +120,11 @@ export default function About() {
             <Link
               to="/wellness-retreats"
               className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
+              data-analytics="cta_click"
+              data-cta-location="about_funnel_cards"
+              data-cta-text="Explore wellness retreats →"
+              data-destination="/wellness-retreats"
+              data-experience-type="wellness"
             >
               Explore wellness retreats →
             </Link>
@@ -140,6 +145,11 @@ export default function About() {
             <Link
               to="/micro-weddings"
               className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
+              data-analytics="cta_click"
+              data-cta-location="about_funnel_cards"
+              data-cta-text="Explore micro weddings →"
+              data-destination="/micro-weddings"
+              data-experience-type="wedding"
             >
               Explore micro weddings →
             </Link>
@@ -160,6 +170,11 @@ export default function About() {
             <Link
               to="/group-getaways"
               className="z-20 inline-block rounded bg-amber-600 px-4 py-2 text-white transition hover:bg-amber-700"
+              data-analytics="cta_click"
+              data-cta-location="about_funnel_cards"
+              data-cta-text="Explore group getaways →"
+              data-destination="/group-getaways"
+              data-experience-type="group"
             >
               Explore group getaways →
             </Link>

@@ -112,9 +112,16 @@ export default function RestoreLark() {
             : "Restore Lark is flexible, effortless, and designed around you. Just reach out — and we’ll create something worth dreaming about."}
         </p>
 
-        <Link to="/guest-experiences">
+        <Link
+          to="/plan-your-retreat"
+          data-analytics="cta_click"
+          data-cta-location="restore_page_cta"
+          data-cta-text="Plan Your Retreat"
+          data-destination="/plan-your-retreat"
+          data-experience-type="general"
+        >
           <button className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-2xl font-semibold shadow-md transition">
-            Start Your Lark
+            Plan Your Retreat
           </button>
         </Link>
       </section>
